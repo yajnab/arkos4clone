@@ -139,6 +139,13 @@ case "$P2_FS" in
     sudo fsck.f2fs -f "$P2_DEV" || true
     sudo resize.f2fs "$P2_DEV"
     ;;
+  btrfs)
+    P2_MNT="$(mktemp -d)"
+    sudo mount "$P2_DEV" "$P2_MNT"
+    sudo btrfs filesystem resize max "$P2_MNT"
+    sudo umount "$P2_MNT"
+    rmdir "$P2_MNT"
+    ;;
   *)
     echo "警告：未知/不支持的 p2 文件系统类型：$P2_FS"
     echo "请手动扩展 p2 文件系统后再继续。"
