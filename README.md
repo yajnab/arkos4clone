@@ -58,6 +58,7 @@ Currently, I can only maintain the devices I personally own, but contributions a
 |                      | **XiFan DC35V**                         | `logo/480P/`, `kernel/common/`, `consoles/dc35v/`       |Thanks to XiFan.|
 |                      | **XiFan DC40V**                         | `logo/720P/`, `kernel/common/`, `consoles/dc40v/`       |Thanks to XiFan.|
 |                      | **XiFan XF28**                         | `logo/480P-1/`, `kernel/common/`, `consoles/xf28/`       |Thanks to XiFan.|
+|                      | **XiFan R36Max2**                         | `logo/768P/`, `kernel/common/`, `consoles/r36max2/`       |Thanks to XiFan.|
 |**Other**             | **GameConsole HG36 （HG3506）**         | `logo/480P/`, `kernel/common/`, `consoles/hg36/`        ||
 |                      | **GameConsole R36Ultra**                | `logo/720P/`, `kernel/common/`, `consoles/r36ultra/`    |Thanks to Mr.Li.|
 |                      | **GameConsole RX6H**                    | `logo/480P/`, `kernel/common/`, `consoles/rx6h/`        |Thanks to Mr.Yin.|

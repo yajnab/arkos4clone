@@ -94,6 +94,13 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/480P-1/", "kernel/common/"},
 	},
 	{
+		RealName: "r36max2",
+		BrandEntries: []BrandEntry{
+			{Brand: "XiFan HandHelds", DisplayName: "XiFan R36Max2"},
+		},
+		ExtraSources: []string{"logo/768P/", "kernel/common/"},
+	},
+	{
 		RealName: "k36s",
 		BrandEntries: []BrandEntry{
 			{Brand: "AISLPC", DisplayName: "GameConsole K36S"},

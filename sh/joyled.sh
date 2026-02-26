@@ -55,7 +55,7 @@ detect_backend() {
   case "${MODEL}" in
     xf35h|xf40h|k36s|r36tmax)          echo "mcu_led" ;;
     mymini|r36ultra|xgb36|mini40)      echo "gpio"  ;;
-    dc40v|dc35v|xf28)          echo "ws2812"  ;;
+    dc40v|dc35v|xf28|r36max2)          echo "ws2812"  ;;
     *)                    echo "unsupported" ;;
   esac
 }

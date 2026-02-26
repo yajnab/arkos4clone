@@ -198,6 +198,7 @@ declare -A dtb2label=(
   [rk3326-xf40h-linux.dtb]=xf40h
   [rk3326-dc40v-linux.dtb]=dc40v
   [rk3326-dc35v-linux.dtb]=dc35v
+  [rk3326-r36max2-linux.dtb]=r36max2
   [rk3326-r36h-linux.dtb]=r36h
   [rk3326-r36plus-linux.dtb]=r36splus
   [rk3326-r46h-linux.dtb]=r46h
@@ -230,6 +231,7 @@ declare -A console_profile=(
   [xf40h]=720p
   [dc40v]=720p
   [dc35v]=480p
+  [r36max2]=768p
   [r36h]=480p
   [r36splus]=720p
   [r46h]=768p
@@ -262,6 +264,7 @@ declare -A joy_conf_map=(
   [xf40h]=dual
   [dc40v]=dual
   [dc35v]=dual
+  [r36max2]=dual
   [r36h]=dual
   [r36splus]=dual
   [r46h]=dual
@@ -294,6 +297,7 @@ declare -A ogage_conf_map=(
   [xf40h]=select
   [dc40v]=happy5
   [dc35v]=happy5
+  [r36max2]=happy5
   [r36h]=select
   [r36splus]=happy5
   [r46h]=select
@@ -325,8 +329,7 @@ declare -A rotate_map=(
   [xf28]=90
 )
 
-rk915_set=("xf40h" "dc40v" "xf35h" "dc35v" "r36ultra" "k36s" "r36tmax") # 按需增删
-spi_set=("dc35v" "dc40v" "xf28")                                               # 按需增删
+spi_set=("dc35v" "dc40v" "xf28" "r36max2")                                               # 按需增删
 
 # LABEL：优先用 DTB 映射；没有映射就退回 r36s
 LABEL="${dtb2label[$DTB]:-r36s}"
