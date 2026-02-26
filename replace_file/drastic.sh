@@ -2,67 +2,23 @@
 
 directory="$(dirname "$1" | cut -d "/" -f2)"
 
-if  [[ ! -d "/${directory}/nds/backup" ]]; then
-  mkdir /${directory}/nds/backup
-fi
-if  [[ ! -d "/${directory}/nds/cheats" ]]; then
-  mkdir /${directory}/nds/cheats
-fi
-if  [[ ! -d "/${directory}/nds/savestates" ]]; then
-  mkdir /${directory}/nds/savestates
-fi
-if  [[ ! -d "/${directory}/nds/slot2" ]]; then
-  mkdir /${directory}/nds/slot2
-fi
+for d in backup cheats savestates slot2; do
+  if [[ ! -d "/${directory}/nds/$d" ]]; then
+    mkdir /${directory}/nds/${d}
+  fi
+  if [[ -d "/opt/drastic/$d" && ! -L "/opt/drastic/$d" ]]; then
+    cp -n /opt/drastic/${d}/* /${directory}/nds/${d}/
+    rm -rf /opt/drastic/${d}/
+  fi
+  ln -sf /${directory}/nds/${d} /opt/drastic/
+done
 
-sudo /usr/local/bin/drastickeydemon.py &
+echo "VAR=drastic" > /home/ark/.config/KILLIT
+sudo systemctl restart killer_daemon.service
 
 cd /opt/drastic
+./drastic "$1"
 
-if grep -q '<string name="Language" value="zh-CN" />' /home/ark/.emulationstation/es_settings.cfg; then
-    export LANG=zh_CN.UTF-8
-    target="/opt/drastic/resources/cheats/zh_CN/usrcheat.dat"
-else
-    target="/opt/drastic/resources/cheats/es_EN/usrcheat.dat"
-fi
+sudo systemctl stop killer_daemon.service
 
-if [ -L /opt/drastic/usrcheat.dat ]; then
-    if [ "$(readlink /opt/drastic/usrcheat.dat)" != "$target" ]; then
-        sudo rm -f /opt/drastic/usrcheat.dat
-        sudo ln -sf "$target" /opt/drastic/usrcheat.dat
-    fi
-else
-    sudo ln -sf "$target" /opt/drastic/usrcheat.dat
-fi
-
-sudo ./drastic_hotkeys &
-
-if [[ -f /opt/drastic/on && -f /boot/.console ]]; then
-  CUR_VAL="$(tr -d '\r\n' < "/boot/.console" || true)"
-  case "$CUR_VAL" in
-    u8|dr28s|r50s)
-      LD_PRELOAD=./libs/libSDL2-2.0.so.0.3200.10.rotate270
-    ;;
-    a10miniv2)
-      LD_PRELOAD=./libs/libSDL2-2.0.so.0.3200.10.rotate180
-    ;;
-    xf28)
-      LD_PRELOAD=./libs/libSDL2-2.0.so.0.3200.10.rotate90
-    ;;
-    *)
-      LD_PRELOAD=./libs/libSDL2-2.0.so.0.3200.10
-    ;;
-  esac
-  LD_PRELOAD="$LD_PRELOAD" ./drastic "$1"
-else
-  ./drastic "$1"
-fi
-
-GPTOKEYB_PID="$(pidof drastic_hotkeys 2>/dev/null || true)"
-if [[ -n "$GPTOKEYB_PID" ]]; then
-  sudo kill -9 $GPTOKEYB_PID
-fi
-
-sudo killall python3
-
-sudo systemctl restart oga_events &
+sudo systemctl restart ogage &

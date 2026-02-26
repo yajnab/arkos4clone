@@ -83,12 +83,20 @@ sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || tru
 sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/saturn.sh" 2>/dev/null || true
 sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
 sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
+sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
+sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
+sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
+sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/saturn.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
+sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
+sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
+sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
+sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
 
 echo "== 注入 adc-key 服务脚本 =="
 sudo cp -f ./bin/adc-key/adckeys.py "$MOUNT_DIR/root/usr/local/bin/"
@@ -114,16 +122,21 @@ sudo rm -rf "$MOUNT_DIR/root/etc/emulationstation/es_input.cfg" 2>/dev/null || t
 
 sudo cp -r ./replace_file/emulationstation "$MOUNT_DIR/root/usr/bin/emulationstation/emulationstation"
 
-echo "== 调整drastic =="
+echo "== 还原drastic =="
 sudo rm -rf "$MOUNT_DIR/root/opt/drastic" 2>/dev/null || true
 sudo mkdir -p "$MOUNT_DIR/root/opt/drastic" 2>/dev/null || true
-
 sudo cp -a ./replace_file/drastic/. "$MOUNT_DIR/root/opt/drastic/" 2>/dev/null || true
-sudo rm -rf "$MOUNT_DIR/root/opt/drastic/patch" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/drastic" 2>/dev/null || true
 sudo chmod -R 775 "$MOUNT_DIR/root/opt/drastic" 2>/dev/null || true
-sudo rm -rf "$MOUNT_DIR/root/opt/drastic/patch"
-sudo cp -a ./replace_file/nds_sh/* "$MOUNT_DIR/root/opt/system/Advanced/NDS Overlays/" 2>/dev/null || true
+
+echo "== 添加drastic-kk =="
+sudo mkdir -p "$MOUNT_DIR/root/opt/drastic-kk" 2>/dev/null || true
+sudo cp -a ./replace_file/drastic-kk/. "$MOUNT_DIR/root/opt/drastic/" 2>/dev/null || true
+sudo rm -rf "$MOUNT_DIR/root/opt/drastic-kk/patch" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/drastic-kk" 2>/dev/null || true
+sudo chmod -R 775 "$MOUNT_DIR/root/opt/drastic-kk" 2>/dev/null || true
+sudo cp -f ./bin/json-c3/* "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/" || true
+sudo chown -R root:root "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
 
 if [ "$(stat -c%s $MOUNT_DIR/root/roms.tar 2>/dev/null || echo 0)" -le $((100*1024*1024)) ]; then
   echo "== 复制 roms.tar 出来操作 =="

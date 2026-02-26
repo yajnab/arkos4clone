@@ -1361,7 +1361,13 @@
 		<fullname>NDS</fullname>
 		<path>/roms/nds/</path>
 		<extension>.7z .7Z .nds .NDS .zip .ZIP</extension>
-		<command>sudo perfmax %GOVERNOR% %ROM%; nice -n -19 /usr/local/bin/drastic.sh %ROM%; sudo perfnorm</command>
+		<command>sudo perfmax %GOVERNOR% %ROM%; nice -n -19 /usr/local/bin/choose_drastic_ver.sh %EMULATOR% %ROM%; sudo perfnorm</command>
+		<emulators>
+			<emulator name="drastic">
+		      </emulator>
+			<emulator name="drastic-kk">
+		      </emulator>
+		</emulators>
 		<platform>nds</platform>
 		<theme>nds</theme>
 		<manufacturer>Nintendo</manufacturer>
@@ -3942,7 +3948,13 @@
 		<fullname>NDS [SD2]</fullname>
 		<path>/roms2/nds/</path>
 		<extension>.7z .7Z .nds .NDS .zip .ZIP</extension>
-		<command>sudo perfmax %GOVERNOR% %ROM%; nice -n -19 /usr/local/bin/drastic.sh %ROM%; sudo perfnorm</command>
+		<command>sudo perfmax %GOVERNOR% %ROM%; nice -n -19 /usr/local/bin/choose_drastic_ver.sh %EMULATOR% %ROM%; sudo perfnorm</command>
+		<emulators>
+			<emulator name="drastic">
+		      </emulator>
+			<emulator name="drastic-kk">
+		      </emulator>
+		</emulators>
 		<platform>nds</platform>
 		<theme>nds</theme>
 		<manufacturer>Nintendo</manufacturer>

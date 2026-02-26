@@ -85,6 +85,8 @@ To make ArkOS work on clone devices, the following changes and adaptations were 
      - Reference repo: [lcdyk0517/351Files](https://github.com/lcdyk0517/351Files)
 5. - **ogage GitHub repo**
      - Reference repo: [lcdyk0517/ogage](https://github.com/lcdyk0517/ogage)
+6. - **drastic-kk patch**
+   - Reference repo: [drastic-kk/patch](https://github.com/lcdyk0517/arkos4clone/tree/main/replace_file/drastic-kk/patch)
 
 ## How to Use
 
