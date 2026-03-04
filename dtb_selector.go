@@ -232,16 +232,30 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/854x480P/", "kernel/common/"},
 	},
 	{
-		RealName: "sauce v03",
+		RealName: "sauce panel1",
 		BrandEntries: []BrandEntry{
-			{Brand: "SaySouce R36s", DisplayName: "Soy Sauce V03 (ArkOS4Clone kernel)"},
+			{Brand: "SaySouce R36s", DisplayName: "Soy Sauce Panel 1"},
 		},
 		ExtraSources: []string{"logo/480P/", "kernel/common/"},
 	},
 	{
-		RealName: "sauce v04",
+		RealName: "sauce panel2",
 		BrandEntries: []BrandEntry{
-			{Brand: "SaySouce R36s", DisplayName: "Soy Sauce V04 (ArkOS4Clone kernel)"},
+			{Brand: "SaySouce R36s", DisplayName: "Soy Sauce Panel 2"},
+		},
+		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+	},
+	{
+		RealName: "sauce panel3",
+		BrandEntries: []BrandEntry{
+			{Brand: "SaySouce R36s", DisplayName: "Soy Sauce Panel 3"},
+		},
+		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+	},
+	{
+		RealName: "sauce panel4",
+		BrandEntries: []BrandEntry{
+			{Brand: "SaySouce R36s", DisplayName: "Soy Sauce Panel 4"},
 		},
 		ExtraSources: []string{"logo/480P/", "kernel/common/"},
 	},

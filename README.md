@@ -44,8 +44,10 @@ Currently, I can only maintain the devices I personally own, but contributions a
 |                      | **GameConsole R36H**                    | `logo/480P/`, `kernel/common/`, `consoles/r36h/` |Thanks to Mr.Lang.|
 |                      | **GameConsole O30S**                    | `logo/480P/`, `kernel/common/`, `consoles/r36h/` ||
 |                      | **GameConsole R50S**                    | `logo/854x480P/`, `kernel/common/`, `consoles/r50s/` |Thanks to Mr.Lang.|
-| **SoySauce R36s**    | **Soy Sauce V03**                       | `logo/480P/`, `kernel/common/`, `consoles/sauce v03/`    ||
-|                      | **Soy Sauce V04**                       | `logo/480P/`, `kernel/common/`, `consoles/sauce v04/`    |Thanks to the user with QQ number 2824907016.|
+| **SoySauce R36s**    | **Soy Sauce Panel1**                       | `logo/480P/`, `kernel/common/`, `consoles/sauce panel1/`    ||
+|                      | **Soy Sauce Panel2**                       | `logo/480P/`, `kernel/common/`, `consoles/sauce panel2/`    |Thanks to the user with QQ number 2824907016.|
+|                      | **Soy Sauce Panel3**                       | `logo/480P/`, `kernel/common/`, `consoles/sauce panel3/`    ||
+|                      | **Soy Sauce Panel4**                       | `logo/480P/`, `kernel/common/`, `consoles/sauce panel4/`    ||
 | **Diium(SZDiiER)**   | **~~Diium Dr28s~~**                       | ~~`logo/480P-270/`, `kernel/common/`, `consoles/dr28s/`~~        |~~Thanks to Diium.~~**Maintenance suspended due to device damage.**|
 |                      | **SZDiiER D007(Plus)**                   | `logo/480P/`, `kernel/common/`, `consoles/d007/`      ||
 | **XiFan HandHelds**   | **XiFan Mymini**                        | `logo/480P/`, `kernel/common/`, `consoles/mymini/`      |Thanks to XiFan.|
