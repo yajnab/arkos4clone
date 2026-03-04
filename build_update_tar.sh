@@ -97,7 +97,6 @@ echo "== 注入 Clone 配置与工具 =="
 mkdir -p "$PAYLOAD_ROOT/opt/system/Clone" \
          "$PAYLOAD_ROOT/usr/bin" \
          "$PAYLOAD_ROOT/usr/local/bin"
-cp -f ./sh/joyled.sh "$PAYLOAD_ROOT/opt/system/Clone/" 2>/dev/null || true
 cp -f ./sh/sdljoytest.sh "$PAYLOAD_ROOT/opt/system/Clone/" 2>/dev/null || true
 cp -f ./bin/mcu_led ./bin/ws2812 "$PAYLOAD_ROOT/usr/bin/" 2>/dev/null || true
 cp -f ./bin/sdljoymap ./bin/sdljoytest "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
@@ -128,13 +127,13 @@ echo "== 注入核心与 EmulationStation 文件 =="
 mkdir -p "$PAYLOAD_ROOT/home/ark/.config/retroarch/cores" \
          "$PAYLOAD_ROOT/home/ark/.config/retroarch32/cores" \
          "$PAYLOAD_ROOT/etc/emulationstation" \
-         "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/locale/zh-CN"
+         "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/locale/"
 cp -f ./mod_so/64/* "$PAYLOAD_ROOT/home/ark/.config/retroarch/cores/" 2>/dev/null || true
 cp -f ./mod_so/32/* "$PAYLOAD_ROOT/home/ark/.config/retroarch32/cores/" 2>/dev/null || true
 cp -f ./replace_file/es_systems.cfg "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
 cp -f ./replace_file/es_systems.cfg.dual "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
-cp -f ./replace_file/emulationstation2.po \
-      "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/locale/zh-CN/" 2>/dev/null || true
+cp -rf "./replace_file/locale/*" \
+      "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/locale/" 2>/dev/null || true
 
 # 注意：es_input.cfg 的删除在 install.sh 中完成
 mkdir -p "$PAYLOAD_ROOT/usr/bin/emulationstation"

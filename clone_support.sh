@@ -28,7 +28,6 @@ sudo chown -R 1002:1002 "$MOUNT_DIR/root/home/ark/.quirks/"
 
 echo "== 注入 clone 用配置 =="
 sudo mkdir -p "$MOUNT_DIR/root/opt/system/Clone" "$MOUNT_DIR/root/usr/bin"
-sudo cp -f ./sh/joyled.sh "$MOUNT_DIR/root/opt/system/Clone/"
 sudo cp -f ./sh/sdljoytest.sh "$MOUNT_DIR/root/opt/system/Clone/"
 sudo cp -f ./bin/mcu_led ./bin/ws2812 "$MOUNT_DIR/root/usr/bin/"
 sudo cp -f ./bin/sdljoymap  ./bin/sdljoytest "$MOUNT_DIR/root/usr/local/bin/"
@@ -117,10 +116,8 @@ sudo cp -f ./replace_file/es_systems.cfg "$MOUNT_DIR/root/etc/emulationstation/"
 sudo cp -f ./replace_file/es_systems.cfg.dual "$MOUNT_DIR/root/etc/emulationstation/"
 sudo chmod 777 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg.dual" 2>/dev/null || true
-sudo cp -f ./replace_file/emulationstation2.po "$MOUNT_DIR/root/usr/bin/emulationstation/resources/locale/zh-CN/"
-
+sudo cp -rf "./replace_file/locale/*" "$MOUNT_DIR/root/usr/bin/emulationstation/resources/locale/"
 sudo rm -rf "$MOUNT_DIR/root/etc/emulationstation/es_input.cfg" 2>/dev/null || true
-
 sudo cp -r ./replace_file/emulationstation "$MOUNT_DIR/root/usr/bin/emulationstation/emulationstation"
 
 echo "== 还原drastic =="
