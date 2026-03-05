@@ -1620,6 +1620,12 @@ msgstr "BIENVENIDO"
 
 #: 
 msgid "CONFIGURE INPUT"
+
+msgid "JOYPAD TEST"
+msgstr "Prueba de mando"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "¿Está seguro de que desea probar el mando?"
 msgstr "CONFIGURAR MANDO"
 
 #: 
@@ -2579,6 +2585,12 @@ msgstr "EFECTO FLUJO"
 msgid "SCROLLING EFFECT"
 msgstr "EFECTO DESPLAZAMIENTO"
 
+msgid "LEFT JOYSTICK LED"
+msgstr "LED joystick izquierdo"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "LED joystick derecho"
+
 msgid "BRIGHTNESS"
 msgstr "Brillo"
 
@@ -2590,3 +2602,69 @@ msgstr "Medio"
 
 msgid "LOW"
 msgstr "Bajo"
+
+msgid "USB SWITCH"
+msgstr "Conmutador USB"
+
+msgid "INTERNAL USB"
+msgstr "USB Interno"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "USB interno para almacenamiento integrado"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "USB externo para dispositivos OTG"
+
+msgid "USB MODE"
+msgstr "Modo USB"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "USB Interno (almacenamiento integrado)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "USB Externo (dispositivo OTG)"
+
+msgid "DATE & TIME"
+msgstr "Fecha y hora"
+
+msgid "CURRENT"
+msgstr "Actual"
+
+msgid "DATE"
+msgstr "Fecha"
+
+msgid "TIME"
+msgstr "Hora"
+
+msgid "SYNC WITH NETWORK"
+msgstr "Sincronizar con red"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "Hora establecida correctamente"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "Hora sincronizada correctamente"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "Sin conexión de red"
+
+msgid "POWER LED"
+msgstr "LED de encendido"
+
+msgid "RED LED"
+msgstr "LED rojo"
+
+msgid "BLUE LED"
+msgstr "LED azul"
+
+msgid "BELOW"
+msgstr "Por debajo de"
+
+msgid "ABOVE"
+msgstr "Por encima de"
+
+msgid "BLUE"
+msgstr "Azul"
+
+msgid "RED"
+msgstr "Rojo"

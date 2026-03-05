@@ -9,8 +9,6 @@
 # ==================== 路径配置 ====================
 QUIRKS_DIR="/home/ark/.quirks"
 CONSOLE_FILE="/boot/.console"
-JOYLED_FILE="/home/ark/.joyled"
-JOYLED_BIN="/opt/system/Clone/joyled.sh"
 CONSOLE_DETECT="/usr/local/bin/console_detect"
 LOG_FILE="/boot/clone_log.txt"
 
@@ -256,27 +254,6 @@ apply_all_quirks() {
   apply_rotate_file
 }
 
-# ==================== Joyled 处理 ====================
-apply_joyled() {
-  [[ -x "$JOYLED_BIN" ]] || { warn "joyled not found"; return 1; }
-  bash "$JOYLED_BIN" --apply >>"$LOG_FILE" 2>&1 || warn "joyled --apply failed"
-}
-
-joyled_boot_flow() {
-  [[ -f "$JOYLED_FILE" ]] || return 0
-  local saved; saved="$(grep -E '^MODEL=' "$JOYLED_FILE" 2>/dev/null | tail -n1 | cut -d= -f2 || true)"
-  
-  if [[ -z "$saved" ]]; then
-    warn "joyled MODEL missing, removing"
-    rm -f "$JOYLED_FILE" 2>/dev/null || true
-  elif [[ "$saved" != "$DEVICE_NAME" ]]; then
-    msg "joyled model mismatch, removing"
-    rm -f "$JOYLED_FILE" 2>/dev/null || true
-  else
-    apply_joyled
-  fi
-}
-
 # ==================== 音频配置 ====================
 setup_audio() {
   local state; state="$(amixer get 'Playback Path' 2>/dev/null | grep -oP "Item0: '\K\w+" || true)"
@@ -428,9 +405,8 @@ main() {
   [[ -f "/boot/.cn" ]] && { apply_localization "cn"; sudo rm -f /boot/.cn; }
   [[ -f "/boot/.ko" ]] && { apply_localization "ko"; sudo rm -f /boot/.ko; }
 
-  # Last game & Joyled
+  # Last game
   [[ -x /home/ark/.config/lastgame.sh ]] && sudo -u ark /home/ark/.config/lastgame.sh
-  joyled_boot_flow
 
   msg "Done. device=$DEVICE_NAME"
 }

@@ -834,6 +834,12 @@ msgstr "OPCJONALNY SILNIK DRGAŃ"
 
 #: 
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
+msgid "JOYPAD TEST"
+msgstr "Test kontrolera"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "Czy na pewno chcesz przetestować kontroler?"
+
 msgstr "CZY NA PEWNO CHCESZ SKONFIGUROWAĆ WEJŚCIE?"
 
 #: 
@@ -2843,6 +2849,12 @@ msgstr "EFEKT PRZEPŁYWU"
 msgid "SCROLLING EFFECT"
 msgstr "EFEKT PRZEWIJANIA"
 
+msgid "LEFT JOYSTICK LED"
+msgstr "LED lewego joysticka"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "LED prawego joysticka"
+
 msgid "BRIGHTNESS"
 msgstr "Jasność"
 
@@ -2855,3 +2867,69 @@ msgstr "Średnia"
 msgid "LOW"
 msgstr "Niska"
 
+
+msgid "USB SWITCH"
+msgstr "Przełącznik USB"
+
+msgid "INTERNAL USB"
+msgstr "Wewnętrzny USB"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "Wewnętrzny USB dla pamięci wewnętrznej"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "Zewnętrzny USB dla urządzeń OTG"
+
+msgid "USB MODE"
+msgstr "Tryb USB"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "Wewnętrzny USB (pamięć wewnętrzna)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "Zewnętrzny USB (urządzenie OTG)"
+
+msgid "DATE & TIME"
+msgstr "Date & Time"
+
+msgid "CURRENT"
+msgstr "Current"
+
+msgid "DATE"
+msgstr "Date"
+
+msgid "TIME"
+msgstr "Time"
+
+msgid "SYNC WITH NETWORK"
+msgstr "Sync with Network"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "Time Set Successfully"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "Time Synced Successfully"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "Brak połączenia sieciowego"
+
+msgid "POWER LED"
+msgstr "Dioda zasilania"
+
+msgid "RED LED"
+msgstr "Czerwona dioda"
+
+msgid "BLUE LED"
+msgstr "Niebieska dioda"
+
+msgid "BELOW"
+msgstr "Poniżej"
+
+msgid "ABOVE"
+msgstr "Powyżej"
+
+msgid "BLUE"
+msgstr "Niebieski"
+
+msgid "RED"
+msgstr "Czerwony"

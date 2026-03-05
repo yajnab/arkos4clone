@@ -98,6 +98,12 @@ msgstr "VERZEICHNISSE ANZEIGEN"
 
 #:
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
+msgid "JOYPAD TEST"
+msgstr "Gamepad-Test"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "Sind Sie sicher, dass Sie das Gamepad testen möchten?"
+
 msgstr "BIST DU SICHER, DASS DU DEN EINGANG KONFIGURIEREN WILLST?"
 
 #:
@@ -2411,6 +2417,12 @@ msgstr "FLUSS-EFFEKT"
 msgid "SCROLLING EFFECT"
 msgstr "SCROLL-EFFEKT"
 
+msgid "LEFT JOYSTICK LED"
+msgstr "Linke Joystick-LED"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "Rechte Joystick-LED"
+
 msgid "BRIGHTNESS"
 msgstr "Helligkeit"
 
@@ -2422,3 +2434,69 @@ msgstr "Mittel"
 
 msgid "LOW"
 msgstr "Niedrig"
+
+msgid "USB SWITCH"
+msgstr "USB-Umschaltung"
+
+msgid "INTERNAL USB"
+msgstr "Interne USB"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "Interne USB für internen Speicher"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "Externe USB für OTG-Geräte"
+
+msgid "USB MODE"
+msgstr "USB-Modus"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "Interne USB (interner Speicher)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "Externe USB (OTG-Gerät)"
+
+msgid "DATE & TIME"
+msgstr "Datum und Uhrzeit"
+
+msgid "CURRENT"
+msgstr "Aktuell"
+
+msgid "DATE"
+msgstr "Datum"
+
+msgid "TIME"
+msgstr "Uhrzeit"
+
+msgid "SYNC WITH NETWORK"
+msgstr "Mit Netzwerk synchronisieren"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "Uhrzeit erfolgreich eingestellt"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "Uhrzeit erfolgreich synchronisiert"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "Keine Netzwerkverbindung"
+
+msgid "POWER LED"
+msgstr "Power LED"
+
+msgid "RED LED"
+msgstr "Rote LED"
+
+msgid "BLUE LED"
+msgstr "Blaue LED"
+
+msgid "BELOW"
+msgstr "Unter"
+
+msgid "ABOVE"
+msgstr "Über"
+
+msgid "BLUE"
+msgstr "Blau"
+
+msgid "RED"
+msgstr "Rot"

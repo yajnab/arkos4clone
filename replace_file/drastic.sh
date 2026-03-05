@@ -17,8 +17,12 @@ echo "VAR=drastic" > /home/ark/.config/KILLIT
 sudo systemctl restart killer_daemon.service
 
 cd /opt/drastic
+sudo ./drastic_hotkeys &
 ./drastic "$1"
 
-sudo systemctl stop killer_daemon.service
+GPTOKEYB_PID="$(pidof drastic_hotkeys 2>/dev/null || true)"
+if [[ -n "$GPTOKEYB_PID" ]]; then
+  sudo kill -9 $GPTOKEYB_PID
+fi
 
 sudo systemctl restart ogage &

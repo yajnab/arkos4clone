@@ -97,7 +97,6 @@ echo "== 注入 Clone 配置与工具 =="
 mkdir -p "$PAYLOAD_ROOT/opt/system/Clone" \
          "$PAYLOAD_ROOT/usr/bin" \
          "$PAYLOAD_ROOT/usr/local/bin"
-cp -f ./sh/sdljoytest.sh "$PAYLOAD_ROOT/opt/system/Clone/" 2>/dev/null || true
 cp -f ./bin/mcu_led ./bin/ws2812 "$PAYLOAD_ROOT/usr/bin/" 2>/dev/null || true
 cp -f ./bin/sdljoymap ./bin/sdljoytest "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
 cp -f ./bin/console_detect "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
@@ -132,7 +131,7 @@ cp -f ./mod_so/64/* "$PAYLOAD_ROOT/home/ark/.config/retroarch/cores/" 2>/dev/nul
 cp -f ./mod_so/32/* "$PAYLOAD_ROOT/home/ark/.config/retroarch32/cores/" 2>/dev/null || true
 cp -f ./replace_file/es_systems.cfg "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
 cp -f ./replace_file/es_systems.cfg.dual "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
-cp -rf "./replace_file/locale/*" \
+cp -rf ./replace_file/locale/* \
       "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/locale/" 2>/dev/null || true
 
 # 注意：es_input.cfg 的删除在 install.sh 中完成
@@ -497,6 +496,13 @@ rm -f /home/ark/.config/imageshift.sh 2>/dev/null && log "Removed: imageshift.sh
 
 rm -rf /opt/system/DeviceType 2>/dev/null && log "Removed: DeviceType" || true
 rm -rf "/opt/system/Change LED to Red.sh" 2>/dev/null && log "Removed: Change LED to Red.sh" || true
+rm -rf "/opt/system/Update.sh" 2>/dev/null && log "Removed: Update.sh" || true
+rm -rf "/opt/system/Wifi.sh" 2>/dev/null && log "Removed: Wifi.sh" || true
+rm -rf "/opt/system/Network Info.sh" 2>/dev/null && log "Removed: Network Info.sh" || true
+rm -rf "/opt/system/Enable Remote Services.sh" 2>/dev/null && log "Removed: Enable Remote Services.sh" || true
+rm -rf "/opt/system/Disable Remote Services.sh" 2>/dev/null && log "Removed: Disable Remote Services.sh" || true
+rm -rf "/opt/system/Change Time.sh" 2>/dev/null && log "Removed: Change Time.sh" || true
+rm -rf "/opt/system/Advanced/NDS Overlays" 2>/dev/null && log "Removed: NDS Overlays" || true
 rm -rf "/opt/system/Advanced/Change Ports SDL.sh" 2>/dev/null && log "Removed: Change Ports SDL.sh" || true
 find /opt/system/Advanced -name 'Restore*.sh' ! -name 'Restore ArkOS Settings.sh' -exec rm -f {} + 2>/dev/null || true
 rm -rf "/opt/system/Advanced/Screen - Switch to Original Screen Timings.sh" 2>/dev/null || true

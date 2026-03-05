@@ -64,6 +64,12 @@ msgid "SHOW FOLDERS"
 msgstr "폴더 표시"
 
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
+msgid "JOYPAD TEST"
+msgstr "게임패드 테스트"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "게임패드를 테스트하시겠습니까?"
+
 msgstr "입력 설정을 진행하시겠습니까?"
 
 msgid "LOG LEVEL"
@@ -1852,6 +1858,12 @@ msgstr "흐름 효과"
 msgid "SCROLLING EFFECT"
 msgstr "스크롤 효과"
 
+msgid "LEFT JOYSTICK LED"
+msgstr "왼쪽 조이스틱 LED"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "오른쪽 조이스틱 LED"
+
 msgid "BRIGHTNESS"
 msgstr "밝기"
 
@@ -1863,3 +1875,69 @@ msgstr "중간"
 
 msgid "LOW"
 msgstr "낮음"
+
+msgid "USB SWITCH"
+msgstr "USB 전환"
+
+msgid "INTERNAL USB"
+msgstr "내부 USB"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "내장 저장소용 내부 USB"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "OTG 기기용 외부 USB"
+
+msgid "USB MODE"
+msgstr "USB 모드"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "내부 USB (내장 저장소)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "외부 USB (OTG 기기)"
+
+msgid "DATE & TIME"
+msgstr "날짜와 시간"
+
+msgid "CURRENT"
+msgstr "현재"
+
+msgid "DATE"
+msgstr "날짜"
+
+msgid "TIME"
+msgstr "시간"
+
+msgid "SYNC WITH NETWORK"
+msgstr "네트워크 동기화"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "시간 설정 완료"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "시간 동기화 완료"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "네트워크 연결 없음"
+
+msgid "POWER LED"
+msgstr "전원 LED"
+
+msgid "RED LED"
+msgstr "빨간 LED"
+
+msgid "BLUE LED"
+msgstr "파란 LED"
+
+msgid "BELOW"
+msgstr "미만"
+
+msgid "ABOVE"
+msgstr "이상"
+
+msgid "BLUE"
+msgstr "파랑"
+
+msgid "RED"
+msgstr "빨강"

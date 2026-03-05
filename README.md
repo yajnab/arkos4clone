@@ -34,7 +34,7 @@ Currently, I can only maintain the devices I personally own, but contributions a
 |                      | **GameConsole R45H**                    | `logo/768P/`, `kernel/common/`, `consoles/r45h/`        |Thanks to Mr.Lang.|
 |                      | **GameConsole R36H ProMax**                    | `logo/768P/`, `kernel/common/`, `consoles/r45h/`        |Thanks to Mr.Lang.|
 |                      | **GameConsole R36sPlus**                | `logo/720P/`, `kernel/common/`, `consoles/r36splus/`    |Thanks to Mr.Lang.|
-|                      | **GameConsole R36s Panel 0**            | `logo/480P/`, `kernel/common/`, `consoles/origin panel0/` ||
+|                      | **GameConsole R33s**            | `logo/480P/`, `kernel/common/`, `consoles/r33s/` ||
 |                      | **GameConsole R36s Panel 1**            | `logo/480P/`, `kernel/common/`, `consoles/origin panel1/` ||
 |                      | **GameConsole R36s Panel 2**            | `logo/480P/`, `kernel/common/`, `consoles/origin panel2/` ||
 |                      | **GameConsole R36s Panel 3**            | `logo/480P/`, `kernel/common/`, `consoles/origin panel3/` ||

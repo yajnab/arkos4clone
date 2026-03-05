@@ -1051,6 +1051,12 @@ msgid "PASSWORD"
 msgstr "ПАРОЛЬ"
 
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
+msgid "JOYPAD TEST"
+msgstr "Тест геймпада"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "Ви впевнені, що хочете протестувати геймпад?"
+
 msgstr "ВИ ВПЕВНЕНІ, ЩО ХОЧЕТЕ НАЛАШТУВАТИ УПРАВЛІННЯ?"
 
 msgid "CHOOSE"
@@ -3854,6 +3860,12 @@ msgstr "ЕФЕКТ ПОТОКУ"
 msgid "SCROLLING EFFECT"
 msgstr "ЕФЕКТ ПРОКРУТКИ"
 
+msgid "LEFT JOYSTICK LED"
+msgstr "Світлодіод лівого джойстика"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "Світлодіод правого джойстика"
+
 msgid "BRIGHTNESS"
 msgstr "Яскравість"
 
@@ -3865,3 +3877,69 @@ msgstr "Середня"
 
 msgid "LOW"
 msgstr "Низька"
+
+msgid "USB SWITCH"
+msgstr "Перемикач USB"
+
+msgid "INTERNAL USB"
+msgstr "Внутрішній USB"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "Внутрішній USB для вбудованого сховища"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "Зовнішній USB для OTG-пристроїв"
+
+msgid "USB MODE"
+msgstr "Режим USB"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "Внутрішній USB (вбудоване сховище)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "Зовнішній USB (OTG-пристрій)"
+
+msgid "DATE & TIME"
+msgstr "Date & Time"
+
+msgid "CURRENT"
+msgstr "Current"
+
+msgid "DATE"
+msgstr "Date"
+
+msgid "TIME"
+msgstr "Time"
+
+msgid "SYNC WITH NETWORK"
+msgstr "Sync with Network"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "Time Set Successfully"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "Time Synced Successfully"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "Немає підключення до мережі"
+
+msgid "POWER LED"
+msgstr "Індикатор живлення"
+
+msgid "RED LED"
+msgstr "Червоний LED"
+
+msgid "BLUE LED"
+msgstr "Синій LED"
+
+msgid "BELOW"
+msgstr "Нижче"
+
+msgid "ABOVE"
+msgstr "Вище"
+
+msgid "BLUE"
+msgstr "Синій"
+
+msgid "RED"
+msgstr "Червоний"

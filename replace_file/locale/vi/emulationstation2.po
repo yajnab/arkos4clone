@@ -1021,6 +1021,12 @@ msgid "WELCOME"
 msgstr "CHÀO MỪNG"
 
 msgid "CONFIGURE INPUT"
+
+msgid "JOYPAD TEST"
+msgstr "Kiểm tra tay cầm"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "Bạn có chắc chắn muốn kiểm tra tay cầm không?"
 msgstr "CẤU HÌNH ĐẦU VÀO"
 
 msgid "%i GAMEPAD DETECTED"
@@ -1708,6 +1714,12 @@ msgstr "HIỆU ỨNG DÒNG CHẢY"
 msgid "SCROLLING EFFECT"
 msgstr "HIỆU ỨNG CUỘN"
 
+msgid "LEFT JOYSTICK LED"
+msgstr "LED cần gạt trái"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "LED cần gạt phải"
+
 msgid "BRIGHTNESS"
 msgstr "Độ sáng"
 
@@ -1719,3 +1731,69 @@ msgstr "Trung bình"
 
 msgid "LOW"
 msgstr "Thấp"
+
+msgid "USB SWITCH"
+msgstr "Chuyển đổi USB"
+
+msgid "INTERNAL USB"
+msgstr "USB nội bộ"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "USB nội bộ cho bộ nhớ tích hợp"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "USB ngoại vi cho thiết bị OTG"
+
+msgid "USB MODE"
+msgstr "Chế độ USB"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "USB nội bộ (bộ nhớ tích hợp)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "USB ngoại vi (thiết bị OTG)"
+
+msgid "DATE & TIME"
+msgstr "Date & Time"
+
+msgid "CURRENT"
+msgstr "Current"
+
+msgid "DATE"
+msgstr "Date"
+
+msgid "TIME"
+msgstr "Time"
+
+msgid "SYNC WITH NETWORK"
+msgstr "Sync with Network"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "Time Set Successfully"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "Time Synced Successfully"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "Không có kết nối mạng"
+
+msgid "POWER LED"
+msgstr "LED nguồn"
+
+msgid "RED LED"
+msgstr "LED đỏ"
+
+msgid "BLUE LED"
+msgstr "LED xanh"
+
+msgid "BELOW"
+msgstr "Dưới"
+
+msgid "ABOVE"
+msgstr "Trên"
+
+msgid "BLUE"
+msgstr "Xanh dương"
+
+msgid "RED"
+msgstr "Đỏ"

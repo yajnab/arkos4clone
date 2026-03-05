@@ -1152,6 +1152,12 @@ msgstr "ΚΑΛΩΣ ΗΡΘΑΤΕ"
 
 #: 
 msgid "CONFIGURE INPUT"
+
+msgid "JOYPAD TEST"
+msgstr "Δοκιμή χειριστηρίου"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "Είστε βέβαιοι ότι θέλετε να δοκιμάσετε το χειριστήριο;"
 msgstr "ΔΙΑΜΟΡΦΩΣΗ ΕΝΤΟΛΗΣ"
 
 #: 
@@ -2111,6 +2117,12 @@ msgstr "ΕΦΕ ΡΟΗΣ"
 msgid "SCROLLING EFFECT"
 msgstr "ΕΦΕ ΚΥΛΙΣΗΣ"
 
+msgid "LEFT JOYSTICK LED"
+msgstr "LED αριστερού joystick"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "LED δεξιού joystick"
+
 msgid "BRIGHTNESS"
 msgstr "Φωτεινότητα"
 
@@ -2122,3 +2134,69 @@ msgstr "Μεσαία"
 
 msgid "LOW"
 msgstr "Χαμηλή"
+
+msgid "USB SWITCH"
+msgstr "Διακόπτης USB"
+
+msgid "INTERNAL USB"
+msgstr "Εσωτερικό USB"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "Εσωτερικό USB για ενσωματωμένο αποθηκευτικό χώρο"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "Εξωτερικό USB για συσκευές OTG"
+
+msgid "USB MODE"
+msgstr "Λειτουργία USB"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "Εσωτερικό USB (ενσωματωμένος αποθηκευτικός χώρος)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "Εξωτερικό USB (συσκευή OTG)"
+
+msgid "DATE & TIME"
+msgstr "Date & Time"
+
+msgid "CURRENT"
+msgstr "Current"
+
+msgid "DATE"
+msgstr "Date"
+
+msgid "TIME"
+msgstr "Time"
+
+msgid "SYNC WITH NETWORK"
+msgstr "Sync with Network"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "Time Set Successfully"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "Time Synced Successfully"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "Χωρίς σύνδεση δικτύου"
+
+msgid "POWER LED"
+msgstr "LED ισχύος"
+
+msgid "RED LED"
+msgstr "Κόκκινο LED"
+
+msgid "BLUE LED"
+msgstr "Μπλε LED"
+
+msgid "BELOW"
+msgstr "Κάτω από"
+
+msgid "ABOVE"
+msgstr "Πάνω από"
+
+msgid "BLUE"
+msgstr "Μπλε"
+
+msgid "RED"
+msgstr "Κόκκινο"

@@ -779,7 +779,7 @@ msgid "NETWORK SETTINGS"
 msgstr "网络设定"
 
 msgid "CONFIGURE INPUT"
-msgstr "设定输入"
+msgstr "按键配置"
 
 msgid "EMULATOR SETTINGS"
 msgstr "模拟器设定"
@@ -1047,7 +1047,13 @@ msgid "PASSWORD"
 msgstr "密码"
 
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
-msgstr "您确定要设定输入吗？"
+msgstr "您确定要配置按键吗？"
+
+msgid "JOYPAD TEST"
+msgstr "手柄测试"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "您确定要测试手柄吗？"
 
 msgid "CHOOSE"
 msgstr "选择"
@@ -3720,3 +3726,75 @@ msgstr "流动效果"
 
 msgid "SCROLLING EFFECT"
 msgstr "滚动效果"
+
+msgid "LEFT JOYSTICK LED"
+msgstr "左摇杆灯"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "右摇杆灯"
+
+msgid "USB SWITCH"
+msgstr "USB 切换"
+
+msgid "INTERNAL USB"
+msgstr "内置 USB"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "内置 USB 用于内置存储"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "外置 USB 用于 OTG 设备"
+
+msgid "USB MODE"
+msgstr "USB 模式"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "内置 USB (内置存储)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "外置 USB (OTG 设备)"
+
+msgid "DATE & TIME"
+msgstr "日期与时间"
+
+msgid "CURRENT"
+msgstr "当前"
+
+msgid "DATE"
+msgstr "日期"
+
+msgid "TIME"
+msgstr "时间"
+
+msgid "SYNC WITH NETWORK"
+msgstr "网络同步"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "时间设置成功"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "时间同步成功"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "无网络连接"
+
+msgid "POWER LED"
+msgstr "电源灯"
+
+msgid "RED LED"
+msgstr "红灯"
+
+msgid "BLUE LED"
+msgstr "蓝灯"
+
+msgid "BELOW"
+msgstr "低于"
+
+msgid "ABOVE"
+msgstr "高于"
+
+msgid "BLUE"
+msgstr "蓝色"
+
+msgid "RED"
+msgstr "红色"

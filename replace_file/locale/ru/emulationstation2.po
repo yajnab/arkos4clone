@@ -993,6 +993,12 @@ msgid "PASSWORD"
 msgstr "ПАРОЛЬ"
 
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
+msgid "JOYPAD TEST"
+msgstr "Тест геймпада"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "Вы уверены, что хотите протестировать геймпад?"
+
 msgstr "ВЫ УВЕРЕНЫ, ЧТО ХОТИТЕ НАСТРОИТЬ УПРАВЛЕНИЕ?"
 
 msgid "CHOOSE"
@@ -3646,6 +3652,12 @@ msgstr "ЭФФЕКТ ПОТОКА"
 msgid "SCROLLING EFFECT"
 msgstr "ЭФФЕКТ ПРОКРУТКИ"
 
+msgid "LEFT JOYSTICK LED"
+msgstr "Светодиод левого джойстика"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "Светодиод правого джойстика"
+
 msgid "BRIGHTNESS"
 msgstr "Яркость"
 
@@ -3663,3 +3675,69 @@ msgstr "Низкая"
 
 
 
+
+msgid "USB SWITCH"
+msgstr "Переключатель USB"
+
+msgid "INTERNAL USB"
+msgstr "Внутренний USB"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "Внутренний USB для встроенного хранилища"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "Внешний USB для OTG-устройств"
+
+msgid "USB MODE"
+msgstr "Режим USB"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "Внутренний USB (встроенное хранилище)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "Внешний USB (OTG-устройство)"
+
+msgid "DATE & TIME"
+msgstr "Дата и время"
+
+msgid "CURRENT"
+msgstr "Текущее"
+
+msgid "DATE"
+msgstr "Дата"
+
+msgid "TIME"
+msgstr "Время"
+
+msgid "SYNC WITH NETWORK"
+msgstr "Синхронизировать с сетью"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "Время успешно установлено"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "Время успешно синхронизировано"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "Нет подключения к сети"
+
+msgid "POWER LED"
+msgstr "Индикатор питания"
+
+msgid "RED LED"
+msgstr "Красный LED"
+
+msgid "BLUE LED"
+msgstr "Синий LED"
+
+msgid "BELOW"
+msgstr "Ниже"
+
+msgid "ABOVE"
+msgstr "Выше"
+
+msgid "BLUE"
+msgstr "Синий"
+
+msgid "RED"
+msgstr "Красный"

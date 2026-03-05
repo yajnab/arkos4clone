@@ -168,9 +168,9 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/720p/", "kernel/common/"},
 	},
 	{
-		RealName: "origin panel0",
+		RealName: "r33s",
 		BrandEntries: []BrandEntry{
-			{Brand: "GameConsole", DisplayName: "GameConsole R36s Panel 0"},
+			{Brand: "GameConsole", DisplayName: "GameConsole R33s"},
 		},
 		ExtraSources: []string{"logo/480P/", "kernel/common/"},
 	},

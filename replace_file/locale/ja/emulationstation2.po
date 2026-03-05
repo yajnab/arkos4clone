@@ -834,6 +834,12 @@ msgstr "追加の振動モーター"
 
 #:
 msgid "ARE YOU SURE YOU WANT TO CONFIGURE INPUT?"
+msgid "JOYPAD TEST"
+msgstr "ゲームパッドテスト"
+
+msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
+msgstr "ゲームパッドをテストしますか？"
+
 msgstr "本当に入力を設定しますか？"
 
 #:
@@ -1475,6 +1481,12 @@ msgstr "フローエフェクト"
 msgid "SCROLLING EFFECT"
 msgstr "スクロールエフェクト"
 
+msgid "LEFT JOYSTICK LED"
+msgstr "左ジョイスティックLED"
+
+msgid "RIGHT JOYSTICK LED"
+msgstr "右ジョイスティックLED"
+
 msgid "BRIGHTNESS"
 msgstr "明るさ"
 
@@ -1486,3 +1498,68 @@ msgstr "中"
 
 msgid "LOW"
 msgstr "低"
+msgid "USB SWITCH"
+msgstr "USB 切り替え"
+
+msgid "INTERNAL USB"
+msgstr "内部 USB"
+
+msgid "INTERNAL USB FOR BUILT-IN STORAGE"
+msgstr "内部ストレージ用内部 USB"
+
+msgid "EXTERNAL USB FOR OTG DEVICES"
+msgstr "OTG デバイス用外部 USB"
+
+msgid "USB MODE"
+msgstr "USB モード"
+
+msgid "INTERNAL USB (BUILT-IN STORAGE)"
+msgstr "内部 USB (内蔵ストレージ)"
+
+msgid "EXTERNAL USB (OTG DEVICE)"
+msgstr "外部 USB (OTG デバイス)"
+
+msgid "DATE & TIME"
+msgstr "日付と時刻"
+
+msgid "CURRENT"
+msgstr "現在"
+
+msgid "DATE"
+msgstr "日付"
+
+msgid "TIME"
+msgstr "時刻"
+
+msgid "SYNC WITH NETWORK"
+msgstr "ネットワークと同期"
+
+msgid "TIME SET SUCCESSFULLY"
+msgstr "時刻を設定しました"
+
+msgid "TIME SYNCED SUCCESSFULLY"
+msgstr "時刻を同期しました"
+
+msgid "NO NETWORK CONNECTION"
+msgstr "ネットワーク接続なし"
+
+msgid "POWER LED"
+msgstr "電源LED"
+
+msgid "RED LED"
+msgstr "赤色LED"
+
+msgid "BLUE LED"
+msgstr "青色LED"
+
+msgid "BELOW"
+msgstr "以下"
+
+msgid "ABOVE"
+msgstr "以上"
+
+msgid "BLUE"
+msgstr "青"
+
+msgid "RED"
+msgstr "赤"
