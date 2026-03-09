@@ -116,6 +116,13 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/720P/", "kernel/common/"},
 	},
 	{
+		RealName: "xu10",
+		BrandEntries: []BrandEntry{
+			{Brand: "MagicX", DisplayName: "MagicX XU10"},
+		},
+		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+	},
+	{
 		RealName: "hg36",
 		BrandEntries: []BrandEntry{
 			{Brand: "Other", DisplayName: "GameConsole HG36 (HG3506)"},
@@ -379,14 +386,23 @@ var Consoles = []ConsoleConfig{
 		},
 		ExtraSources: []string{"logo/480P/", "kernel/common/"},
 	},
+	{
+		RealName: "rp1",
+		BrandEntries: []BrandEntry{
+			{Brand: "RetroBox", DisplayName: "RetroBox P1"},
+		},
+		ExtraSources: []string{"logo/480P-270/", "kernel/common/"},
+	},
 }
 
 // 品牌列表
 var Brands = []string{
 	"YMC",
 	"AISLPC",
+	"MagicX",
 	"Batlexp",
 	"Kinhank",
+	"RetroBox",
 	"Powkiddy",
 	"Clone R36s",
 	"GameConsole",

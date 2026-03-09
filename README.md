@@ -17,9 +17,11 @@ Currently, I can only maintain the devices I personally own, but contributions a
 | **AISLPC**            | **GameConsole K36S**                    | `logo/480P/`, `kernel/common/`, `consoles/k36s/`        |Thanks to Mr.Yin.|
 |                      | **GameConsole R36T**                    | `logo/480P/`, `kernel/common/`, `consoles/k36s/`        |Thanks to Mr.Yin.|
 |                      | **GameConsole R36T MAX**                | `logo/720P/`, `kernel/common/`, `consoles/r36tmax/`     |Thanks to Mr.Yin.|
+| **MagicX**            | **MagicX xu10**                    | `logo/480P/`, `kernel/common/`, `consoles/xu10/`        ||
 | **Batlexp**           | **Batlexp G350**                        | `logo/480P/`, `kernel/common/`, `consoles/g350/`         ||
 | **Kinhank**           | **K36 Origin Panel**                    | `logo/480P/`, `kernel/common/`, `consoles/k36/`         ||
 | **Powkiddy**           | **Powkiddy RGB20S**                    | `logo/480P/`, `kernel/common/`, `consoles/rgb20s/`         ||
+| **RetroBox**           | **RetroBox P1**                    | `logo/480P-270/`, `kernel/common/`, `consoles/rp1/`         ||
 | **Clone R36s**        | **Clone Type 1 With Amplifier**         | `logo/480P/`, `kernel/common/`, `consoles/r36pro/` |Thanks to XiFan.|
 |                       | **Clone Type 1 Without Amplifier**      | `logo/480P/`, `kernel/common/`, `consoles/hg36/` ||
 |                      | **Clone Type 1 Without Amplifier And Invert Right Joystick** | `logo/480P/`, `kernel/common/`, `consoles/k36/` |
