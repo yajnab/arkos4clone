@@ -94,8 +94,7 @@ mkdir -p "$PAYLOAD_ROOT/home/ark/.quirks"
 cp -r ./consoles/files/* "$PAYLOAD_ROOT/home/ark/.quirks/" 2>/dev/null || true
 
 echo "== 注入 Clone 配置与工具 =="
-mkdir -p "$PAYLOAD_ROOT/opt/system/Clone" \
-         "$PAYLOAD_ROOT/usr/bin" \
+mkdir -p "$PAYLOAD_ROOT/usr/bin" \
          "$PAYLOAD_ROOT/usr/local/bin"
 cp -f ./bin/mcu_led ./bin/ws2812 "$PAYLOAD_ROOT/usr/bin/" 2>/dev/null || true
 cp -f ./bin/sdljoymap ./bin/sdljoytest "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
@@ -218,70 +217,100 @@ EOF
 # ---- META：只描述“本次交付文件”的权限/属主（对齐离线注入脚本）----
 meta_init
 
-# quirks：只 chown，不 chmod（避免误伤用户已有文件）
-meta_add "----" "1002:1002" "/home/ark/.quirks/*"
+# quirks：chown + 777
+meta_add "0777" "1002:1002" "/home/ark/.quirks/*"
 
-# Clone：chown + 755
-meta_add "0755" "1002:1002" "/opt/system/Clone"
-meta_add "0755" "1002:1002" "/opt/system/Clone/*"
+# Tools：chown + 777
+meta_add "0777" "1002:1002" "/usr/bin/mcu_led"
+meta_add "0777" "1002:1002" "/usr/bin/ws2812"
+meta_add "0777" "1002:1002" "/usr/local/bin/sdljoytest"
+meta_add "0777" "1002:1002" "/usr/local/bin/sdljoymap"
+meta_add "0777" "1002:1002" "/usr/local/bin/console_detect"
 
-# Tools：chown + 755
-meta_add "0755" "1002:1002" "/usr/bin/mcu_led"
-meta_add "0755" "1002:1002" "/usr/bin/ws2812"
-meta_add "0755" "1002:1002" "/usr/local/bin/sdljoytest"
-meta_add "0755" "1002:1002" "/usr/local/bin/sdljoymap"
-meta_add "0755" "1002:1002" "/usr/local/bin/console_detect"
+# rk915 固件 777
+meta_add "0777" "1002:1002" "/usr/lib/firmware/rk915_*.bin"
 
-# rk915 固件 755
-meta_add "0755" "0:0" "/usr/lib/firmware/rk915_*.bin"
+# 351Files：chown + 777（并会在 install.sh 做 351Files -> old 的重命名）
+meta_add "0777" "1002:1002" "/opt/351Files"
+meta_add "0777" "1002:1002" "/opt/351Files/*"
 
-# 351Files：chown + 755（并会在 install.sh 做 351Files -> old 的重命名）
-meta_add "0755" "1002:1002" "/opt/351Files"
-meta_add "0755" "1002:1002" "/opt/351Files/*"
-
-# replace_file/*.sh 中那 9 个：root:root + 777
-for f in atomiswave.sh dreamcast.sh naomi.sh saturn.sh n64.sh pico8.sh drastic.sh drastic_kk.sh choose_drastic_ver.sh; do
-  meta_add "0777" "0:0" "/usr/local/bin/$f"
+# replace_file/*.sh 中那 10 个：1002:1002 + 777
+for f in atomiswave.sh dreamcast.sh naomi.sh saturn.sh n64.sh pico8.sh drastic.sh drastic_kk.sh choose_drastic_ver.sh mediaplayer.sh; do
+  meta_add "0777" "1002:1002" "/usr/local/bin/$f"
 done
 
-# adckeys：py/sh 777；service 644
-meta_add "0777" "0:0" "/usr/local/bin/adckeys.py"
-meta_add "0777" "0:0" "/usr/local/bin/adckeys.sh"
-meta_add "0644" "0:0" "/etc/systemd/system/adckeys.service"
+# adckeys：py/sh/service 全部 777
+meta_add "0777" "1002:1002" "/usr/local/bin/adckeys.py"
+meta_add "0777" "1002:1002" "/usr/local/bin/adckeys.sh"
+meta_add "0777" "1002:1002" "/etc/systemd/system/adckeys.service"
 
-# cores：只 chown，不 chmod
-meta_add "----" "1002:1002" "/home/ark/.config/retroarch/cores/*"
-meta_add "----" "1002:1002" "/home/ark/.config/retroarch32/cores/*"
+# cores：chown + 777
+meta_add "0777" "1002:1002" "/home/ark/.config/retroarch/cores/*"
+meta_add "0777" "1002:1002" "/home/ark/.config/retroarch32/cores/*"
 
 # ES cfg：777（owner 你离线没强制，按 ark 用户更合理，这里跟随 1002:1002）
 meta_add "0777" "1002:1002" "/etc/emulationstation/es_systems.cfg"
 meta_add "0777" "1002:1002" "/etc/emulationstation/es_systems.cfg.dual"
 
-# drastic：1002:1002 + 775
-meta_add "0775" "1002:1002" "/opt/drastic"
-meta_add "0775" "1002:1002" "/opt/drastic/*"
+# drastic：1002:1002 + 777
+meta_add "0777" "1002:1002" "/opt/drastic"
+meta_add "0777" "1002:1002" "/opt/drastic/*"
 
-# drastic-kk：1002:1002 + 775
-meta_add "0775" "1002:1002" "/opt/drastic-kk"
-meta_add "0775" "1002:1002" "/opt/drastic-kk/*"
+# drastic-kk：1002:1002 + 777
+meta_add "0777" "1002:1002" "/opt/drastic-kk"
+meta_add "0777" "1002:1002" "/opt/drastic-kk/*"
 
-# json-c3 库：root:root
-meta_add "----" "0:0" "/usr/lib/aarch64-linux-gnu/libjson-c.so*"
+# json-c3 库：1002:1002 + 777
+meta_add "0777" "1002:1002" "/usr/lib/aarch64-linux-gnu/libjson-c.so*"
 
-# pymo：777（离线脚本是 777）
-meta_add "0777" "0:0" "/usr/local/bin/cpymo"
-meta_add "0777" "0:0" "/usr/local/bin/pymo.sh"
+# pymo：777
+meta_add "0777" "1002:1002" "/usr/local/bin/cpymo"
+meta_add "0777" "1002:1002" "/usr/local/bin/pymo.sh"
 
-# Jason3_Scripte 工具：可执行
-meta_add "0755" "0:0" "/opt/system/Wifi-Toggle.sh"
-meta_add "0755" "0:0" "/opt/system/Tools/*.sh"
-meta_add "0755" "0:0" "/opt/system/Tools/patch.pak"
+# Jason3_Scripte 工具：777
+meta_add "0777" "1002:1002" "/opt/system/Wifi-Toggle.sh"
+meta_add "0777" "1002:1002" "/opt/system/Tools/*.sh"
+meta_add "0777" "1002:1002" "/opt/system/Tools/patch.pak"
 
-# /opt/system 下脚本权限
-meta_add "0755" "0:0" "/opt/system/Advanced/*.sh"
+# /opt/system 下脚本权限：777
+meta_add "0777" "1002:1002" "/opt/system/*.sh"
+meta_add "0777" "1002:1002" "/opt/system/Advanced/*.sh"
 
-# 临时修复：mediaplayer 777（按你旧脚本）
-meta_add "0777" "0:0" "/usr/local/bin/mediaplayer.sh"
+# aic8800DC 固件：777
+meta_add "0777" "1002:1002" "/usr/lib/firmware/aic8800DC"
+meta_add "0777" "1002:1002" "/usr/lib/firmware/aic8800DC/*"
+
+# locale：777
+meta_add "0777" "1002:1002" "/usr/bin/emulationstation/resources/locale"
+meta_add "0777" "1002:1002" "/usr/bin/emulationstation/resources/locale/*"
+
+# emulationstation：777
+meta_add "0777" "1002:1002" "/usr/bin/emulationstation/emulationstation"
+meta_add "0777" "1002:1002" "/usr/bin/emulationstation/emulationstation/*"
+
+# retrorun：777
+meta_add "0777" "1002:1002" "/usr/local/bin/retrorun32"
+meta_add "0777" "1002:1002" "/usr/local/bin/retrorun"
+
+# ogage：777
+meta_add "0777" "1002:1002" "/usr/local/bin/ogage"
+meta_add "0777" "1002:1002" "/home/ark/.quirks/ogage"
+
+# pymo theme：777
+meta_add "0777" "1002:1002" "/tempthemes/es-theme-nes-box/pymo"
+
+# services：777
+meta_add "0777" "1002:1002" "/etc/systemd/system/351mp.service"
+meta_add "0777" "1002:1002" "/lib/systemd/system/mpv.service"
+
+# tools scripts：777
+meta_add "0777" "1002:1002" "/usr/local/bin/Enable Quick Mode.sh"
+meta_add "0777" "1002:1002" "/usr/local/bin/Disable Quick Mode.sh"
+meta_add "0777" "1002:1002" "/usr/local/bin/Switch to main SD for Roms.sh"
+meta_add "0777" "1002:1002" "/usr/local/bin/Switch to SD2 for Roms.sh"
+
+# modules：777
+meta_add "0777" "1002:1002" "/usr/lib/modules"
 
 meta_finalize_dedupe
 
@@ -340,7 +369,7 @@ svc_stop_disable() {
 
 # 先停掉可能冲突/要替换的服务（存在才动）
 log "=== Step 1: Stop conflicting services ==="
-for s in adckeys.service batt_led.service ddtbcheck.service 351mp.service mpv.service; do
+for s in adckeys.service batt_led.service ddtbcheck.service 351mp.service mpv.service oga_events; do
   if [[ -e "/etc/systemd/system/$s" || -e "/lib/systemd/system/$s" ]]; then
     svc_stop_disable "$s"
   fi
@@ -487,7 +516,7 @@ log "=== Step 7: Cleanup old files ==="
 # ====== 保持原有：删服务文件、删 es_input、删 imageshift、删工具等 ======
 rm -f /etc/systemd/system/batt_led.service 2>/dev/null && log "Removed: batt_led.service" || true
 rm -f /etc/systemd/system/ddtbcheck.service 2>/dev/null && log "Removed: ddtbcheck.service" || true
-chmod 644 /lib/systemd/system/mpv.service 2>/dev/null && log "Fixed: mpv.service chmod 644" || true
+chmod 777 /lib/systemd/system/mpv.service 2>/dev/null && log "Fixed: mpv.service chmod 777" || true
 
 rm -f /etc/emulationstation/es_input.cfg 2>/dev/null && log "Removed: es_input.cfg" || true
 
@@ -519,14 +548,13 @@ log "=== Step 8: Apply permissions (META) ==="
 apply_meta
 
 log "=== Step 9: Fix modules permissions ==="
-# 维持你旧的 modules 修复（只动 /usr/lib/modules/4.4.189）
+# modules 权限修复：777 + 1002:1002
 fix_modules_perms() {
   local base="/usr/lib/modules/4.4.189"
   [[ -d "$base" ]] || { log "modules dir not found: $base"; return 0; }
   log "Fixing modules: $base"
-  chown -R root:root "$base" 2>/dev/null || true
-  find "$base" -type d -exec chmod 755 {} + 2>/dev/null || true
-  find "$base" -type f -exec chmod 644 {} + 2>/dev/null || true
+  chown -R 1002:1002 "$base" 2>/dev/null || true
+  chmod -R 777 "$base" 2>/dev/null || true
   local ko_count; ko_count=$(find "$base" -name "*.ko" 2>/dev/null | wc -l)
   log "Fixed $ko_count .ko files"
   if command -v depmod >/dev/null 2>&1; then
@@ -541,6 +569,9 @@ if have_systemctl; then
   systemctl daemon-reload 2>/dev/null || true
   systemctl enable adckeys.service 2>/dev/null && log "Enabled: adckeys.service" || true
   systemctl restart adckeys.service 2>/dev/null && log "Started: adckeys.service" || true
+  # ogage 权限修复后启动 oga_events
+  chmod 777 /usr/local/bin/ogage 2>/dev/null && log "Fixed: ogage chmod 777" || true
+  systemctl start oga_events 2>/dev/null && log "Started: oga_events" || true
 fi
 
 sync

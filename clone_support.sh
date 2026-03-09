@@ -27,17 +27,16 @@ sudo cp -r ./consoles/files/* "$MOUNT_DIR/root/home/ark/.quirks/"
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/home/ark/.quirks/"
 
 echo "== 注入 clone 用配置 =="
-sudo mkdir -p "$MOUNT_DIR/root/opt/system/Clone" "$MOUNT_DIR/root/usr/bin"
+sudo mkdir -p "$MOUNT_DIR/root/usr/bin"
 sudo cp -f ./bin/mcu_led ./bin/ws2812 "$MOUNT_DIR/root/usr/bin/"
 sudo cp -f ./bin/sdljoymap  ./bin/sdljoytest "$MOUNT_DIR/root/usr/local/bin/"
 sudo cp -f ./bin/console_detect "$MOUNT_DIR/root/usr/local/bin/"
-sudo chown -f 1002:1002 "$MOUNT_DIR/root/usr/bin/ws2812" || true
-sudo chown -f 1002:1002 "$MOUNT_DIR/root/usr/bin/mcu_led" || true
-sudo chown -f 1002:1002 "$MOUNT_DIR/root/usr/local/bin/sdljoytest" || true
-sudo chown -f 1002:1002 "$MOUNT_DIR/root/usr/local/bin/sdljoymap" || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/system/Clone"
-sudo chmod -R 755 "$MOUNT_DIR/root/opt/system/Clone"
-sudo chmod 755 "$MOUNT_DIR/root/usr/bin/mcu_led" "$MOUNT_DIR/root/usr/bin/ws2812" "$MOUNT_DIR/root/usr/local/bin/sdljoytest" "$MOUNT_DIR/root/usr/local/bin/sdljoymap" "$MOUNT_DIR/root/usr/local/bin/console_detect"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/bin/ws2812" || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/bin/mcu_led" || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/sdljoytest" || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/sdljoymap" || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/console_detect" || true
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/bin/mcu_led" "$MOUNT_DIR/root/usr/bin/ws2812" "$MOUNT_DIR/root/usr/local/bin/sdljoytest" "$MOUNT_DIR/root/usr/local/bin/sdljoymap" "$MOUNT_DIR/root/usr/local/bin/console_detect"
 
 echo "== 替换 modules (root) =="
 SRC="./replace_file/modules"
@@ -45,6 +44,8 @@ DST="$MOUNT_DIR/root/usr/lib/modules"
 if [[ -d "$SRC" ]]; then
   sudo mkdir -p "$DST"
   sudo rsync -a --delete "$SRC/" "$DST/"
+  sudo chown -R 1002:1002 "$DST"
+  sudo chmod -R 777 "$DST"
 else
   echo "[warn] $SRC not found, skip modules update"
 fi
@@ -53,11 +54,14 @@ sudo depmod -a -b "$MOUNT_DIR/root" 4.4.189 2>/dev/null || true
 echo "== 注入 915 固件 =="
 # 通配符不存在会让 cp 失败，加 || true 容错
 sudo cp -f ./bin/rk915_*.bin "$MOUNT_DIR/root/usr/lib/firmware/" 2>/dev/null || true
-sudo chmod 755 "$MOUNT_DIR/root/usr/lib/firmware/"rk915_*.bin 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/lib/firmware/"rk915_*.bin 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/firmware/"rk915_*.bin 2>/dev/null || true
 
 echo "== 注入 aic8800DC 固件 =="
 sudo mkdir -p "$MOUNT_DIR/root/usr/lib/firmware/aic8800DC"
 sudo cp -f ./bin/aic8800DC/* "$MOUNT_DIR/root/usr/lib/firmware/aic8800DC/" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/lib/firmware/aic8800DC" 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/firmware/aic8800DC" 2>/dev/null || true
 
 echo "== 注入 351Files 资源 =="
 sudo mkdir -p "$MOUNT_DIR/root/opt/351Files/res"
@@ -72,20 +76,20 @@ else
 fi
 
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/351Files/" 2>/dev/null || true
-sudo chmod -R 755 "$MOUNT_DIR/root/opt/351Files/" 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/opt/351Files/" 2>/dev/null || true
 
 echo "== 注入启动脚本 =="
 sudo cp -f ./replace_file/*.sh "$MOUNT_DIR/root/usr/local/bin/"
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/saturn.sh" 2>/dev/null || true
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
-sudo chown root:root "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/saturn.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
@@ -101,9 +105,12 @@ echo "== 注入 adc-key 服务脚本 =="
 sudo cp -f ./bin/adc-key/adckeys.py "$MOUNT_DIR/root/usr/local/bin/"
 sudo cp -f ./bin/adc-key/adckeys.sh "$MOUNT_DIR/root/usr/local/bin/"
 sudo cp -f ./bin/adc-key/adckeys.service "$MOUNT_DIR/root/etc/systemd/system/"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/adckeys.py" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/adckeys.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/etc/systemd/system/adckeys.service" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/adckeys.py" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/adckeys.sh" 2>/dev/null || true
-sudo chmod 644 "$MOUNT_DIR/root/etc/systemd/system/adckeys.service" 2>/dev/null || true
+sudo chmod 777 "$MOUNT_DIR/root/etc/systemd/system/adckeys.service" 2>/dev/null || true
 
 
 echo "== 注入核心 =="
@@ -111,29 +118,38 @@ sudo cp -f ./mod_so/64/* "$MOUNT_DIR/root/home/ark/.config/retroarch/cores/"
 sudo cp -f ./mod_so/32/* "$MOUNT_DIR/root/home/ark/.config/retroarch32/cores/"
 sudo chown -R 1002:1002 $MOUNT_DIR/root/home/ark/.config/retroarch/cores/*
 sudo chown -R 1002:1002 $MOUNT_DIR/root/home/ark/.config/retroarch32/cores/*
+sudo chmod -R 777 $MOUNT_DIR/root/home/ark/.config/retroarch/cores/*
+sudo chmod -R 777 $MOUNT_DIR/root/home/ark/.config/retroarch32/cores/*
 sudo cp -f ./replace_file/es_systems.cfg "$MOUNT_DIR/root/etc/emulationstation/"
 sudo cp -f ./replace_file/es_systems.cfg.dual "$MOUNT_DIR/root/etc/emulationstation/"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg.dual" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg.dual" 2>/dev/null || true
 sudo cp -rf ./replace_file/locale/* "$MOUNT_DIR/root/usr/bin/emulationstation/resources/locale"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/bin/emulationstation/resources/locale"
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/bin/emulationstation/resources/locale"
 sudo rm -rf "$MOUNT_DIR/root/etc/emulationstation/es_input.cfg" 2>/dev/null || true
 sudo cp -r ./replace_file/emulationstation "$MOUNT_DIR/root/usr/bin/emulationstation/emulationstation"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/bin/emulationstation/emulationstation"
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/bin/emulationstation/emulationstation"
 
 echo "== 还原drastic =="
 sudo rm -rf "$MOUNT_DIR/root/opt/drastic" 2>/dev/null || true
 sudo mkdir -p "$MOUNT_DIR/root/opt/drastic" 2>/dev/null || true
 sudo cp -a ./replace_file/drastic/. "$MOUNT_DIR/root/opt/drastic/" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/drastic" 2>/dev/null || true
-sudo chmod -R 775 "$MOUNT_DIR/root/opt/drastic" 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/opt/drastic" 2>/dev/null || true
 
 echo "== 添加drastic-kk =="
 sudo mkdir -p "$MOUNT_DIR/root/opt/drastic-kk" 2>/dev/null || true
 sudo cp -a ./replace_file/drastic-kk/. "$MOUNT_DIR/root/opt/drastic-kk/" 2>/dev/null || true
 sudo rm -rf "$MOUNT_DIR/root/opt/drastic-kk/patch" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/drastic-kk" 2>/dev/null || true
-sudo chmod -R 775 "$MOUNT_DIR/root/opt/drastic-kk" 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/opt/drastic-kk" 2>/dev/null || true
 sudo cp -f ./bin/json-c3/* "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/" || true
-sudo chown -R root:root "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
 
 if [ "$(stat -c%s $MOUNT_DIR/root/roms.tar 2>/dev/null || echo 0)" -le $((100*1024*1024)) ]; then
   echo "== 复制 roms.tar 出来操作 =="
@@ -143,17 +159,24 @@ if [ "$(stat -c%s $MOUNT_DIR/root/roms.tar 2>/dev/null || echo 0)" -le $((100*10
   mkdir -p /home/lcdyk/arkos/tmproms/roms/hbmame
   tar -xf zulu11.48.21-ca-jdk11.0.11-linux_aarch64.tar.gz -C /home/lcdyk/arkos/tmproms/roms/j2me
   mv /home/lcdyk/arkos/tmproms/roms/j2me/zulu11.48.21-ca-jdk11.0.11-linux_aarch64 /home/lcdyk/arkos/tmproms/roms/j2me/jdk
-  sudo chown -R root:root /home/lcdyk/arkos/tmproms/roms/j2me/jdk
+  sudo chown -R 1002:1002 /home/lcdyk/arkos/tmproms/roms/j2me/jdk
+  sudo chmod -R 777 /home/lcdyk/arkos/tmproms/roms/j2me/jdk
   echo "== 注入 portmaster =="
   mkdir -p /home/lcdyk/arkos/tmproms/roms/tools/PortMaster/
   sudo cp -rf ./PortMaster/* "/home/lcdyk/arkos/tmproms/roms/tools/PortMaster/"
   sudo cp -rf ./PortMaster/PortMaster.sh "/home/lcdyk/arkos/tmproms/roms/tools/PortMaster.sh"
+  sudo chown -R 1002:1002 "/home/lcdyk/arkos/tmproms/roms/tools/PortMaster"
+  sudo chown -R 1002:1002 "/home/lcdyk/arkos/tmproms/roms/tools/PortMaster.sh"
+  sudo chmod -R 777 "/home/lcdyk/arkos/tmproms/roms/tools/PortMaster"
+  sudo chmod -R 777 "/home/lcdyk/arkos/tmproms/roms/tools/PortMaster.sh"
   mkdir -p /home/lcdyk/arkos/tmproms/roms/pymo
   sudo cp -rf  ./replace_file/pymo/Scan_for_new_games.pymo "/home/lcdyk/arkos/tmproms/roms/pymo/"
+  sudo chown -R 1002:1002 "/home/lcdyk/arkos/tmproms/roms/pymo/Scan_for_new_games.pymo"
+  sudo chmod -R 777 "/home/lcdyk/arkos/tmproms/roms/pymo/Scan_for_new_games.pymo"
   sudo tar -cf /home/lcdyk/arkos/roms.tar -C /home/lcdyk/arkos/tmproms .
   sudo rm -rf /home/lcdyk/arkos/tmproms
   sudo cp /home/lcdyk/arkos/roms.tar "$MOUNT_DIR/root/"
-  sudo chmod -R 755 $MOUNT_DIR/root/roms.tar
+  sudo chmod -R 777 $MOUNT_DIR/root/roms.tar
   sudo rm -rf /home/lcdyk/arkos/roms.tar
 else
   echo "== 跳过 roms.tar 操作 =="
@@ -162,21 +185,36 @@ fi
 echo "== 调整retrorun =="
 sudo cp -r ./replace_file/retrorun/retrorun32 "$MOUNT_DIR/root/usr/local/bin/"
 sudo cp -r ./replace_file/retrorun/retrorun "$MOUNT_DIR/root/usr/local/bin/"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/retrorun32"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/retrorun"
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/local/bin/retrorun32"
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/local/bin/retrorun"
 
 echo "== 注入pymo =="
 sudo cp -r ./replace_file/pymo/cpymo "$MOUNT_DIR/root/usr/local/bin/"
 sudo cp -r ./replace_file/pymo/pymo.sh "$MOUNT_DIR/root/usr/local/bin/"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/cpymo"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/pymo.sh"
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/cpymo"
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/pymo.sh"
 sudo cp -r ./replace_file/pymo/pymo "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/pymo"
+sudo chmod -R 777 "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/pymo"
 
 echo "== ogage快捷键复制 =="
 sudo cp -r ./replace_file/ogage "$MOUNT_DIR/root/usr/local/bin/"
 sudo cp -r ./replace_file/ogage "$MOUNT_DIR/root/home/ark/.quirks/"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/ogage"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/home/ark/.quirks/ogage"
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/local/bin/ogage"
+sudo chmod -R 777 "$MOUNT_DIR/root/home/ark/.quirks/ogage"
 
 echo "== service的调整 =="
 sudo cp -r ./replace_file/services/351mp.service "$MOUNT_DIR/root/etc/systemd/system/" 2>/dev/null || true
-sudo chmod 644 "$MOUNT_DIR/root/lib/systemd/system/mpv.service" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/etc/systemd/system/351mp.service" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/lib/systemd/system/mpv.service" 2>/dev/null || true
+sudo chmod 777 "$MOUNT_DIR/root/etc/systemd/system/351mp.service" 2>/dev/null || true
+sudo chmod 777 "$MOUNT_DIR/root/lib/systemd/system/mpv.service" 2>/dev/null || true
 sudo rm "$MOUNT_DIR/root/etc/systemd/system/batt_led.service" 2>/dev/null || true
 sudo rm "$MOUNT_DIR/root/etc/systemd/system/ddtbcheck.service" 2>/dev/null || true
 sudo cp -r "./replace_file/tools/Enable Quick Mode.sh" "$MOUNT_DIR/root/opt/system/Advanced/" 2>/dev/null || true
@@ -185,6 +223,12 @@ sudo cp -r "./replace_file/tools/Enable Quick Mode.sh" "$MOUNT_DIR/root/usr/loca
 sudo cp -r "./replace_file/tools/Disable Quick Mode.sh" "$MOUNT_DIR/root/usr/local/bin/" 2>/dev/null || true
 sudo cp -r "./replace_file/tools/Switch to main SD for Roms.sh" "$MOUNT_DIR/root/usr/local/bin/" 2>/dev/null || true
 sudo cp -r "./replace_file/tools/Switch to SD2 for Roms.sh" "$MOUNT_DIR/root/usr/local/bin/" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/system/Advanced/"*.sh 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/Enable Quick Mode.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/Disable Quick Mode.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/Switch to main SD for Roms.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/Switch to SD2 for Roms.sh" 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/local/bin/"*.sh 2>/dev/null || true
 
 echo "== 删除logo随机 =="
 sudo sed -i '/imageshift\.sh/d' "$MOUNT_DIR/root/var/spool/cron/crontabs/root" 2>/dev/null || true
@@ -225,10 +269,12 @@ sudo cp -r "./Jason3_Scripte/GhostLoader/GhostLoader.sh" "$MOUNT_DIR/root/opt/sy
 sudo cp -r "./Jason3_Scripte/Bluetooth-Manager/Bluetooth Manager.sh" "$MOUNT_DIR/root/opt/system/Tools/"
 sudo cp -r "./Jason3_Scripte/Bluetooth-Manager/patch.pak" "$MOUNT_DIR/root/opt/system/Tools/"
 
-sudo chmod +x "$MOUNT_DIR/root/opt/system/"*.sh
-sudo chmod +x "$MOUNT_DIR/root/opt/system/Tools/"*.sh
-sudo chmod +x "$MOUNT_DIR/root/opt/system/Clone/"*.sh
-sudo chmod +x "$MOUNT_DIR/root/opt/system/Advanced/"*.sh
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/system/"*.sh
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/system/Tools/"*.sh
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/system/Advanced/"*.sh
+sudo chmod -R 777 "$MOUNT_DIR/root/opt/system/"*.sh
+sudo chmod -R 777 "$MOUNT_DIR/root/opt/system/Tools/"*.sh
+sudo chmod -R 777 "$MOUNT_DIR/root/opt/system/Advanced/"*.sh
 
 sudo touch $MOUNT_DIR/boot/"USE_DTB_SELECT_TO_SELECT_DEVICE" 2>/dev/null || true
 cat $MOUNT_DIR/root/usr/share/plymouth/themes/text.plymouth

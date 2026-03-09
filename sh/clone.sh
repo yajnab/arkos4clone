@@ -61,6 +61,7 @@ cp_if_exists() {
     # 使用 -L 解引用符号链接，确保复制实际文件
     cp -L "$src" "$dst" 2>/dev/null || install -m 0755 -D "$src" "$dst"
     sudo chmod 0755 "$dst" 2>/dev/null || true
+    sudo chown -R ark:ark "$dst" 2>/dev/null || true
   else
     mkdir -p "$dst"
     cp -a "$src" "$dst/"
@@ -297,7 +298,7 @@ apply_localization() {
 
   # Timezone
   sudo rm -f /etc/localtime
-  sudo ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
+  ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
 
   # PPSSPP
   for dir in /opt/ppsspp/backupforromsfolder/ppsspp/PSP/SYSTEM /roms/psp/ppsspp/PSP/SYSTEM; do
@@ -348,39 +349,37 @@ main() {
     printf '\033c'
     echo "==============================="; echo "   arkos for clone lcdyk  ..."; echo "==============================="
     sleep 2
-    echo "$DEVICE_NAME" | sudo tee "$CONSOLE_FILE" > /dev/null
+    sudo chown -R ark:ark "$QUIRKS_DIR" > /dev/null
+    echo "$DEVICE_NAME" | sudo tee "$CONSOLE_FILE"  2>/dev/null || true
     msg "First boot, device=$DEVICE_NAME"
     apply_all_quirks
     sleep 5
     sudo systemctl unmask systemd-journald.service systemd-journald.socket 2>/dev/null || true
     sudo systemctl enable --now systemd-journald.service systemd-journald.socket 2>/dev/null || true
-  elif [[ "$dtb_changed" == "yes" ]]; then
-    # DTB 变化（boot.ini 被修改）- 重新检测设备信息
-    msg "DTB changed: $cur_val -> $bootini_device"
-    # 更新 .console 文件
-    echo "$bootini_device" | sudo tee "$CONSOLE_FILE" > /dev/null
-    # 重新检测设备信息（因为设备变了）
-    if [[ -x "$CONSOLE_DETECT" ]]; then
-      eval "$("$CONSOLE_DETECT" -s)"
-      msg "Re-detected: $DEVICE_NAME, ${SCREEN_WIDTH}x${SCREEN_HEIGHT}, joy=$JOYSTICK_COUNT, hotkey=$HOTKEY_TYPE, rot=$SCREEN_ROTATION, led=$LED_TYPE"
+  elif [[ "$dtb_changed" == "yes" || "$cur_val" != "$DEVICE_NAME" ]]; then
+    # 设备切换（DTB 变化或机型变化）
+    local new_device old_device
+    if [[ "$dtb_changed" == "yes" ]]; then
+      old_device="$cur_val"
+      new_device="$bootini_device"
+      msg "DTB changed: $old_device -> $new_device"
+      # 更新 .console 文件
+      echo "$bootini_device" | sudo tee "$CONSOLE_FILE" > /dev/null
+      # 重新检测设备信息（因为设备变了）
+      if [[ -x "$CONSOLE_DETECT" ]]; then
+        eval "$("$CONSOLE_DETECT" -s)"
+        msg "Re-detected: $DEVICE_NAME, ${SCREEN_WIDTH}x${SCREEN_HEIGHT}, joy=$JOYSTICK_COUNT, hotkey=$HOTKEY_TYPE, rot=$SCREEN_ROTATION, led=$LED_TYPE"
+      fi
+    else
+      old_device="$cur_val"
+      new_device="$DEVICE_NAME"
+      msg "Console changed: $old_device -> $new_device"
+      echo "$DEVICE_NAME" | sudo tee "$CONSOLE_FILE" > /dev/null
     fi
     (
       printf '\033c'
       echo "==============================="; echo "   arkos for clone lcdyk  ..."; echo "==============================="
-      echo; echo "DTB changed!"; echo "old: $cur_val"; echo "new: $bootini_device"
-      apply_all_quirks
-      sleep 5
-    ) > /dev/tty1 2>&1
-    sudo systemctl unmask systemd-journald.service systemd-journald.socket 2>/dev/null || true
-    sudo systemctl enable --now systemd-journald.service systemd-journald.socket 2>/dev/null || true
-  elif [[ "$cur_val" != "$DEVICE_NAME" ]]; then
-    # 机型切换
-    msg "Console changed: $cur_val -> $DEVICE_NAME"
-    (
-      printf '\033c'
-      echo "==============================="; echo "   arkos for clone lcdyk  ..."; echo "==============================="
-      echo; echo "old: $cur_val"; echo "new: $DEVICE_NAME"
-      echo "$DEVICE_NAME" | sudo tee "$CONSOLE_FILE" > /dev/null
+      echo; echo "Device changed!"; echo "old: $old_device"; echo "new: $new_device"
       apply_all_quirks
       sleep 5
     ) > /dev/tty1 2>&1
@@ -388,7 +387,6 @@ main() {
     sudo systemctl enable --now systemd-journald.service systemd-journald.socket 2>/dev/null || true
   else
     msg "Console unchanged: $cur_val"
-    apply_all_quirks
   fi
 
   # 驱动加载
