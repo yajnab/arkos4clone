@@ -126,9 +126,9 @@ sudo chown -R 1002:1002 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg" 2>
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg.dual" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg.dual" 2>/dev/null || true
-sudo cp -rf ./replace_file/locale/* "$MOUNT_DIR/root/usr/bin/emulationstation/resources/locale"
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/bin/emulationstation/resources/locale"
-sudo chmod -R 777 "$MOUNT_DIR/root/usr/bin/emulationstation/resources/locale"
+sudo cp -rf ./replace_file/resources/* "$MOUNT_DIR/root/usr/bin/emulationstation/resources/"
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/bin/emulationstation/resources"
+sudo chmod -R 777 "$MOUNT_DIR/root/usr/bin/emulationstation/resources"
 sudo rm -rf "$MOUNT_DIR/root/etc/emulationstation/es_input.cfg" 2>/dev/null || true
 sudo cp -r ./replace_file/emulationstation "$MOUNT_DIR/root/usr/bin/emulationstation/emulationstation"
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/bin/emulationstation/emulationstation"

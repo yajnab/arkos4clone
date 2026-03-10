@@ -125,13 +125,13 @@ echo "== 注入核心与 EmulationStation 文件 =="
 mkdir -p "$PAYLOAD_ROOT/home/ark/.config/retroarch/cores" \
          "$PAYLOAD_ROOT/home/ark/.config/retroarch32/cores" \
          "$PAYLOAD_ROOT/etc/emulationstation" \
-         "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/locale/"
+         "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/"
 cp -f ./mod_so/64/* "$PAYLOAD_ROOT/home/ark/.config/retroarch/cores/" 2>/dev/null || true
 cp -f ./mod_so/32/* "$PAYLOAD_ROOT/home/ark/.config/retroarch32/cores/" 2>/dev/null || true
 cp -f ./replace_file/es_systems.cfg "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
 cp -f ./replace_file/es_systems.cfg.dual "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
-cp -rf ./replace_file/locale/* \
-      "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/locale/" 2>/dev/null || true
+cp -rf ./replace_file/resources/* \
+      "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/" 2>/dev/null || true
 
 # 注意：es_input.cfg 的删除在 install.sh 中完成
 mkdir -p "$PAYLOAD_ROOT/usr/bin/emulationstation"
@@ -280,9 +280,9 @@ meta_add "0777" "1002:1002" "/opt/system/Advanced/*.sh"
 meta_add "0777" "1002:1002" "/usr/lib/firmware/aic8800DC"
 meta_add "0777" "1002:1002" "/usr/lib/firmware/aic8800DC/*"
 
-# locale：777
-meta_add "0777" "1002:1002" "/usr/bin/emulationstation/resources/locale"
-meta_add "0777" "1002:1002" "/usr/bin/emulationstation/resources/locale/*"
+# resources：777
+meta_add "0777" "1002:1002" "/usr/bin/emulationstation/resources"
+meta_add "0777" "1002:1002" "/usr/bin/emulationstation/resources/*"
 
 # emulationstation：777
 meta_add "0777" "1002:1002" "/usr/bin/emulationstation/emulationstation"
