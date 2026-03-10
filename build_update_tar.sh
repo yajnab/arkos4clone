@@ -151,6 +151,10 @@ rm -rf "$PAYLOAD_ROOT/opt/drastic-kk/patch" 2>/dev/null || true
 echo "== 注入 json-c3 库（drastic-kk 依赖） =="
 cp -f ./bin/json-c3/* "$PAYLOAD_ROOT/usr/lib/aarch64-linux-gnu/" 2>/dev/null || true
 
+echo "== 更新PPSSPP1.21.1 =="
+mkdir -p "$PAYLOAD_ROOT/opt/ppsspp"
+cp -a ./replace_file/ppsspp/. "$PAYLOAD_ROOT/opt/ppsspp/" 2>/dev/null || true
+
 echo "== 注入 retrorun =="
 mkdir -p "$PAYLOAD_ROOT/usr/local/bin"
 cp -r ./replace_file/retrorun/retrorun32 "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
@@ -259,6 +263,10 @@ meta_add "0777" "1002:1002" "/opt/drastic/*"
 # drastic-kk：1002:1002 + 777
 meta_add "0777" "1002:1002" "/opt/drastic-kk"
 meta_add "0777" "1002:1002" "/opt/drastic-kk/*"
+
+# ppsspp1.21.1：1002:1002 + 777
+meta_add "0777" "1002:1002" "/opt/ppsspp"
+meta_add "0777" "1002:1002" "/opt/ppsspp/*"
 
 # json-c3 库：1002:1002 + 777
 meta_add "0777" "1002:1002" "/usr/lib/aarch64-linux-gnu/libjson-c.so*"
