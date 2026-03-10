@@ -569,9 +569,7 @@ if have_systemctl; then
   systemctl daemon-reload 2>/dev/null || true
   systemctl enable adckeys.service 2>/dev/null && log "Enabled: adckeys.service" || true
   systemctl restart adckeys.service 2>/dev/null && log "Started: adckeys.service" || true
-  # ogage 权限修复后启动 oga_events
   chmod 777 /usr/local/bin/ogage 2>/dev/null && log "Fixed: ogage chmod 777" || true
-  systemctl start oga_events 2>/dev/null && log "Started: oga_events" || true
 fi
 
 sync

@@ -1051,6 +1051,30 @@ msgstr "您确定要配置按键吗？"
 
 msgid "JOYPAD TEST"
 msgstr "手柄测试"
+msgid "VIEW INFO"
+msgstr "查看信息"
+
+msgid "SD CARD 1"
+msgstr "SD卡1"
+
+msgid "SD CARD 2"
+msgstr "SD卡2"
+
+msgid "SPEED"
+msgstr "速度"
+
+msgid "CPU INFO"
+msgstr "CPU信息"
+
+msgid "CPU TEMP"
+msgstr "CPU温度"
+
+msgid "TEST SD SPEED"
+msgstr "测试SD卡速度"
+
+msgid "SD CARD SPEED TEST RESULTS:"
+msgstr "SD卡速度测试结果："
+msgstr "手柄测试"
 
 msgid "ARE YOU SURE YOU WANT TO TEST JOYPAD?"
 msgstr "您确定要测试手柄吗？"
@@ -3798,3 +3822,124 @@ msgstr "蓝色"
 
 msgid "RED"
 msgstr "红色"
+
+msgid "ARKOS4CLONE TOOLS"
+msgstr "ArkOS4Clone 工具"
+
+msgid "CPU SETTINGS"
+msgstr "CPU 设置"
+
+msgid "CPU CORES"
+msgstr "CPU 核心"
+
+msgid "CPU GOVERNOR"
+msgstr "CPU 调度模式"
+
+msgid "CPU MAX FREQ"
+msgstr "CPU 最大频率"
+
+msgid "GPU SETTINGS"
+msgstr "GPU 设置"
+
+msgid "GPU MAX FREQ"
+msgstr "GPU 最大频率"
+
+msgid "DMC SETTINGS"
+msgstr "DMC 设置"
+
+msgid "DMC MAX FREQ"
+msgstr "DMC 最大频率"
+
+msgid "ZRAM SETTINGS"
+msgstr "ZRAM 设置"
+
+msgid "ZRAM ENABLE"
+msgstr "启用 ZRAM"
+
+msgid "ZRAM SIZE"
+msgstr "ZRAM 大小"
+
+msgid "MAX FREQ"
+msgstr "最大频率"
+
+msgid "GOVERNOR"
+msgstr "调度模式"
+
+
+msgstr "(实验性功能)"
+
+msgstr "(实验性功能)"
+
+
+
+
+
+
+
+
+
+
+
+
+msgid "REMOTE SERVICES AUTO-START"
+msgstr "远程服务开机自启"
+
+msgid "R36Ultra V1"
+msgstr "R36Ultra V1"
+
+msgid "R36Ultra V2"
+msgstr "R36Ultra V2"
+
+msgid "DAY"
+msgstr "日"
+
+msgid "HOUR"
+msgstr "时"
+
+msgid "MINUTE"
+msgstr "分"
+
+msgid "MONTH"
+msgstr "月"
+
+msgid "YEAR"
+msgstr "年"
+
+msgid "SIZE"
+msgstr "大小"
+
+msgid "INTERFACE"
+msgstr "接口"
+
+msgid "VIEW INFO"
+msgstr "查看信息"
+
+msgid "SD CARD 1"
+msgstr "SD卡1"
+
+msgid "SD CARD 2"
+msgstr "SD卡2"
+
+msgid "SPEED"
+msgstr "速度"
+
+msgid "CPU INFO"
+msgstr "CPU信息"
+
+msgid "CPU TEMP"
+msgstr "CPU温度"
+
+msgid "TEST SD SPEED"
+msgstr "测试SD卡速度"
+
+msgid "SD CARD SPEED TEST RESULTS:"
+msgstr "SD卡速度测试结果："
+
+msgid "UNKNOWN"
+msgstr "未知"
+
+msgid "DEVICE"
+msgstr "设备名"
+
+msgid "CPU GRADE"
+msgstr "CPU体质"

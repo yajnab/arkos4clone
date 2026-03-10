@@ -50,6 +50,13 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/720P/", "kernel/common/"},
 	},
 	{
+		RealName: "r36max noamp",
+		BrandEntries: []BrandEntry{
+			{Brand: "XiFan HandHelds", DisplayName: "XiFan R36Max No sound"},
+		},
+		ExtraSources: []string{"logo/720P/", "kernel/common/"},
+	},
+	{
 		RealName: "r36pro",
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan R36Pro"},

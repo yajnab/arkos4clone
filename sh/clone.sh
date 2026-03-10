@@ -391,7 +391,6 @@ main() {
 
   # 驱动加载
   sudo depmod -a 2>/dev/null || true
-  [[ "$LED_TYPE" == "ws2812" ]] && { msg "Loading spidev for ws2812"; sudo modprobe spidev 2>/dev/null || true; }
 
   # 音频配置
   setup_audio
