@@ -123,57 +123,16 @@ then
   if [ "$filesystem" = "ext4" ]; then
      sudo chown -R ark:ark /roms2/
   fi
-  if [ ! -d "/roms2/wasm4/" ]; then
-      sudo mkdir /roms2/wasm4
-  fi
-  if [ ! -d "/roms2/thomson/" ]; then
-      sudo mkdir /roms2/thomson
-  fi
-  if [ ! -d "/roms2/enterprise/" ]; then
-      sudo mkdir /roms2/enterprise
-  fi
-  if [ ! -d "/roms2/tvc/" ]; then
-      sudo mkdir /roms2/tvc
-  fi
-  if [ ! -d "/roms2/palm/" ]; then
-      sudo mkdir /roms2/palm
-  fi
-  if [ ! -d "/roms2/coco3/" ]; then
-      sudo mkdir /roms2/coco3
-  fi
   sudo mv "/opt/system/Advanced/Read from SD1 and SD2 for Roms" "/opt/system/Advanced/Read from SD1 and SD2 for Roms.sh"
   echo "Read from SD1 and SD2 Script Activated."
   sleep 3
-  if [ ! -d "/roms2/apple2/" ]; then
-      sudo mkdir /roms2/apple2
-  fi
-  if [ ! -d "/roms2/piece/" ]; then
-      sudo mkdir /roms2/piece
-  fi
-  if [ ! -d "/roms2/scv/" ]; then
-      sudo mkdir /roms2/scv
-  fi
-  if [ ! -d "/roms2/vmac/" ]; then
-      sudo mkdir /roms2/vmac
-  fi
-  if [ ! -d "/roms2/puzzlescript/" ]; then
-      sudo mkdir /roms2/puzzlescript
-  fi
-  if [ ! -d "/roms2/vircon32/" ]; then
-      sudo mkdir /roms2/vircon32
-  fi
-  if [ ! -d "/roms2/j2me/" ]; then
-      sudo mkdir /roms2/j2me
-  fi
-  if [ ! -d "/roms2/cavestory/" ]; then
-      sudo mkdir /roms2/cavestory
-  fi
-  if [ ! -d "/roms2/bbcmicro/" ]; then
-      sudo mkdir /roms2/bbcmicro
-  fi
-  if [ ! -d "/roms2/dragon32/" ]; then
-      sudo mkdir /roms2/dragon32
-  fi
+  # Create missing directories in /roms2 based on /roms structure
+  for dir in /roms/*/; do
+      dirname=$(basename "$dir")
+      if [ ! -d "/roms2/$dirname/" ]; then
+          sudo mkdir "/roms2/$dirname"
+      fi
+  done
   sudo pkill filebrowser
   filebrowser -d /home/ark/.config/filebrowser.db users update ark --scope "/roms2"
   printf "\n\n\e[32m$filesystem sdcard in slot2 is mounted to /roms2...\n"
