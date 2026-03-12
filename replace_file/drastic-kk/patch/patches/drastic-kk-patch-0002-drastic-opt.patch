@@ -1,34 +1,23 @@
-From 21ea7a89c35c3042441acf4b0cdf94b53416d67d Mon Sep 17 00:00:00 2001
+From d5ac9a992ae1723f164389a04b2c02a21be77419 Mon Sep 17 00:00:00 2001
 From: lcdyk <lcdyk0517@qq.com>
-Date: Thu, 26 Feb 2026 11:54:30 +0800
-Subject: [PATCH 2/6] Port drastic.sdl commits from 5ae9581e to a1c9aa6b
+Date: Thu, 12 Mar 2026 14:20:55 +0800
+Subject: [PATCH] Add jsonlayout renderer support and modify SDL
+ render/video/events
 
-This includes 20 commits with the following features:
-- Drastic-specific rendering optimizations
-- Menu translation support
-- Screen rotation support from layout.json
-- Transparent bottom screen support
-- Layout definitions for various resolutions
-- Pixel filter toggle
-- Theme switching support
-- Alpha and position handling improvements
-- D-pad input rotation based on screen rotation
-- Settings menu (M key) for alpha/position/pixel/layout/theme
-- And other drastic-specific enhancements
 ---
  CMakeLists.txt          |    2 +-
  Makefile.in             |    2 +-
  src/events/SDL_events.c |  382 ++++-
- src/render/SDL_render.c | 3236 +++++++++++++++++++++++++++++++++++++++
+ src/render/SDL_render.c | 3315 +++++++++++++++++++++++++++++++++++++++
  src/render/jsonlayout.c |  456 ++++++
  src/render/jsonlayout.h |   48 +
  src/video/SDL_video.c   |  233 +++
- 7 files changed, 4355 insertions(+), 4 deletions(-)
+ 7 files changed, 4434 insertions(+), 4 deletions(-)
  create mode 100644 src/render/jsonlayout.c
  create mode 100644 src/render/jsonlayout.h
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e45b53e20..de2766362 100644
+index e45b53e..de27663 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -721,7 +721,7 @@ if(USE_GCC OR USE_CLANG OR USE_INTELCC OR USE_QCC)
@@ -41,7 +30,7 @@ index e45b53e20..de2766362 100644
    endif()
  
 diff --git a/Makefile.in b/Makefile.in
-index 27e0bbbf3..84835f9f0 100644
+index 27e0bbb..84835f9 100644
 --- a/Makefile.in
 +++ b/Makefile.in
 @@ -23,7 +23,7 @@ CXX     = @CXX@
@@ -54,7 +43,7 @@ index 27e0bbbf3..84835f9f0 100644
  LIBTOOL = @LIBTOOL@
  INSTALL = @INSTALL@
 diff --git a/src/events/SDL_events.c b/src/events/SDL_events.c
-index 271e2504b..2ce3ed972 100644
+index 271e250..2ce3ed9 100644
 --- a/src/events/SDL_events.c
 +++ b/src/events/SDL_events.c
 @@ -22,6 +22,7 @@
@@ -470,7 +459,7 @@ index 271e2504b..2ce3ed972 100644
  
  static Sint16 SDL_events_get_polling_interval(void)
 diff --git a/src/render/SDL_render.c b/src/render/SDL_render.c
-index cc3d16959..1a51028ff 100644
+index cc3d169..6699d72 100644
 --- a/src/render/SDL_render.c
 +++ b/src/render/SDL_render.c
 @@ -25,14 +25,26 @@
@@ -500,7 +489,7 @@ index cc3d16959..1a51028ff 100644
  /* as a courtesy to iOS apps, we don't try to draw when in the background, as
  that will crash the app. However, these apps _should_ have used
  SDL_AddEventWatch to catch SDL_APP_WILLENTERBACKGROUND events and stopped
-@@ -137,9 +149,1559 @@ static const SDL_RenderDriver *render_drivers[] = {
+@@ -137,9 +149,1563 @@ static const SDL_RenderDriver *render_drivers[] = {
  };
  #endif /* !SDL_RENDER_DISABLED */
  
@@ -1082,13 +1071,17 @@ index cc3d16959..1a51028ff 100644
 +static int nds_pixel_filter_dirty = 4;     /* Counter for SDL textures */
 +static int nds_pixel_filter_gl_dirty = 1;  /* Flag for GL overlay texture */
 +
++/* FPS display */
++static int nds_show_fps = 0;
++
 +/* Settings menu */
 +#define SETTINGS_MENU_LAYOUT    0
 +#define SETTINGS_MENU_THEME     1
 +#define SETTINGS_MENU_ALPHA     2
 +#define SETTINGS_MENU_POSITION  3
 +#define SETTINGS_MENU_PIXEL     4
-+#define SETTINGS_MENU_COUNT     5
++#define SETTINGS_MENU_FPS       5
++#define SETTINGS_MENU_COUNT     6
 +
 +static struct {
 +    int visible;        /* Menu is visible */
@@ -2060,7 +2053,7 @@ index cc3d16959..1a51028ff 100644
  static SDL_INLINE void DebugLogRenderCommands(const SDL_RenderCommand *cmd)
  {
  #if 0
-@@ -875,6 +2437,135 @@ static int SDLCALL SDL_RendererEventWatch(void *userdata, SDL_Event *event)
+@@ -875,6 +2441,136 @@ static int SDLCALL SDL_RendererEventWatch(void *userdata, SDL_Event *event)
                  event->tfinger.y = (event->tfinger.y - normalized_viewport_y) / normalized_viewport_h;
              }
          }
@@ -2163,6 +2156,7 @@ index cc3d16959..1a51028ff 100644
 +            break;
 +        }
 +        
++        
 +        /* Handle settings menu navigation when visible */
 +        if (nds_settings_menu.visible) {
 +            switch (event->key.keysym.scancode) {
@@ -2196,7 +2190,7 @@ index cc3d16959..1a51028ff 100644
      }
  
      return 0;
-@@ -954,6 +2645,66 @@ static void SDL_CalculateSimulatedVSyncInterval(SDL_Renderer *renderer, SDL_Wind
+@@ -954,6 +2650,66 @@ static void SDL_CalculateSimulatedVSyncInterval(SDL_Renderer *renderer, SDL_Wind
  }
  #endif /* !SDL_RENDER_DISABLED */
  
@@ -2263,7 +2257,7 @@ index cc3d16959..1a51028ff 100644
  SDL_Renderer *SDL_CreateRenderer(SDL_Window *window, int index, Uint32 flags)
  {
  #ifndef SDL_RENDER_DISABLED
-@@ -1127,6 +2878,9 @@ SDL_Renderer *SDL_CreateRenderer(SDL_Window *window, int index, Uint32 flags)
+@@ -1127,6 +2883,9 @@ SDL_Renderer *SDL_CreateRenderer(SDL_Window *window, int index, Uint32 flags)
  #if defined(__ANDROID__)
      Android_ActivityMutex_Unlock();
  #endif
@@ -2273,7 +2267,7 @@ index cc3d16959..1a51028ff 100644
      return renderer;
  
  error:
-@@ -2447,6 +4201,8 @@ int SDL_RenderSetLogicalSize(SDL_Renderer *renderer, int w, int h)
+@@ -2447,6 +4206,8 @@ int SDL_RenderSetLogicalSize(SDL_Renderer *renderer, int w, int h)
      renderer->logical_w = w;
      renderer->logical_h = h;
  
@@ -2282,7 +2276,7 @@ index cc3d16959..1a51028ff 100644
      return UpdateLogicalSize(renderer, SDL_TRUE);
  }
  
-@@ -3423,11 +5179,1484 @@ int SDL_RenderFillRectsF(SDL_Renderer *renderer,
+@@ -3423,11 +5184,1552 @@ int SDL_RenderFillRectsF(SDL_Renderer *renderer,
      return retval < 0 ? retval : FlushRenderCommandsIfNotBatching(renderer);
  }
  
@@ -2574,7 +2568,8 @@ index cc3d16959..1a51028ff 100644
 +    "Theme",
 +    "Alpha",
 +    "Position", 
-+    "Pixel"
++    "Pixel",
++    "FPS"
 +};
 +
 +static void nds_settings_menu_get_value_str(int item, char *buf, int buflen)
@@ -2612,6 +2607,9 @@ index cc3d16959..1a51028ff 100644
 +        break;
 +    case SETTINGS_MENU_PIXEL:
 +        snprintf(buf, buflen, "%s", nds_pixel_filter ? "Pixel" : "Blur");
++        break;
++    case SETTINGS_MENU_FPS:
++        snprintf(buf, buflen, "%s", nds_show_fps ? "On" : "Off");
 +        break;
 +    default:
 +        buf[0] = '\0';
@@ -2710,6 +2708,9 @@ index cc3d16959..1a51028ff 100644
 +        nds_pixel_filter_gl_dirty = 1;
 +        nds_settings_save_pixel_filter(nds_pixel_filter);
 +        break;
++    case SETTINGS_MENU_FPS:
++        nds_show_fps = !nds_show_fps;
++        break;
 +    }
 +    nds_settings_menu.need_redraw = 1;
 +}
@@ -2790,6 +2791,67 @@ index cc3d16959..1a51028ff 100644
 +    }
 +    
 +    nds_settings_menu.need_redraw = 0;
++}
++
++static void nds_fps_draw(SDL_Renderer *renderer)
++{
++    static Uint32 last_time = 0;
++    static int frame_count = 0;
++    static float current_fps = 0.0f;
++    static SDL_Texture *fps_tex = NULL;
++    static int tex_w = 0, tex_h = 0;
++    Uint32 current_time;
++    int out_w, out_h;
++    
++    if (!nds_show_fps) {
++        if (fps_tex) {
++            SDL_DestroyTexture(fps_tex);
++            fps_tex = NULL;
++        }
++        return;
++    }
++    
++    if (!nds.font || !renderer) return;
++    
++    frame_count++;
++    current_time = SDL_GetTicks();
++    
++    /* Update FPS every second */
++    if (current_time - last_time >= 1000 || fps_tex == NULL) {
++        SDL_Surface *surf;
++        SDL_Color col = {0xcc, 0xcc, 0x00, 0xff};
++        char fps_str[32];
++        
++        if (current_time - last_time >= 1000) {
++            current_fps = (float)frame_count * 1000.0f / (current_time - last_time);
++            frame_count = 0;
++            last_time = current_time;
++        }
++        
++        snprintf(fps_str, sizeof(fps_str), "%.1f", current_fps);
++        
++        surf = TTF_RenderUTF8_Solid(nds.font, fps_str, col);
++        if (surf) {
++            if (fps_tex) {
++                SDL_DestroyTexture(fps_tex);
++            }
++            fps_tex = SDL_CreateTextureFromSurface(renderer, surf);
++            tex_w = surf->w;
++            tex_h = surf->h;
++            SDL_FreeSurface(surf);
++        }
++    }
++    
++    /* Draw FPS texture */
++    if (fps_tex) {
++        SDL_FRect dstrect;
++        SDL_GetRendererOutputSize(renderer, &out_w, &out_h);
++        dstrect.x = (float)(out_w - tex_w - 5);
++        dstrect.y = 5.0f;
++        dstrect.w = (float)tex_w;
++        dstrect.h = (float)tex_h;
++        SDL_RenderCopyF(renderer, fps_tex, NULL, &dstrect);
++    }
 +}
 +
 +static int get_current_menu_layer(void)
@@ -3767,19 +3829,25 @@ index cc3d16959..1a51028ff 100644
      if (dstrect) {
          dstfrect.x = (float)dstrect->x;
          dstfrect.y = (float)dstrect->y;
-@@ -4292,6 +7521,11 @@ void SDL_RenderPresent(SDL_Renderer *renderer)
+@@ -4292,6 +7594,17 @@ void SDL_RenderPresent(SDL_Renderer *renderer)
  
      CHECK_RENDERER_MAGIC(renderer, );
  
++    /* Draw FPS if enabled */
++    if (nds_show_fps && disp_mode != DISP_MODE_MENU) {
++        nds_fps_draw(renderer);
++    }
++
 +    /* Draw settings menu if visible */
 +    if (nds_settings_menu.visible && disp_mode != DISP_MODE_MENU) {
 +        nds_settings_menu_draw(renderer);
 +    }
 +
++
      FlushRenderCommands(renderer); /* time to send everything to the GPU! */
  
  #if DONT_DRAW_WHILE_HIDDEN
-@@ -4361,6 +7595,8 @@ void SDL_DestroyRendererWithoutFreeing(SDL_Renderer *renderer)
+@@ -4361,6 +7674,8 @@ void SDL_DestroyRendererWithoutFreeing(SDL_Renderer *renderer)
  
      renderer->destroyed = SDL_TRUE;
  
@@ -3790,7 +3858,7 @@ index cc3d16959..1a51028ff 100644
      if (renderer->render_commands_tail) {
 diff --git a/src/render/jsonlayout.c b/src/render/jsonlayout.c
 new file mode 100644
-index 000000000..beddd358d
+index 0000000..beddd35
 --- /dev/null
 +++ b/src/render/jsonlayout.c
 @@ -0,0 +1,456 @@
@@ -4252,7 +4320,7 @@ index 000000000..beddd358d
 +}
 diff --git a/src/render/jsonlayout.h b/src/render/jsonlayout.h
 new file mode 100644
-index 000000000..213a410c1
+index 0000000..213a410
 --- /dev/null
 +++ b/src/render/jsonlayout.h
 @@ -0,0 +1,48 @@
@@ -4305,7 +4373,7 @@ index 000000000..213a410c1
 +
 +#endif /* _JSONLAYOUT_H */
 diff --git a/src/video/SDL_video.c b/src/video/SDL_video.c
-index 2f6c631d1..d9241c176 100644
+index 2f6c631..d9241c1 100644
 --- a/src/video/SDL_video.c
 +++ b/src/video/SDL_video.c
 @@ -33,6 +33,7 @@
