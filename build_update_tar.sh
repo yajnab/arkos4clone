@@ -155,6 +155,10 @@ echo "== 更新PPSSPP1.21.1 =="
 mkdir -p "$PAYLOAD_ROOT/opt/ppsspp"
 cp -a ./replace_file/ppsspp/. "$PAYLOAD_ROOT/opt/ppsspp/" 2>/dev/null || true
 
+echo "== 更新ScummVM v2026.1.0 =="
+mkdir -p "$PAYLOAD_ROOT/opt/scummvm"
+cp -a ./replace_file/scummvm/. "$PAYLOAD_ROOT/opt/scummvm/" 2>/dev/null || true
+
 echo "== 注入 retrorun =="
 mkdir -p "$PAYLOAD_ROOT/usr/local/bin"
 cp -r ./replace_file/retrorun/retrorun32 "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
@@ -267,6 +271,10 @@ meta_add "0777" "1002:1002" "/opt/drastic-kk/*"
 # ppsspp1.21.1：1002:1002 + 777
 meta_add "0777" "1002:1002" "/opt/ppsspp"
 meta_add "0777" "1002:1002" "/opt/ppsspp/*"
+
+# ScummVM v2026.1.0：1002:1002 + 777
+meta_add "0777" "1002:1002" "/opt/scummvm"
+meta_add "0777" "1002:1002" "/opt/scummvm/*"
 
 # json-c3 库：1002:1002 + 777
 meta_add "0777" "1002:1002" "/usr/lib/aarch64-linux-gnu/libjson-c.so*"

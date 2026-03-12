@@ -151,10 +151,15 @@ sudo cp -f ./bin/json-c3/* "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/" || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
 
-echo "== 更新PPSSPP 1.21.1 =="
+echo "== 更新 PPSSPP 1.21.1 =="
 sudo cp -a ./replace_file/ppsspp/* "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null || true
+
+echo "== 更新 ScummVM v2026.1.0 =="
+sudo cp -a ./replace_file/scummvm/* "$MOUNT_DIR/root/opt/scummvm/" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/scummvm/" 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/opt/scummvm/" 2>/dev/null || true
 
 if [ "$(stat -c%s $MOUNT_DIR/root/roms.tar 2>/dev/null || echo 0)" -le $((100*1024*1024)) ]; then
   echo "== 复制 roms.tar 出来操作 =="
