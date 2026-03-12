@@ -5,6 +5,18 @@ Currently, I can only maintain the devices I personally own, but contributions a
 
 **💡 If you don't know what clone your device is but you have the DTB file, you can use [ DTB Analysis Tool Web](https://lcdyk0517.github.io/dtbTools.html) to help identify your clone type.**
 
+
+
+## ArkOS4Clone Build
+
+```
+1. git clone git@github.com:lcdyk0517/arkos4clone.git
+2. cd arkos4clone
+3. sudo ./build_image.sh ArkOS-R3XS.img /
+```
+
+   
+
 ## Supported Devices
 ---
 

@@ -3,3 +3,8 @@ PortMaster/*
 /*.txt
 update.tar
 /*.gz
+bin/pm_libs/*
+/*.img.xz
+*.img.xz
+PortMaster/
+sh/firstboot.sh

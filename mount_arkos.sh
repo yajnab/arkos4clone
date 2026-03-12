@@ -9,8 +9,8 @@ set -euo pipefail
 # Mount points will be created under: ./mnt/{boot,root,roms}
 # State (loop device) is stored in:   ./.arkos_loop
 
-STATE_FILE=".arkos_loop"
-BASE_MNT="/home/lcdyk/arkos/mnt"
+BASE_MNT="${ARKOS_MNT:-/home/lcdyk/arkos/mnt}"
+STATE_FILE="$BASE_MNT/.arkos_loop"
 BOOT_MNT="$BASE_MNT/boot"
 ROOT_MNT="$BASE_MNT/root"
 ROMS_MNT="$BASE_MNT/roms"
