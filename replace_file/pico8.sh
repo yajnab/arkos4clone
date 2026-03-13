@@ -37,7 +37,7 @@ if [[ -f "/boot/.console" ]]; then
     res="800,480"
   elif [[ "$CUR_VAL" == "r50s" ]]; then
     res="854,480"
-  elif [[ "$CUR_VAL" == "a10miniv2" ]]; then
+  elif [[ "$CUR_VAL" == "a10miniv4" ]]; then
     res="720,540"
   else
     res="640,480"

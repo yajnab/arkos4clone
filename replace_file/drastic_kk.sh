@@ -43,7 +43,7 @@ if [[ -f /boot/.console ]]; then
     u8|dr28s|r50s)
       LD_PRELOAD=./libs/libSDL2-2.0.so.0.3200.10.rotate270
     ;;
-    a10miniv2)
+    a10miniv4)
       LD_PRELOAD=./libs/libSDL2-2.0.so.0.3200.10.rotate180
     ;;
     xf28)

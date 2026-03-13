@@ -52,7 +52,7 @@ var Consoles = []ConsoleConfig{
 	{
 		RealName: "r36max noamp",
 		BrandEntries: []BrandEntry{
-			{Brand: "XiFan HandHelds", DisplayName: "XiFan R36Max No sound"},
+			{Brand: "XiFan HandHelds", DisplayName: "XiFan R36Max Without Amplifier"},
 		},
 		ExtraSources: []string{"logo/720P/", "kernel/common/"},
 	},
@@ -281,9 +281,9 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/480P/", "kernel/common/"},
 	},
 	{
-		RealName: "a10miniv2",
+		RealName: "a10miniv4",
 		BrandEntries: []BrandEntry{
-			{Brand: "YMC", DisplayName: "YMC A10MINI V2"},
+			{Brand: "YMC", DisplayName: "YMC A10MINI V4"},
 		},
 		ExtraSources: []string{"logo/540P/", "kernel/common/"},
 	},

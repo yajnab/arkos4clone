@@ -25,7 +25,7 @@ Currently, I can only maintain the devices I personally own, but contributions a
 | **Brand**            | **Device**                               | **Files to Copy**                                      | **Note**                                      |
 |----------------------|------------------------------------------|--------------------------------------------------------|--------------------------------------------------------|
 | **YMC**               | **YMC A10MINI**                        | `logo/480P/`, `kernel/common/`, `consoles/a10mini/`     |Thanks to Mr.Wu.|
-|                      | **YMC A10MINI V2**                      | `logo/540P/`, `kernel/common/`, `consoles/a10mini V2/`        |Thanks to Mr.Wu.|
+|                      | **YMC A10MINI V4**                     | `logo/540P/`, `kernel/common/`, `consoles/a10mini V4/`       |Thanks to Mr.Wu.|
 | **AISLPC**            | **GameConsole K36S**                    | `logo/480P/`, `kernel/common/`, `consoles/k36s/`        |Thanks to Mr.Yin.|
 |                      | **GameConsole R36T**                    | `logo/480P/`, `kernel/common/`, `consoles/k36s/`        |Thanks to Mr.Yin.|
 |                      | **GameConsole R36T MAX**                | `logo/720P/`, `kernel/common/`, `consoles/r36tmax/`     |Thanks to Mr.Yin.|
@@ -36,7 +36,7 @@ Currently, I can only maintain the devices I personally own, but contributions a
 | **RetroBox**           | **RetroBox P1**                    | `logo/480P-270/`, `kernel/common/`, `consoles/rp1/`         ||
 | **Clone R36s**        | **Clone Type 1 With Amplifier**         | `logo/480P/`, `kernel/common/`, `consoles/r36pro/` |Thanks to XiFan.|
 |                       | **Clone Type 1 Without Amplifier**      | `logo/480P/`, `kernel/common/`, `consoles/hg36/` ||
-|                      | **Clone Type 1 Without Amplifier And Invert Right Joystick** | `logo/480P/`, `kernel/common/`, `consoles/k36/` |
+|                      | **Clone Type 1 Without Amplifier And Invert Right Joystick** | `logo/480P/`, `kernel/common/`, `consoles/k36/` ||
 |                      | **Clone Type 2 With Amplifier**                         | `logo/480P/`, `kernel/common/`, `consoles/clone type2 amp/` |Thanks to XiFan.|
 |                      | **Clone Type 2 Without Amplifier**                         | `logo/480P/`, `kernel/common/`, `consoles/clone type2/` |Thanks to Mr.Li.|
 |                      | **Clone Type 3**                         | `logo/480P/`, `kernel/common/`, `consoles/clone type3/` |Thanks to LangZi.|
