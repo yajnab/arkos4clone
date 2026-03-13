@@ -18,6 +18,14 @@ echo "== 注入 boot =="
 sudo mkdir -p "$MOUNT_DIR/boot/consoles"
 # 不同步 consoles/files 目录（按你原本需求）
 sudo rsync $RSYNC_BOOT_OPTS --exclude='files' ./consoles/ "$MOUNT_DIR/boot/consoles/"
+if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
+  echo "检测到 dArkOS 镜像，使用 logo-darkos"
+  sudo rm -rf "$MOUNT_DIR/boot/consoles/logo"
+  sudo mv "$MOUNT_DIR/boot/consoles/logo-darkos" "$MOUNT_DIR/boot/consoles/logo"
+else
+  echo "检测到 ArkOS 镜像，删除 logo-darkos"
+  sudo rm -rf "$MOUNT_DIR/boot/consoles/logo-darkos"
+fi
 
 # 这些都是普通文件，直接复制即可
 sudo cp -f ./sh/clone.sh ./dtb_selector_macos ./dtb_selector_win32.exe ./sh/expandtoexfat.sh "$MOUNT_DIR/boot/"
@@ -160,7 +168,7 @@ sudo cp -f ./bin/json-c3/* "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/" || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
 
-echo "== 更新 PPSSPP 1.21.1 =="
+echo "== 更新 PPSSPP 1.20.2 =="
 sudo cp -a ./replace_file/ppsspp/* "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null || true
@@ -190,6 +198,17 @@ if [ "$(stat -c%s $MOUNT_DIR/root/roms.tar 2>/dev/null || echo 0)" -le $((100*10
   sudo chmod -R 777 "$WORK_DIR/tmproms/roms/tools/PortMaster"
   sudo chmod -R 777 "$WORK_DIR/tmproms/roms/tools/PortMaster.sh"
   mkdir -p "$WORK_DIR/tmproms/roms/pymo"
+  if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
+    echo "== 注入 dArkOS 主题 =="
+    sudo cp -r ./replace_file/pymo/pymo "$WORK_DIR/mnt/roms/themes/es-theme-nes-box/"
+    sudo chown -R root:root "$WORK_DIR/tmproms/roms/themes/es-theme-nes-box/pymo"
+    sudo chmod -R 777 "$WORK_DIR/tmproms/roms/themes/es-theme-nes-box/pymo"
+  else
+    echo "== 注入 ArkOS 主题 =="
+    sudo cp -r ./replace_file/pymo/pymo "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/"
+    sudo chown -R root:root "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/pymo"
+    sudo chmod -R 777 "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/pymo" 
+  fi
   sudo cp -rf  ./replace_file/pymo/Scan_for_new_games.pymo "$WORK_DIR/tmproms/roms/pymo/"
   sudo chown -R 1002:1002 "$WORK_DIR/tmproms/roms/pymo/Scan_for_new_games.pymo"
   sudo chmod -R 777 "$WORK_DIR/tmproms/roms/pymo/Scan_for_new_games.pymo"
@@ -217,10 +236,6 @@ sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/cpymo"
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/pymo.sh"
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/cpymo"
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/pymo.sh"
-sudo cp -r ./replace_file/pymo/pymo "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/"
-sudo cp -r ./replace_file/pymo/pymo "$MOUNT_DIR/roms/themes/es-theme-nes-box/"
-sudo chown -R root:root "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/pymo"
-sudo chmod -R 777 "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/pymo"
 
 echo "== ogage快捷键复制 =="
 sudo cp -r ./replace_file/ogage "$MOUNT_DIR/root/usr/local/bin/"
@@ -290,7 +305,9 @@ sudo rm -rf "$MOUNT_DIR/root/opt/system/Advanced/Reset EmulationStation Controls
 sudo rm -rf "$MOUNT_DIR/root/opt/system/Advanced/Fix Global Hotkeys.sh" 2>/dev/null || true
 
 if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
-  mkdir "$MOUNT_DIR/root/opt/system/Tools/" || true
+  sudo mkdir "$MOUNT_DIR/root/opt/system/Tools/" || true
+  sudo rm -rf "$MOUNT_DIR/root/opt/system/Advanced/Backup dArkOS Settings" 2>/dev/null || true
+  sudo rm -rf "$MOUNT_DIR/root/opt/system/Tools/Install.PortMaster.sh" 2>/dev/null || true
 fi
 sudo cp -r "./Jason3_Scripte/wifi-toggle/Wifi-toggle.sh" "$MOUNT_DIR/root/opt/system/Wifi-Toggle.sh" || true
 sudo cp -r "./Jason3_Scripte/InfoSystem/InfoSystem.sh" "$MOUNT_DIR/root/opt/system/Tools/System Info.sh" || true

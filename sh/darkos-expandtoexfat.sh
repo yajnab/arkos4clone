@@ -1,4 +1,13 @@
 #!/bin/bash
+
+LOG_FILE="/var/log/darkos-expand.log"
+
+# 初始化日志（追加模式）
+log() {
+  local ts; ts="$(date '+%Y-%m-%d %H:%M:%S')"
+  echo "[$ts] $*" | tee -a "$LOG_FILE"
+}
+
 if mountpoint -q /roms; then
   sudo umount /roms
 fi
@@ -23,8 +32,8 @@ fi
 	maxSize=$(lsblk -b --output SIZE -n -d /dev/mmcblk0)
 
 	newExtSizePct=$(printf %.2f "$((10**4 * 11000000000/$maxSize))e-4")
-	newExtSizePct=$(echo print 1-$newExtSizePct | perl)
-	ExfatPctToRemain=$(echo print 100*$newExtSizePct | perl)
+	newExtSizePct=$(perl -e "print 1 - $newExtSizePct")
+	ExfatPctToRemain=$(perl -e "print 100 * $newExtSizePct")
 
 	partition_type=$(df -T | grep mmcblk[0-1]p2 | cut -d ' ' -f 2)
 	if [ $ExfatPctToRemain -lt "100" ]; then
@@ -41,7 +50,7 @@ fi
 		echo ""
 	  fi
 	  ext4endSector=$(sudo sfdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk '{print $3}')
-	  exfatstartSector=$(echo print 1+$ext4endSector | perl)
+	  exfatstartSector=$(perl -e "print 1 + $ext4endSector")
 	  echo 30
 	  printf "n\np\n3\n$exfatstartSector\n\nt\n3\n11\nw\n" | sudo fdisk /dev/mmcblk0 &> /dev/null
 	  echo 45
