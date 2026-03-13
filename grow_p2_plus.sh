@@ -3,9 +3,10 @@ set -euo pipefail
 
 # ============ 配置 ============
 ADD_MB=2536                   # 追加容量（MiB），当前约 +2.48 GiB
-P3_FS="ntfs"                  # 可选: ntfs | exfat
-P3_LABEL="data"               # 新的分区3卷标
-TMP_DIR="$(pwd)/tmp"          # 备份/恢复目录；脚本会创建、用完后删除
+# 临时目录优先使用 ARKOS_WORK_DIR，否则使用当前目录
+WORK_BASE="${ARKOS_WORK_DIR:-$(pwd)}"
+TMP_DIR="${WORK_BASE}/tmp"    # 备份/恢复目录；脚本会创建、用完后删除
+# P3 文件系统类型和卷标将自动从原始 p3 检测
 # =============================
 
 if [[ $# -lt 1 ]]; then
@@ -35,6 +36,12 @@ cleanup() {
   mountpoint -q "$P3_NEW_MNT" && sudo umount "$P3_NEW_MNT"
   [[ -d "$P3_OLD_MNT" ]] && rmdir "$P3_OLD_MNT" || true
   [[ -d "$P3_NEW_MNT" ]] && rmdir "$P3_NEW_MNT" || true
+  # 清理 btrfs 临时挂载点
+  local btrfs_mnt="${WORK_BASE:-$(pwd)}/btrfs_resize"
+  if [[ -d "$btrfs_mnt" ]]; then
+    mountpoint -q "$btrfs_mnt" && sudo umount -l "$btrfs_mnt"
+    sudo rmdir "$btrfs_mnt" 2>/dev/null
+  fi
   # 解绑当前 loop
   if [[ -n "${LOOP:-}" ]] && losetup -a | grep -q "^$LOOP:"; then
     sudo losetup -d "$LOOP" || true
@@ -53,6 +60,16 @@ echo "== 映射镜像到 loop（带分区） =="
 LOOP="$(sudo losetup --find --show -P "$IMG")"
 settle
 echo "使用 loop: $LOOP"
+
+# 清理可能残留的挂载点（设备可能已被其他进程挂载）
+echo "== 清理残留挂载点 =="
+for part in "${LOOP}p1" "${LOOP}p2" "${LOOP}p3"; do
+  if [[ -b "$part" ]]; then
+    while read -r mnt; do
+      [[ -n "$mnt" ]] && sudo umount -l "$mnt" 2>/dev/null || true
+    done < <(findmnt -n -o TARGET "$part" 2>/dev/null || true)
+  fi
+done
 
 # 扇区信息
 SECTOR_SIZE="$(sudo blockdev --getss "$LOOP")"  # 常见 512
@@ -76,6 +93,11 @@ if has_p3; then
   mkdir -p "$TMP_DIR"
   P3_DEV="${LOOP}p3"
 
+  # 自动检测原始 p3 的文件系统类型和卷标
+  ORIG_P3_FS="$(sudo blkid -s TYPE -o value "$P3_DEV" 2>/dev/null || echo 'vfat')"
+  ORIG_P3_LABEL="$(sudo blkid -s LABEL -o value "$P3_DEV" 2>/dev/null || echo 'EASYROMS')"
+  echo "原始 p3 文件系统: $ORIG_P3_FS, 卷标: $ORIG_P3_LABEL"
+
   echo "挂载旧 p3 到 $P3_OLD_MNT（优先只读）"
   if ! sudo mount -o ro "$P3_DEV" "$P3_OLD_MNT"; then
     echo "只读挂载失败，尝试普通挂载"
@@ -89,6 +111,10 @@ if has_p3; then
   sudo umount "$P3_OLD_MNT"
 else
   echo "未发现 p3，跳过备份。"
+  # 设置默认值（用于新建 p3）
+  ORIG_P3_FS="exfat"
+  ORIG_P3_LABEL="EASYROMS"
+  echo "将使用默认值创建 p3: 文件系统=$ORIG_P3_FS, 卷标=$ORIG_P3_LABEL"
 fi
 
 # ======= 第二步：删除 p3 分区（必须清路） =======
@@ -140,11 +166,20 @@ case "$P2_FS" in
     sudo resize.f2fs "$P2_DEV"
     ;;
   btrfs)
-    P2_MNT="$(mktemp -d)"
-    sudo mount "$P2_DEV" "$P2_MNT"
+    # 使用工作目录下的固定挂载点，确保干净
+    P2_MNT="${WORK_BASE}/btrfs_resize"
+    sudo mkdir -p "$P2_MNT"
+    # 确保卸载任何现有挂载
+    sudo umount -l "$P2_MNT" 2>/dev/null || true
+    sudo umount -l "$P2_DEV" 2>/dev/null || true
+    # 清除 btrfs 内核设备缓存（关键！）
+    echo "清除 btrfs 设备缓存..."
+    sudo btrfs device scan --forget 2>/dev/null || true
+    # 挂载并扩容
+    sudo mount -t btrfs "$P2_DEV" "$P2_MNT"
     sudo btrfs filesystem resize max "$P2_MNT"
     sudo umount "$P2_MNT"
-    rmdir "$P2_MNT"
+    sudo rmdir "$P2_MNT" 2>/dev/null || true
     ;;
   *)
     echo "警告：未知/不支持的 p2 文件系统类型：$P2_FS"
@@ -167,20 +202,36 @@ settle
 
 echo "== 格式化新的 p3 =="
 P3_DEV="${LOOP}p3"
-if [[ "$P3_FS" == "ntfs" ]]; then
-  sudo mkfs.ntfs -F -L "$P3_LABEL" "$P3_DEV"
-elif [[ "$P3_FS" == "exfat" ]]; then
-  sudo mkfs.exfat -n "$P3_LABEL" "$P3_DEV"
-else
-  echo "不支持的 P3_FS: $P3_FS"
-  exit 1
-fi
+echo "使用文件系统: $ORIG_P3_FS, 卷标: $ORIG_P3_LABEL"
+case "$ORIG_P3_FS" in
+  vfat|fat32|fat16)
+    sudo mkfs.vfat -F 32 -n "$ORIG_P3_LABEL" "$P3_DEV"
+    ;;
+  ntfs)
+    sudo mkfs.ntfs -F -L "$ORIG_P3_LABEL" "$P3_DEV"
+    ;;
+  exfat)
+    sudo mkfs.exfat -n "$ORIG_P3_LABEL" "$P3_DEV"
+    ;;
+  *)
+    echo "警告：未知文件系统类型 $ORIG_P3_FS，使用 exfat 作为默认"
+    sudo mkfs.exfat -n "$ORIG_P3_LABEL" "$P3_DEV"
+    ;;
+esac
 
 # ======= 第五步：恢复数据（镜像一致） =======
 if [[ -d "$TMP_DIR" ]] && [[ -n "$(ls -A "$TMP_DIR" 2>/dev/null || true)" ]]; then
   echo "== 恢复数据（镜像一致）：$TMP_DIR -> 新 p3 =="
   sudo mount "$P3_DEV" "$P3_NEW_MNT"
-  sudo rsync -aH --delete --info=progress2 "$TMP_DIR"/ "$P3_NEW_MNT"/
+  # FAT32/exFAT 不支持 Unix 权限，使用 --no-perms --no-owner --no-group
+  case "$ORIG_P3_FS" in
+    vfat|fat32|fat16|exfat)
+      sudo rsync -rltD --no-perms --no-owner --no-group --delete --info=progress2 "$TMP_DIR"/ "$P3_NEW_MNT"/
+      ;;
+    *)
+      sudo rsync -aH --delete --info=progress2 "$TMP_DIR"/ "$P3_NEW_MNT"/
+      ;;
+  esac
   sync
   sudo umount "$P3_NEW_MNT"
   echo "恢复完成。"

@@ -101,6 +101,7 @@ cp -f ./bin/sdljoymap ./bin/sdljoytest "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/nul
 cp -f ./bin/console_detect "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
 
 echo "== 注入 rk915 固件 =="
+mkdir -p "$PAYLOAD_ROOT/usr/lib/firmware/"
 cp -f ./bin/rk915_*.bin "$PAYLOAD_ROOT/usr/lib/firmware/" 2>/dev/null || true
 
 echo "== 注入 aic8800DC 固件 =="
@@ -149,13 +150,14 @@ cp -a ./replace_file/drastic-kk/. "$PAYLOAD_ROOT/opt/drastic-kk/" 2>/dev/null ||
 rm -rf "$PAYLOAD_ROOT/opt/drastic-kk/patch" 2>/dev/null || true
 
 echo "== 注入 json-c3 库（drastic-kk 依赖） =="
+mkdir -p "$PAYLOAD_ROOT/usr/lib/aarch64-linux-gnu/"
 cp -f ./bin/json-c3/* "$PAYLOAD_ROOT/usr/lib/aarch64-linux-gnu/" 2>/dev/null || true
 
-echo "== 更新PPSSPP1.21.1 =="
+echo "== 更新 PPSSPP1.20.2 =="
 mkdir -p "$PAYLOAD_ROOT/opt/ppsspp"
 cp -a ./replace_file/ppsspp/. "$PAYLOAD_ROOT/opt/ppsspp/" 2>/dev/null || true
 
-echo "== 更新ScummVM v2026.1.0 =="
+echo "== 更新 ScummVM v2026.1.0 =="
 mkdir -p "$PAYLOAD_ROOT/opt/scummvm"
 cp -a ./replace_file/scummvm/. "$PAYLOAD_ROOT/opt/scummvm/" 2>/dev/null || true
 
@@ -167,9 +169,9 @@ cp -r ./replace_file/retrorun/retrorun "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/nul
 echo "== 注入 pymo =="
 cp -r ./replace_file/pymo/cpymo "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
 cp -r ./replace_file/pymo/pymo.sh "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
-mkdir -p "$PAYLOAD_ROOT/tempthemes/es-theme-nes-box"
-cp -r ./replace_file/pymo/pymo \
-      "$PAYLOAD_ROOT/tempthemes/es-theme-nes-box/" 2>/dev/null || true
+# mkdir -p "$PAYLOAD_ROOT/tempthemes/es-theme-nes-box"
+# cp -r ./replace_file/pymo/pymo \
+#       "$PAYLOAD_ROOT/tempthemes/es-theme-nes-box/" 2>/dev/null || true
 
 echo "== 注入 ogage =="
 cp -r ./replace_file/ogage "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
@@ -383,6 +385,37 @@ svc_stop_disable() {
   systemctl reset-failed "$svc" 2>/dev/null || true
 }
 
+log "=== Step 0: Backup user configs ==="
+BACKUP_FILE="/home/ark/arkos4clone.tar"
+BACKUP_ITEMS=(
+  "/roms/psp/ppsspp/PSP/SYSTEM"
+  "/roms2/psp/ppsspp/PSP/SYSTEM"
+  "/home/ark/.config/retroarch/retroarch.cfg"
+  "/home/ark/.config/retroarch32/retroarch.cfg"
+)
+
+# 收集存在的文件/目录
+BACKUP_LIST=()
+for item in "${BACKUP_ITEMS[@]}"; do
+  if [[ -e "$item" ]]; then
+    BACKUP_LIST+=("$item")
+    log "Will backup: $item"
+  else
+    log "Skip (not found): $item"
+  fi
+done
+
+# 打包备份
+if [[ ${#BACKUP_LIST[@]} -gt 0 ]]; then
+  if tar -cf "$BACKUP_FILE" "${BACKUP_LIST[@]}" 2>/dev/null; then
+    log "Backup created: $BACKUP_FILE (${#BACKUP_LIST[@]} items)"
+  else
+    log "Backup failed"
+  fi
+else
+  log "No items to backup, skipping"
+fi
+
 # 先停掉可能冲突/要替换的服务（存在才动）
 log "=== Step 1: Stop conflicting services ==="
 for s in adckeys.service batt_led.service ddtbcheck.service 351mp.service mpv.service oga_events; do
@@ -518,14 +551,32 @@ else
 fi
 
 log "=== Step 6: Update plymouth theme ==="
-# plymouth title: ArkOS4Clone (MMDDYYYY)(MODDER)
 PLYMOUTH_THEME="/usr/share/plymouth/themes/text.plymouth"
+
+# 检测当前系统是否为 dArkOS
+IS_DARKOS="false"
+if [[ -f "$PLYMOUTH_THEME" ]]; then
+  CURRENT_TITLE="$(grep '^title=' "$PLYMOUTH_THEME" 2>/dev/null || true)"
+  if [[ "$CURRENT_TITLE" == *dArkOS* ]]; then
+    IS_DARKOS="true"
+    log "Detected: dArkOS system"
+  else
+    log "Detected: ArkOS system"
+  fi
+fi
+
+# 根据检测结果设置标题
 if [[ -f "$BASE/VERSION" && -f "$PLYMOUTH_THEME" ]]; then
   VER_RAW="$(cat "$BASE/VERSION" 2>/dev/null || true)"
   UPDATE_DATE="$(echo "$VER_RAW" | cut -d- -f2)"
   MODDER="$(echo "$VER_RAW" | cut -d- -f3-)"
-  sed -i "/^title=/c\title=ArkOS4Clone (${UPDATE_DATE})(${MODDER})" "$PLYMOUTH_THEME" 2>/dev/null || true
-  log "Plymouth updated: ArkOS4Clone (${UPDATE_DATE})(${MODDER})"
+  if [[ "$IS_DARKOS" == "true" ]]; then
+    sed -i "/^title=/c\title=dArkOS4Clone (${UPDATE_DATE})(${MODDER})" "$PLYMOUTH_THEME" 2>/dev/null || true
+    log "Plymouth updated: dArkOS4Clone (${UPDATE_DATE})(${MODDER})"
+  else
+    sed -i "/^title=/c\title=ArkOS4Clone (${UPDATE_DATE})(${MODDER})" "$PLYMOUTH_THEME" 2>/dev/null || true
+    log "Plymouth updated: ArkOS4Clone (${UPDATE_DATE})(${MODDER})"
+  fi
 fi
 
 log "=== Step 7: Cleanup old files ==="
