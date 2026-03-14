@@ -403,7 +403,13 @@ main() {
   [[ -f "/boot/.ko" ]] && { apply_localization "ko"; sudo rm -f /boot/.ko; }
 
   # Last game
-  [[ -x /home/ark/.config/lastgame.sh ]] && sudo -u ark /home/ark/.config/lastgame.sh
+  if [[ -x /home/ark/.config/lastgame.sh ]]; then
+      msg "Executing lastgame.sh..."
+      sudo -u ark /home/ark/.config/lastgame.sh
+      msg "lastgame.sh completed"
+  else
+      msg "lastgame.sh not found or not executable"
+  fi
 
   msg "Done. device=$DEVICE_NAME"
 }

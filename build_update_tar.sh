@@ -245,7 +245,7 @@ meta_add "0777" "1002:1002" "/opt/351Files"
 meta_add "0777" "1002:1002" "/opt/351Files/*"
 
 # replace_file/*.sh 中那 10 个：1002:1002 + 777
-for f in atomiswave.sh dreamcast.sh naomi.sh saturn.sh n64.sh pico8.sh drastic.sh drastic_kk.sh choose_drastic_ver.sh mediaplayer.sh; do
+for f in atomiswave.sh dreamcast.sh naomi.sh saturn.sh n64.sh pico8.sh drastic.sh drastic_kk.sh choose_drastic_ver.sh mediaplayer.sh get_last_played.sh; do
   meta_add "0777" "1002:1002" "/usr/local/bin/$f"
 done
 

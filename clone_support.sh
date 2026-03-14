@@ -107,6 +107,7 @@ sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null |
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
@@ -117,6 +118,7 @@ sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
+sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh" 2>/dev/null || true
 
 echo "== 注入 adc-key 服务脚本 =="
 sudo cp -f ./bin/adc-key/adckeys.py "$MOUNT_DIR/root/usr/local/bin/"
