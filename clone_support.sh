@@ -12,35 +12,49 @@ MODDER="kk&lcdyk"
 # -rltD   ：递归/保留软链/保留时间/保留设备文件（尽量通用）
 # --no-owner --no-group --no-perms ：不要在 FAT32 上设置属主/属组/权限，避免 EPERM
 # --omit-dir-times ：不尝试写目录时间戳（FAT32 上也可能受限）
+# (English:
+# Unified rsync options:
+# -rltD: recursive / preserve symlinks / preserve times / preserve device files (broadly compatible)
+# --no-owner --no-group --no-perms: do not set owner/group/permissions on FAT32 to avoid EPERM
+# --omit-dir-times: do not attempt to write directory timestamps (may be limited on FAT32)
+# )
 RSYNC_BOOT_OPTS="-rltD --no-owner --no-group --no-perms --omit-dir-times"
 
 echo "== 注入 boot =="
 sudo mkdir -p "$MOUNT_DIR/boot/consoles"
 # 不同步 consoles/files 目录（按你原本需求）
+# (English: Do not sync consoles/files directory (per original requirement))
 sudo rsync $RSYNC_BOOT_OPTS --exclude='files' ./consoles/ "$MOUNT_DIR/boot/consoles/"
 if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   echo "检测到 dArkOS 镜像，使用 logo-darkos"
+  # (English: Detected dArkOS image, use logo-darkos)
   sudo rm -rf "$MOUNT_DIR/boot/consoles/logo"
   sudo mv "$MOUNT_DIR/boot/consoles/logo-darkos" "$MOUNT_DIR/boot/consoles/logo"
 else
   echo "检测到 ArkOS 镜像，删除 logo-darkos"
+  # (English: Detected ArkOS image, remove logo-darkos)
   sudo rm -rf "$MOUNT_DIR/boot/consoles/logo-darkos"
 fi
 
 # 这些都是普通文件，直接复制即可
+# (English: These are regular files; copy them directly)
 sudo cp -f ./sh/clone.sh ./dtb_selector_macos ./dtb_selector_win32.exe ./sh/expandtoexfat.sh "$MOUNT_DIR/boot/"
 
 # 如果镜像名包含 dArkOS，使用专用的 expandtoexfat.sh
+# (English: If image name contains dArkOS, use special expandtoexfat.sh)
 if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   echo "检测到 dArkOS 镜像，使用 darkos-expandtoexfat.sh"
+  # (English: Detected dArkOS image, install darkos-expandtoexfat.sh)
   sudo cp -f "$SCRIPT_DIR/sh/darkos-expandtoexfat.sh" "$MOUNT_DIR/boot/expandtoexfat.sh"
 fi
 
 echo "== 注入按键信息 =="
 sudo mkdir -p "$MOUNT_DIR/root/home/ark/.quirks"
 # 这里你要的是把 consoles/files 这个“目录”复制进去，所以必须 -r
+# (English: You want to copy the consoles/files directory, so use -r)
 sudo cp -r ./consoles/files/* "$MOUNT_DIR/root/home/ark/.quirks/"
 # 只有 ext4/f2fs 才能 chown，boot(FAT32) 不要 chown
+# (English: Only ext4/f2fs support chown; do not chown boot (FAT32))
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/home/ark/.quirks/"
 
 echo "== 注入 clone 用配置 =="
@@ -70,6 +84,7 @@ sudo depmod -a -b "$MOUNT_DIR/root" 4.4.189 2>/dev/null || true
 
 echo "== 注入 915 固件 =="
 # 通配符不存在会让 cp 失败，加 || true 容错
+# (English: If glob doesn't match cp fails; add || true to tolerate)
 sudo cp -f ./bin/rk915_*.bin "$MOUNT_DIR/root/usr/lib/firmware/" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/lib/firmware/"rk915_*.bin 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/firmware/"rk915_*.bin 2>/dev/null || true
@@ -83,19 +98,23 @@ sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/firmware/aic8800DC" 2>/dev/null || tr
 echo "== 注入 351Files 资源 =="
 sudo mkdir -p "$MOUNT_DIR/root/opt/351Files/res"
 # 这里 res/* 是多个“目录”，必须 -r
+# (English: res/* contains multiple directories; must use -r)
 sudo cp -r ./res/* "$MOUNT_DIR/root/opt/351Files/res/" 2>/dev/null || true
 
 # 重命名 351Files -> 351Files.old（存在才动）
+# (English: Rename 351Files -> 351Files.old if exists)
 if [[ -e "$MOUNT_DIR/root/opt/351Files/351Files" ]]; then
   sudo mv "$MOUNT_DIR/root/opt/351Files/351Files" "$MOUNT_DIR/root/opt/351Files/351Files.old"
 else
   echo "[warn] 未找到 $MOUNT_DIR/root/opt/351Files/351Files，跳过重命名"
+  # (English: Not found, skip rename)
 fi
 
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/351Files/" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/opt/351Files/" 2>/dev/null || true
 
 echo "== 注入启动脚本 =="
+# (English: Inject startup scripts)
 sudo cp -f ./replace_file/*.sh "$MOUNT_DIR/root/usr/local/bin/"
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
@@ -121,6 +140,7 @@ sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || tru
 sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh" 2>/dev/null || true
 
 echo "== 注入 adc-key 服务脚本 =="
+# (English: Inject adc-key service scripts)
 sudo cp -f ./bin/adc-key/adckeys.py "$MOUNT_DIR/root/usr/local/bin/"
 sudo cp -f ./bin/adc-key/adckeys.sh "$MOUNT_DIR/root/usr/local/bin/"
 sudo cp -f ./bin/adc-key/adckeys.service "$MOUNT_DIR/root/etc/systemd/system/"

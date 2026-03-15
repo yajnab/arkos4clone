@@ -3,14 +3,20 @@ set -euo pipefail
 
 # ============================================
 # ArkOS4Clone OTA 升级包制作脚本（保持原有流程）
+# (English: ArkOS4Clone OTA update package build script (keeps existing flow))
 #
 # 输出文件：
+# (English: Output:)
 #   ./update.tar   （放到设备 /roms/update.tar）
+#   (English: ./update.tar  (place on device at /roms/update.tar))
 #
 # update.tar 内部结构：
+# (English: update.tar contents:)
 #   VERSION
 #   install.sh      # 设备端执行（流式抽取 chunks/ 与 uboot/）
+#   (English: install.sh  # Runs on device; streams chunks/ and uboot/)
 #   META            # (新增) 只描述“本次交付文件”的权限/属主要求
+#   (English: META  # Describes permissions/ownership for delivered files only)
 #   CHUNKS
 #   chunks/
 #     00_boot.tar
@@ -24,17 +30,23 @@ set -euo pipefail
 #     trust.img
 #
 # 关键目标：
+# (English: Goals:)
 # - 不改变你原本“做哪些事”的流程（包含 uboot 刷写、清理、删除等）
+# (English: - Keep existing flow: uboot flash, cleanup, deletes, etc.)
 # - 复制阶段不改任何“已有文件/目录”的权限属主
+# (English: - Copy phase does not change existing file/dir permissions/owner)
 # - 仅对“本次 OTA 交付的文件”按离线注入脚本修正权限/属主（通过 META）
+# (English: - Only fix permissions/owner for OTA-delivered files via META)
 # ============================================
 
 # 生成版本信息
+# (English: Generate version info)
 UPDATE_DATE="$(TZ=Asia/Shanghai date +%m%d%Y)"
 MODDER="kk&lcdyk"
 VERSION="ArkOS4Clone-${UPDATE_DATE}-${MODDER}"
 
 # 工作目录与临时构建目录
+# (English: Work dir and temp build dir)
 WORKDIR="$(pwd)"
 STAGE="/tmp/_ota_stage"
 PAYLOAD_BOOT="${STAGE}/payload/boot"
@@ -42,6 +54,7 @@ PAYLOAD_ROOT="${STAGE}/payload/root"
 OUT_TAR="${WORKDIR}/update.tar"
 
 # boot 分区（FAT32）专用 rsync 参数（不保存 owner/perms）
+# (English: boot partition (FAT32) rsync opts: no owner/perms)
 RSYNC_BOOT_OPTS="-rltD --no-owner --no-group --no-perms --omit-dir-times"
 
 # ----------------- helpers -----------------
@@ -66,28 +79,33 @@ meta_finalize_dedupe() {
 }
 
 # 清理旧的构建目录
+# (English: Clean old build dir)
 rm -rf "$STAGE"
 mkdir -p "$PAYLOAD_BOOT" "$PAYLOAD_ROOT"
 
-echo "== 构建 payload/boot =="
+echo "== 构建 payload/boot == (English: Build payload/boot)"
 
 # consoles -> /boot/consoles（排除 consoles/files）
+# (English: consoles -> /boot/consoles, exclude consoles/files)
 mkdir -p "$PAYLOAD_BOOT/consoles"
 # shellcheck disable=SC2086
 rsync $RSYNC_BOOT_OPTS --exclude='files' ./consoles/ "$PAYLOAD_BOOT/consoles/"
 
 # clone.sh 在 OTA 中必须直接生成为 /boot/firstboot.sh
+# (English: clone.sh must be output as /boot/firstboot.sh in OTA)
 cp -f ./sh/clone.sh "$PAYLOAD_BOOT/firstboot.sh"
 
 # 其他 boot 工具保持原文件名
+# (English: Other boot tools keep original filenames)
 cp -f ./dtb_selector_macos \
       ./dtb_selector_win32.exe \
       "$PAYLOAD_BOOT/" 2>/dev/null || true
 
 # DTB 选择器提示标记文件
+# (English: DTB selector hint marker file)
 touch "$PAYLOAD_BOOT/USE_DTB_SELECT_TO_SELECT_DEVICE" 2>/dev/null || true
 
-echo "== 构建 payload/root =="
+echo "== 构建 payload/root == (English: Build payload/root)"
 
 echo "== 注入设备怪癖 =="
 mkdir -p "$PAYLOAD_ROOT/home/ark/.quirks"
@@ -135,6 +153,7 @@ cp -rf ./replace_file/resources/* \
       "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/" 2>/dev/null || true
 
 # 注意：es_input.cfg 的删除在 install.sh 中完成
+# (English: Note: es_input.cfg removal is done in install.sh)
 mkdir -p "$PAYLOAD_ROOT/usr/bin/emulationstation"
 cp -r ./replace_file/emulationstation \
       "$PAYLOAD_ROOT/usr/bin/emulationstation/emulationstation" 2>/dev/null || true
@@ -198,7 +217,8 @@ cp -r "./replace_file/tools/Switch to SD2 for Roms.sh" \
       "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
 
 # ========= 新增：复制 replace_file/modules -> /usr/lib/modules =========
-echo "== 注入 modules（replace_file/modules -> /usr/lib/modules） =="
+# (English: Copy replace_file/modules -> /usr/lib/modules)
+echo "== 注入 modules（replace_file/modules -> /usr/lib/modules） == (English: Inject modules)"
 if [[ -d "./replace_file/modules" ]]; then
   mkdir -p "$PAYLOAD_ROOT/usr/lib/modules"
   cp -a ./replace_file/modules/. "$PAYLOAD_ROOT/usr/lib/modules/" 2>/dev/null || true
@@ -213,18 +233,21 @@ cp -r "./Jason3_Scripte/Bluetooth-Manager/Bluetooth Manager.sh" "$PAYLOAD_ROOT/o
 cp -r "./Jason3_Scripte/Bluetooth-Manager/patch.pak" "$PAYLOAD_ROOT/opt/system/Tools/" 2>/dev/null || true
 
 # ========= ROMS.TAR 被明确排除（OTA 不处理用户数据） =========
-echo "== 跳过 roms.tar（设计如此） =="
+# (English: ROMS.TAR explicitly excluded; OTA does not touch user data)
+echo "== 跳过 roms.tar（设计如此） == (English: Skip roms.tar by design)"
 
 # -----------------------------
 # 写入 VERSION / META / install.sh
+# (English: Write VERSION / META / install.sh)
 # -----------------------------
-echo "== 写入 VERSION / META / install.sh =="
+echo "== 写入 VERSION / META / install.sh == (English: Write VERSION / META / install.sh)"
 
 cat > "$STAGE/VERSION" <<EOF
 $VERSION
 EOF
 
 # ---- META：只描述“本次交付文件”的权限/属主（对齐离线注入脚本）----
+# (English: META: permissions/owner for delivered files only, aligned with offline inject)
 meta_init
 
 # quirks：chown + 777
@@ -238,18 +261,22 @@ meta_add "0777" "1002:1002" "/usr/local/bin/sdljoymap"
 meta_add "0777" "1002:1002" "/usr/local/bin/console_detect"
 
 # rk915 固件 777
+# (English: rk915 firmware 777)
 meta_add "0777" "1002:1002" "/usr/lib/firmware/rk915_*.bin"
 
 # 351Files：chown + 777（并会在 install.sh 做 351Files -> old 的重命名）
+# (English: 351Files: chown + 777; install.sh renames 351Files -> old)
 meta_add "0777" "1002:1002" "/opt/351Files"
 meta_add "0777" "1002:1002" "/opt/351Files/*"
 
 # replace_file/*.sh 中那 10 个：1002:1002 + 777
+# (English: replace_file/*.sh scripts: 1002:1002 + 777)
 for f in atomiswave.sh dreamcast.sh naomi.sh saturn.sh n64.sh pico8.sh drastic.sh drastic_kk.sh choose_drastic_ver.sh mediaplayer.sh get_last_played.sh; do
   meta_add "0777" "1002:1002" "/usr/local/bin/$f"
 done
 
 # adckeys：py/sh/service 全部 777
+# (English: adckeys: py/sh/service all 777)
 meta_add "0777" "1002:1002" "/usr/local/bin/adckeys.py"
 meta_add "0777" "1002:1002" "/usr/local/bin/adckeys.sh"
 meta_add "0777" "1002:1002" "/etc/systemd/system/adckeys.service"
@@ -259,6 +286,7 @@ meta_add "0777" "1002:1002" "/home/ark/.config/retroarch/cores/*"
 meta_add "0777" "1002:1002" "/home/ark/.config/retroarch32/cores/*"
 
 # ES cfg：777（owner 你离线没强制，按 ark 用户更合理，这里跟随 1002:1002）
+# (English: ES cfg: 777, owner 1002:1002)
 meta_add "0777" "1002:1002" "/etc/emulationstation/es_systems.cfg"
 meta_add "0777" "1002:1002" "/etc/emulationstation/es_systems.cfg.dual"
 
@@ -279,6 +307,7 @@ meta_add "0777" "1002:1002" "/opt/scummvm"
 meta_add "0777" "1002:1002" "/opt/scummvm/*"
 
 # json-c3 库：1002:1002 + 777
+# (English: json-c3 lib: 1002:1002 + 777)
 meta_add "0777" "1002:1002" "/usr/lib/aarch64-linux-gnu/libjson-c.so*"
 
 # pymo：777
@@ -286,15 +315,18 @@ meta_add "0777" "1002:1002" "/usr/local/bin/cpymo"
 meta_add "0777" "1002:1002" "/usr/local/bin/pymo.sh"
 
 # Jason3_Scripte 工具：777
+# (English: Jason3_Scripte tools: 777)
 meta_add "0777" "1002:1002" "/opt/system/Wifi-Toggle.sh"
 meta_add "0777" "1002:1002" "/opt/system/Tools/*.sh"
 meta_add "0777" "1002:1002" "/opt/system/Tools/patch.pak"
 
 # /opt/system 下脚本权限：777
+# (English: /opt/system script permissions: 777)
 meta_add "0777" "1002:1002" "/opt/system/*.sh"
 meta_add "0777" "1002:1002" "/opt/system/Advanced/*.sh"
 
 # aic8800DC 固件：777
+# (English: aic8800DC firmware: 777)
 meta_add "0777" "1002:1002" "/usr/lib/firmware/aic8800DC"
 meta_add "0777" "1002:1002" "/usr/lib/firmware/aic8800DC/*"
 
@@ -334,6 +366,7 @@ meta_finalize_dedupe
 
 # -----------------------------
 # install.sh（保持原有做事，改权限方式为 META）
+# (English: install.sh: same actions, permissions via META)
 # -----------------------------
 cat > "$STAGE/install.sh" <<'EOF'
 #!/bin/bash
@@ -349,6 +382,7 @@ LOG_FILE="${LOG_FILE:-/boot/clone_log.txt}"
 OTA_LOG="/roms/update.log"
 
 # 日志函数：同时输出到控制台和日志文件
+# (English: Log: to console and log file)
 log() {
   local ts; ts="$(date '+%Y-%m-%d %H:%M:%S')"
   echo "[$ts] $*" | tee -a "$OTA_LOG" | tee -a "$LOG_FILE"
@@ -368,6 +402,7 @@ log_result() {
 }
 
 # 初始化日志
+# (English: Init log)
 : > "$OTA_LOG" 2>/dev/null || true
 log "========== OTA Update Start =========="
 log "OTA_TAR_PATH: $OTA_TAR_PATH"
@@ -395,6 +430,7 @@ BACKUP_ITEMS=(
 )
 
 # 收集存在的文件/目录
+# (English: Collect existing files/dirs)
 BACKUP_LIST=()
 for item in "${BACKUP_ITEMS[@]}"; do
   if [[ -e "$item" ]]; then
@@ -406,6 +442,7 @@ for item in "${BACKUP_ITEMS[@]}"; do
 done
 
 # 打包备份
+# (English: Tar backup)
 if [[ ${#BACKUP_LIST[@]} -gt 0 ]]; then
   if tar -cf "$BACKUP_FILE" "${BACKUP_LIST[@]}" 2>/dev/null; then
     log "Backup created: $BACKUP_FILE (${#BACKUP_LIST[@]} items)"
@@ -417,6 +454,7 @@ else
 fi
 
 # 先停掉可能冲突/要替换的服务（存在才动）
+# (English: Stop conflicting/to-replace services if present)
 log "=== Step 1: Stop conflicting services ==="
 for s in adckeys.service batt_led.service ddtbcheck.service 351mp.service mpv.service oga_events; do
   if [[ -e "/etc/systemd/system/$s" || -e "/lib/systemd/system/$s" ]]; then
@@ -426,11 +464,13 @@ done
 
 log "=== Step 2: Find boot partition ==="
 # 查找 boot 分区挂载点
+# (English: Find boot partition mount point)
 BOOT_MP="$(findmnt -n -o TARGET /dev/mmcblk0p1 2>/dev/null || true)"
 [[ -z "$BOOT_MP" ]] && BOOT_MP="/boot"
 log "Boot mount point: $BOOT_MP"
 
 # ====== 保持原有清理（不改权限，只删文件）======
+# (English: Keep existing cleanup: delete files only, no permission changes)
 log "=== Step 3: Cleanup before apply ==="
 cleanup_before_apply() {
   log "Cleaning: $BOOT_MP/consoles"
@@ -447,6 +487,7 @@ cleanup_before_apply() {
 cleanup_before_apply
 
 # 你要求的 boot 清理（与离线一致）
+# (English: Boot cleanup as requested, same as offline)
 log "Cleaning boot files..."
 rm -rf "$BOOT_MP/BMPs" "$BOOT_MP/ScreenFiles" 2>/dev/null || true
 rm -f  "$BOOT_MP/boot.ini" "$BOOT_MP"/*.dtb "$BOOT_MP"/*.orig "$BOOT_MP"/*.tony \
@@ -457,6 +498,7 @@ log "Remounting boot as rw"
 mount -o remount,rw "$BOOT_MP" 2>/dev/null || true
 
 # ====== (新增) 只对 META 列出的文件修正权限/属主 ======
+# (English: Only fix permissions/owner for files listed in META)
 apply_meta() {
   local count=0
   [[ -f "$META_FILE" ]] || { log "META file not found"; return 0; }
@@ -493,6 +535,7 @@ apply_chunk_stream() {
       "$OTA_TMP/" "$dest/"
   else
     # 关键：复制阶段不改已有权限/属主
+    # (English: Copy phase does not change existing permissions/owner)
     rsync -rltD --omit-dir-times --no-owner --no-group --no-perms \
       "$OTA_TMP/" "$dest/"
   fi
@@ -508,6 +551,7 @@ apply_legacy_rsync() {
   fi
   if [[ -d "$PAYLOAD/root" ]]; then
     # legacy 也按“不改权限/owner”的策略
+    # (English: Legacy: same no-permission-change policy)
     rsync -rltD --omit-dir-times --no-owner --no-group --no-perms \
       "$PAYLOAD/root/" "/"
   fi
@@ -515,6 +559,7 @@ apply_legacy_rsync() {
 
 log "=== Step 4: Apply chunks ==="
 # 应用更新（优先 chunks 流式模式）
+# (English: Apply update; prefer chunk stream mode)
 if [[ -n "$OTA_TAR_PATH" && -f "$OTA_TAR_PATH" && -f "$CHUNKS_FILE" ]]; then
   while read -r t m; do
     [[ -z "${t:-}" || -z "${m:-}" ]] && continue
@@ -530,6 +575,7 @@ fi
 
 log "=== Step 5: Flash uboot ==="
 # ====== 保持原有：刷写 uboot（从 update.tar 流式读入）======
+# (English: Keep existing: flash uboot from update.tar stream)
 dd_from_tar() {
   local member="$1" seek="$2"
   if ! tar -tf "$OTA_TAR_PATH" "$member" >/dev/null 2>&1; then
@@ -554,6 +600,7 @@ log "=== Step 6: Update plymouth theme ==="
 PLYMOUTH_THEME="/usr/share/plymouth/themes/text.plymouth"
 
 # 检测当前系统是否为 dArkOS
+# (English: Detect if current system is dArkOS)
 IS_DARKOS="false"
 if [[ -f "$PLYMOUTH_THEME" ]]; then
   CURRENT_TITLE="$(grep '^title=' "$PLYMOUTH_THEME" 2>/dev/null || true)"
@@ -566,6 +613,7 @@ if [[ -f "$PLYMOUTH_THEME" ]]; then
 fi
 
 # 根据检测结果设置标题
+# (English: Set title from detection result)
 if [[ -f "$BASE/VERSION" && -f "$PLYMOUTH_THEME" ]]; then
   VER_RAW="$(cat "$BASE/VERSION" 2>/dev/null || true)"
   UPDATE_DATE="$(echo "$VER_RAW" | cut -d- -f2)"
@@ -581,6 +629,7 @@ fi
 
 log "=== Step 7: Cleanup old files ==="
 # ====== 保持原有：删服务文件、删 es_input、删 imageshift、删工具等 ======
+# (English: Keep existing: remove service files, es_input, imageshift, tools, etc.)
 rm -f /etc/systemd/system/batt_led.service 2>/dev/null && log "Removed: batt_led.service" || true
 rm -f /etc/systemd/system/ddtbcheck.service 2>/dev/null && log "Removed: ddtbcheck.service" || true
 chmod 777 /lib/systemd/system/mpv.service 2>/dev/null && log "Fixed: mpv.service chmod 777" || true
@@ -606,16 +655,19 @@ rm -rf "/opt/system/Advanced/Reset EmulationStation Controls.sh" 2>/dev/null || 
 rm -rf "/opt/system/Advanced/Fix Global Hotkeys.sh" 2>/dev/null || true
 
 # 351Files 重命名（保持原逻辑）
+# (English: 351Files rename, keep original logic)
 if [[ -e "/opt/351Files/351Files" ]]; then
   mv "/opt/351Files/351Files" "/opt/351Files/351Files.old" 2>/dev/null && log "Renamed: 351Files -> 351Files.old" || true
 fi
 
 log "=== Step 8: Apply permissions (META) ==="
 # ====== (关键新增) 最后只修正“我们交付文件”的权限/属主 ======
+# (English: Finally fix permissions/owner only for delivered files)
 apply_meta
 
 log "=== Step 9: Fix modules permissions ==="
 # modules 权限修复：777 + 1002:1002
+# (English: modules permission fix: 777 + 1002:1002)
 fix_modules_perms() {
   local base="/usr/lib/modules/4.4.189"
   [[ -d "$base" ]] || { log "modules dir not found: $base"; return 0; }
@@ -632,6 +684,7 @@ fix_modules_perms
 
 log "=== Step 10: Enable services ==="
 # systemd：按你旧逻辑启用 adckeys
+# (English: systemd: enable adckeys per original logic)
 if have_systemctl; then
   systemctl daemon-reload 2>/dev/null || true
   systemctl enable adckeys.service 2>/dev/null && log "Enabled: adckeys.service" || true
@@ -647,8 +700,9 @@ chmod +x "$STAGE/install.sh"
 
 # -----------------------------
 # 把 uboot 三件套打进 update.tar（保持原有）
+# (English: Pack uboot triplet into update.tar, keep existing)
 # -----------------------------
-echo "== 打包 uboot 镜像（uboot/*.img） =="
+echo "== 打包 uboot 镜像（uboot/*.img） == (English: Pack uboot images)"
 mkdir -p "$STAGE/uboot"
 cp -f ./uboot/idbloader.img "$STAGE/uboot/" 2>/dev/null || true
 cp -f ./uboot/uboot.img     "$STAGE/uboot/" 2>/dev/null || true
@@ -656,8 +710,9 @@ cp -f ./uboot/trust.img     "$STAGE/uboot/" 2>/dev/null || true
 
 # -----------------------------
 # 生成 chunks + CHUNKS 清单（分包流式）
+# (English: Generate chunks + CHUNKS manifest, split for streaming)
 # -----------------------------
-echo "== 生成 chunks（分包） =="
+echo "== 生成 chunks（分包） == (English: Generate chunks)"
 
 CHUNK_DIR="$STAGE/chunks"
 rm -rf "$CHUNK_DIR" 2>/dev/null || true
@@ -667,6 +722,7 @@ mkdir -p "$CHUNK_DIR"
 tar --numeric-owner --owner=0 --group=0 -C "$PAYLOAD_BOOT" -cf "$CHUNK_DIR/00_boot.tar" .
 
 # root chunks（按目录拆）
+# (English: root chunks by directory)
 tar --numeric-owner --owner=0 --group=0 -C "$PAYLOAD_ROOT" -cf "$CHUNK_DIR/10_root_usr_etc.tar" ./usr ./etc 2>/dev/null || true
 tar --numeric-owner --owner=1002 --group=1002 -C "$PAYLOAD_ROOT" -cf "$CHUNK_DIR/20_root_opt.tar" ./opt 2>/dev/null || true
 tar --numeric-owner --owner=1002 --group=1002 -C "$PAYLOAD_ROOT" -cf "$CHUNK_DIR/30_root_home.tar" ./home 2>/dev/null || true
@@ -682,15 +738,19 @@ EOF
 
 # -----------------------------
 # 打包生成 update.tar（新增 META，但其它结构不变）
+# (English: Pack update.tar; add META, rest unchanged)
 # -----------------------------
-echo "== 打包 update.tar =="
+echo "== 打包 update.tar == (English: Pack update.tar)"
 rm -f "$OUT_TAR" 2>/dev/null || true
 tar --numeric-owner --owner=0 --group=0 -C "$STAGE" -cf "$OUT_TAR" \
   VERSION install.sh META CHUNKS chunks uboot
 
 # 清理临时构建目录
+# (English: Clean temp build dir)
 rm -rf "$STAGE"
 
-echo "== 完成 =="
+echo "== 完成 == (English: Done)"
 echo "版本号: $VERSION"
+echo "(English: Version)"
 echo "输出文件: $OUT_TAR"
+echo "(English: Output file)"
