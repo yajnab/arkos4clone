@@ -14,8 +14,7 @@ SRC=dtb_selector.go
 # - platform_macos (universal)
 # - platform_linux64
 PLATFORMS=(
-  platform_win32
-  platform_macos
+  platform_linux64
 )
 
 platform_win32() {
