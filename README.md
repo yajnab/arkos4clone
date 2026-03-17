@@ -1,3 +1,5 @@
+# I’ve been a little exhausted lately, so I’m pausing updates for a while. Every ending is just a new beginning.
+
 # (d)ArkOS 4.4 Kernel Support for Unsupported Devices
 
 Bringing **(d)ArkOS 4.4 kernel** support to unsupported devices. Contributions via PRs are always welcome.
