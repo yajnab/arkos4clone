@@ -38,7 +38,7 @@ fi
 
 # 这些都是普通文件，直接复制即可
 # (English: These are regular files; copy them directly)
-sudo cp -f ./sh/clone.sh ./dtb_selector_macos ./dtb_selector_win32.exe ./sh/expandtoexfat.sh "$MOUNT_DIR/boot/"
+sudo cp -f ./sh/clone.sh ./dtb_selector_linux ./sh/expandtoexfat.sh "$MOUNT_DIR/boot/"
 
 # 如果镜像名包含 dArkOS，使用专用的 expandtoexfat.sh
 # (English: If image name contains dArkOS, use special expandtoexfat.sh)
