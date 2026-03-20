@@ -12,8 +12,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # 时间戳格式 (与 clone_support.sh 一致)
 # (English: Timestamp format (aligned with clone_support.sh))
-BUILD_DATE="$(TZ=Asia/Shanghai date +%m%d%Y)"
-OUTPUT_NAME="ArkOS4Clone-${BUILD_DATE}"
+BUILD_DATE="$(TZ=Asia/Calcutta date +%m%d%Y)"
 
 # 颜色输出
 # (English: Colored output)
@@ -306,8 +305,7 @@ check_clone_dependencies() {
   # 检查必需文件
   # (English: Check required files)
   local files=(
-    "dtb_selector_macos"
-    "dtb_selector_win32.exe"
+    "dtb_selector_linux"
     "sh/clone.sh"
     "sh/expandtoexfat.sh"
     "sh/darkos-expandtoexfat.sh"
@@ -373,6 +371,29 @@ step_build_dtb_selector() {
     cd - > /dev/null
   else
     log_warn "未找到 build_dtb_selector.sh，跳过 (English: build_dtb_selector.sh not found, skipping)"
+  fi
+}
+
+sync_kernel_image() {
+  local src="$SCRIPT_DIR/../kernel/arch/arm64/boot/Image"
+  local dst="$SCRIPT_DIR/consoles/kernel/common/Image"
+  local dst_dir
+  dst_dir="$(dirname "$dst")"
+
+  if [[ ! -f "$src" ]]; then
+    log_warn "内核 Image 文件不存在，跳过同步: $src (English: Kernel Image file not found, skipping sync)"
+    return 0
+  fi
+
+  if [[ ! -d "$dst_dir" ]]; then
+    log_warn "目标目录不存在，跳过同步: $dst_dir (English: Destination directory not found, skipping sync)"
+    return 0
+  fi
+
+  if cp -f "$src" "$dst"; then
+    log_ok "已同步内核 Image: $dst (English: Kernel Image synced)"
+  else
+    log_warn "内核 Image 同步失败，继续构建: $src -> $dst (English: Kernel Image sync failed, continuing build)"
   fi
 }
 
@@ -534,8 +555,8 @@ ArkOS4Clone 一键构建脚本
 
 输出:
 (English: Output:)
-  <脚本目录>/ArkOS4Clone-MMDDYYYY.img.xz
-  (English: <script_dir>/ArkOS4Clone-MMDDYYYY.img.xz)
+  <脚本目录>/ArkOS4Clone-yajnab-MMDDYYYY.img.xz
+  (English: <script_dir>/ArkOS4Clone-yajnab-MMDDYYYY.img.xz)
 
 注意:
 (English: Notes:)
@@ -593,13 +614,13 @@ main() {
   ARKOS_IMAGE_NAME="$(basename "$source_image")"
   export ARKOS_MNT ARKOS_WORK_DIR ARKOS_IMAGE_NAME
 
-  # 根据源镜像名决定输出前缀
-  # (English: Output prefix from source image name)
+  # 根据源镜像名决定输出前缀，保留 dArkOS/ArkOS 区分
+  # (English: Pick output prefix from source image name to preserve dArkOS/ArkOS distinction)
   local output_prefix
   if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
-    output_prefix="dArkOS4Clone"
+    output_prefix="dArkOS4Clone-yajnab"
   else
-    output_prefix="ArkOS4Clone"
+    output_prefix="ArkOS4Clone-yajnab"
   fi
   local work_image="${work_dir}/${output_prefix}-${BUILD_DATE}.img"
 
@@ -616,6 +637,11 @@ main() {
   echo "挂载路径: $ARKOS_MNT"
   echo "(English: Mount path)"
   echo "========================================"
+  echo ""
+
+  # 启动时先同步内核 Image
+  # (English: Sync kernel Image at startup)
+  sync_kernel_image
   echo ""
 
   # 步骤 0: 编译 dtb_selector (不需要 root)
