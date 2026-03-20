@@ -27,6 +27,16 @@ log_ok() { echo -e "${GREEN}[OK]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 
+# mkdir under sudo is root-owned; downloads run as $SUDO_USER and get "Permission denied".
+# (English: Directories created while root are not writable by the invoking user.)
+ensure_dir_owned_by_sudo_user() {
+  local d="$1"
+  mkdir -p "$d"
+  if [[ -n "${SUDO_USER:-}" ]]; then
+    chown -R "$SUDO_USER:$SUDO_USER" "$d"
+  fi
+}
+
 need_root() {
   if [[ ${EUID:-$(id -u)} -ne 0 ]]; then
     log_error "请使用 sudo 运行此脚本 (English: Please run this script with sudo)"
@@ -150,11 +160,9 @@ check_pm_libs() {
     "zulu8.86.0.25-ca-jdk8.0.452-linux.squashfs"
   )
 
-  # 检查目录是否存在
-  # (English: Check if directory exists)
-  if [[ ! -d "$pm_libs_dir" ]]; then
-    mkdir -p "$pm_libs_dir"
-  fi
+  # 检查目录是否存在（sudo 下需归 $SUDO_USER，否则 wget 无法写入）
+  # (English: Ensure dir exists and is owned by $SUDO_USER when running under sudo)
+  ensure_dir_owned_by_sudo_user "$pm_libs_dir"
 
   # 检查缺少的文件
   # (English: Check for missing files)
@@ -211,11 +219,21 @@ check_work_dir() {
   local dir="$1"
   if [[ ! -d "$dir" ]]; then
     log_info "创建工作目录: $dir (English: Creating work directory)"
-    mkdir -p "$dir"
+    ensure_dir_owned_by_sudo_user "$dir"
+  elif [[ -n "${SUDO_USER:-}" ]] && ! sudo -u "$SUDO_USER" test -w "$dir" 2>/dev/null; then
+    # 已存在但先前由 root 创建，调用用户无法写入
+    # (English: Exists but root-owned from a prior sudo run; fix ownership)
+    log_info "修正工作目录属主为 $SUDO_USER: $dir (English: Fixing work dir ownership for $SUDO_USER)"
+    chown -R "$SUDO_USER:$SUDO_USER" "$dir"
   fi
-  # 检查是否可写
-  # (English: Check if writable)
-  if [[ ! -w "$dir" ]]; then
+  # 检查是否可写（sudo 下以 $SUDO_USER 为准，避免 root 可写但普通用户不可写）
+  # (English: Under sudo, require writability as $SUDO_USER, not only as root)
+  if [[ -n "${SUDO_USER:-}" ]]; then
+    if ! sudo -u "$SUDO_USER" test -w "$dir" 2>/dev/null; then
+      log_error "工作目录对 $SUDO_USER 不可写: $dir (English: Work directory not writable for invoking user)"
+      exit 1
+    fi
+  elif [[ ! -w "$dir" ]]; then
     log_error "工作目录不可写: $dir (English: Work directory not writable)"
     exit 1
   fi
