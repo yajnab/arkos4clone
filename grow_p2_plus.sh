@@ -158,7 +158,16 @@ P2_DEV="${LOOP}p2"
 P2_FS="$(blkid -s TYPE -o value "$P2_DEV" || true)"
 case "$P2_FS" in
   ext4|"")
+    # e2fsck 在“已修复错误”时常返回 1，在需重启时常返回 2；set -e 会误杀脚本
+    # (English: e2fsck exit 1/2 mean corrected; with set -e we must not treat as failure)
+    set +e
     sudo e2fsck -fy "$P2_DEV"
+    e2fsck_rc=$?
+    set -e
+    if [[ $e2fsck_rc -gt 2 ]]; then
+      echo "e2fsck 失败，退出码: $e2fsck_rc (English: e2fsck failed)"
+      exit "$e2fsck_rc"
+    fi
     sudo resize2fs "$P2_DEV"
     ;;
   f2fs)
