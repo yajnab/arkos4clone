@@ -530,7 +530,7 @@ ArkOS4Clone 一键构建脚本
 
   # 指定工作目录（推荐，使用 ext4 文件系统）
   # (English: Specify work dir (recommended, use ext4))
-  sudo ./build_image.sh /mnt/e/ArkOS.img /home/lcdyk/arkos
+  sudo ./build_image.sh /path/to/ArkOS.img /path/to/build-workdir
 
 执行步骤:
 (English: Steps:)

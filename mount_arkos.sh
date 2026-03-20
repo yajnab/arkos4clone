@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # One-key mount/unmount for ArkOS multi-partition images
 # Usage:
 #   sudo ./mount_arkos.sh mount   /path/to/ArkOS_*.img
@@ -9,7 +11,9 @@ set -euo pipefail
 # Mount points will be created under: ./mnt/{boot,root,roms}
 # State (loop device) is stored in:   ./.arkos_loop
 
-BASE_MNT="${ARKOS_MNT:-/home/lcdyk/arkos/mnt}"
+# Default: repo-local ./mnt (override with ARKOS_MNT)
+# (English: Default mount base under this repo; override with ARKOS_MNT)
+BASE_MNT="${ARKOS_MNT:-$SCRIPT_DIR/mnt}"
 STATE_FILE="$BASE_MNT/.arkos_loop"
 BOOT_MNT="$BASE_MNT/boot"
 ROOT_MNT="$BASE_MNT/root"
@@ -179,7 +183,7 @@ main() {
     *)
       cat >&2 <<USAGE
 Usage:
-  sudo $0 mount   /path/to/ArkOS_*.img   # attach, map partitions, mount to ./mnt/{boot,root,roms}
+  sudo $0 mount   /path/to/ArkOS_*.img   # attach, map partitions, mount to <repo>/mnt/{boot,root,roms} (or ARKOS_MNT)
   sudo $0 unmount                        # unmount all and detach loop device
 
 Notes:

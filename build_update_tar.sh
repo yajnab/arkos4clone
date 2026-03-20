@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
 # ============================================
 # ArkOS4Clone OTA 升级包制作脚本（保持原有流程）
 # (English: ArkOS4Clone OTA update package build script (keeps existing flow))
@@ -41,13 +44,13 @@ set -euo pipefail
 
 # 生成版本信息
 # (English: Generate version info)
-UPDATE_DATE="$(TZ=Asia/Shanghai date +%m%d%Y)"
+UPDATE_DATE="$(TZ=Asia/Calcutta date +%m%d%Y)"
 MODDER="kk&lcdyk"
 VERSION="ArkOS4Clone-${UPDATE_DATE}-${MODDER}"
 
 # 工作目录与临时构建目录
 # (English: Work dir and temp build dir)
-WORKDIR="$(pwd)"
+WORKDIR="$SCRIPT_DIR"
 STAGE="/tmp/_ota_stage"
 PAYLOAD_BOOT="${STAGE}/payload/boot"
 PAYLOAD_ROOT="${STAGE}/payload/root"
@@ -95,10 +98,9 @@ rsync $RSYNC_BOOT_OPTS --exclude='files' ./consoles/ "$PAYLOAD_BOOT/consoles/"
 # (English: clone.sh must be output as /boot/firstboot.sh in OTA)
 cp -f ./sh/clone.sh "$PAYLOAD_BOOT/firstboot.sh"
 
-# 其他 boot 工具保持原文件名
-# (English: Other boot tools keep original filenames)
-cp -f ./dtb_selector_macos \
-      ./dtb_selector_win32.exe \
+# 其他 boot 工具保持原文件名（Linux x86_64 构建产物）
+# (English: Other boot tools keep original filenames — Linux x86_64 build output)
+cp -f ./dtb_selector_linux \
       "$PAYLOAD_BOOT/" 2>/dev/null || true
 
 # DTB 选择器提示标记文件
@@ -475,8 +477,11 @@ log "=== Step 3: Cleanup before apply ==="
 cleanup_before_apply() {
   log "Cleaning: $BOOT_MP/consoles"
   rm -rf "$BOOT_MP/consoles" 2>/dev/null || true
-  log "Cleaning: $BOOT_MP/dtb_selector.exe"
+  log "Cleaning: $BOOT_MP/dtb_selector_linux (and legacy selector names)"
+  rm -f  "$BOOT_MP/dtb_selector_linux" 2>/dev/null || true
   rm -f  "$BOOT_MP/dtb_selector.exe" 2>/dev/null || true
+  rm -f  "$BOOT_MP/dtb_selector_macos" 2>/dev/null || true
+  rm -f  "$BOOT_MP/dtb_selector_win32.exe" 2>/dev/null || true
   log "Cleaning: /opt/system/Clone"
   rm -rf "/opt/system/Clone" 2>/dev/null || true
   log "Cleaning: /opt/drastic"

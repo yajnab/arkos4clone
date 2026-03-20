@@ -51,7 +51,7 @@ After the script finishes, `(d)ArkOS4Clone.img.xz` will be generated in the root
 
 1. Download the **ArkOS** release image
 2. Flash to SD card
-3. Run `dtb_selector.exe` (Windows) to select your device
+3. On a Linux x86_64 PC, run `dtb_selector_linux` from the SD card’s boot (FAT) partition to select your device (legacy `dtb_selector.exe` / macOS builds are not shipped here)
 4. Reboot the device
 
 Non-Windows users, see [Manual Configuration](#manual-configuration).

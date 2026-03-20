@@ -2,10 +2,12 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MOUNT_DIR="${ARKOS_MNT:-/home/lcdyk/arkos/mnt}"
-WORK_DIR="${ARKOS_WORK_DIR:-/home/lcdyk/arkos}"
+cd "$SCRIPT_DIR"
+
+MOUNT_DIR="${ARKOS_MNT:-$SCRIPT_DIR/mnt}"
+WORK_DIR="${ARKOS_WORK_DIR:-$SCRIPT_DIR}"
 ARKOS_IMAGE_NAME="${ARKOS_IMAGE_NAME:-}"
-UPDATE_DATE="$(TZ=Asia/Shanghai date +%m%d%Y)"
+UPDATE_DATE="$(TZ=Asia/Calcutta date +%m%d%Y)"
 MODDER="kk&lcdyk"
 
 # 统一的 rsync 选项：
@@ -222,7 +224,8 @@ if [ "$(stat -c%s $MOUNT_DIR/root/roms.tar 2>/dev/null || echo 0)" -le $((100*10
   mkdir -p "$WORK_DIR/tmproms/roms/pymo"
   if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
     echo "== 注入 dArkOS 主题 =="
-    sudo cp -r ./replace_file/pymo/pymo "$WORK_DIR/mnt/roms/themes/es-theme-nes-box/"
+    mkdir -p "$WORK_DIR/tmproms/roms/themes/es-theme-nes-box/"
+    sudo cp -r ./replace_file/pymo/pymo "$WORK_DIR/tmproms/roms/themes/es-theme-nes-box/"
     sudo chown -R root:root "$WORK_DIR/tmproms/roms/themes/es-theme-nes-box/pymo"
     sudo chmod -R 777 "$WORK_DIR/tmproms/roms/themes/es-theme-nes-box/pymo"
   else
