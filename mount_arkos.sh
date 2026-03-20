@@ -8,8 +8,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #   sudo ./mount_arkos.sh mount   /path/to/ArkOS_*.img
 #   sudo ./mount_arkos.sh unmount
 #
-# Mount points will be created under: ./mnt/{boot,root,roms}
-# State (loop device) is stored in:   ./.arkos_loop
+# Mount points will be created under: <ARKOS_MNT or repo/mnt>/{boot,root,roms}
+# State (loop device) is stored in:   <that base>/.arkos_loop
 
 # Default: repo-local ./mnt (override with ARKOS_MNT)
 # (English: Default mount base under this repo; override with ARKOS_MNT)
@@ -75,6 +75,10 @@ do_mount() {
   # sanity
   [[ -f "$img" ]] || { echo "Image not found: $img" >&2; exit 1; }
 
+  # State file lives under BASE_MNT; create dirs first or write_state fails
+  # (English: .arkos_loop is under ARKOS_MNT; mkdir before first write)
+  mk_mount_dirs
+
   # create loop with partition scan
   local loop
   loop="$(losetup -fP --show "$img")"   # e.g. /dev/loop7
@@ -86,9 +90,6 @@ do_mount() {
 
   # show partitions
   lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT "$loop"
-
-  # mount points
-  mk_mount_dirs
 
   # Try common layout:
   #  p1 = boot (FAT32), p2 = root (ext4), p3 = roms (exFAT)
