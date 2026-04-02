@@ -68,6 +68,7 @@ var Consoles = []ConsoleConfig{
 		RealName: "xf35h",
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan XF35H"},
+			{Brand: "XiFan HandHelds", DisplayName: "XiFan RF35H"},
 		},
 		ExtraSources: []string{"logo/480P/", "kernel/common/"},
 	},
@@ -75,6 +76,7 @@ var Consoles = []ConsoleConfig{
 		RealName: "xf40h",
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan XF40H"},
+			{Brand: "XiFan HandHelds", DisplayName: "XiFan RF40H"},
 		},
 		ExtraSources: []string{"logo/720P/", "kernel/common/"},
 	},
@@ -104,6 +106,9 @@ var Consoles = []ConsoleConfig{
 		RealName: "r36max2",
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan R36Max2"},
+			{Brand: "XiFan HandHelds", DisplayName: "XiFan XF45V"},
+			{Brand: "XiFan HandHelds", DisplayName: "XiFan DC45V"},
+			{Brand: "XiFan HandHelds", DisplayName: "XiFan RF45V"},
 		},
 		ExtraSources: []string{"logo/768P/", "kernel/common/"},
 	},

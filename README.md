@@ -164,10 +164,15 @@ Non-Windows users, see [Manual Configuration](#manual-configuration).
 | Mini40 | `720P` | `common` | `consoles/mini40/` | Thanks to XiFan |
 | R36Max | `720P` | `common` | `consoles/r36max/` | Thanks to XiFan |
 | R36Max2 | `768P` | `common` | `consoles/r36max2/` | Thanks to XiFan |
+| XF45V | `768P` | `common` | `consoles/r36max2/` | Thanks to XiFan |
+| DC45V | `768P` | `common` | `consoles/r36max2/` | Thanks to XiFan |
+| RF45V | `768P` | `common` | `consoles/r36max2/` | Thanks to XiFan |
 | R36Pro | `480P` | `common` | `consoles/r36pro/` | Thanks to XiFan |
 | XF28 | `480P-1` | `common` | `consoles/xf28/` | Thanks to XiFan |
 | XF35H | `480P` | `common` | `consoles/xf35h/` | Thanks to XiFan |
+| RF35H | `480P` | `common` | `consoles/xf35h/` | Thanks to XiFan |
 | XF40H | `720P` | `common` | `consoles/xf40h/` | Thanks to XiFan |
+| RF40H | `720P` | `common` | `consoles/xf40h/` | Thanks to XiFan |
 | DC35V | `480P` | `common` | `consoles/dc35v/` | Thanks to XiFan |
 | DC40V | `720P` | `common` | `consoles/dc40v/` | Thanks to XiFan |
 
