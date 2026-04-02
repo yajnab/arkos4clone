@@ -352,6 +352,8 @@ main() {
     sudo chown -R ark:ark "$QUIRKS_DIR" > /dev/null
     echo "$DEVICE_NAME" | sudo tee "$CONSOLE_FILE"  2>/dev/null || true
     msg "First boot, device=$DEVICE_NAME"
+    echo "$DEVICE_NAME" | sudo tee /etc/hostname >/dev/null
+    sudo hostnamectl set-hostname "$DEVICE_NAME" || true
     apply_all_quirks
     sleep 5
     sudo systemctl unmask systemd-journald.service systemd-journald.socket 2>/dev/null || true
@@ -374,6 +376,8 @@ main() {
       old_device="$cur_val"
       new_device="$DEVICE_NAME"
       msg "Console changed: $old_device -> $new_device"
+      echo "$DEVICE_NAME" | sudo tee /etc/hostname >/dev/null
+      sudo hostnamectl set-hostname "$DEVICE_NAME" || true
       echo "$DEVICE_NAME" | sudo tee "$CONSOLE_FILE" > /dev/null
     fi
     (

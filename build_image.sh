@@ -212,7 +212,7 @@ check_work_dir() {
 
 check_portmaster() {
   local pm_dir="$SCRIPT_DIR/PortMaster"
-  local pm_url="https://github.com/PortsMaster/PortMaster-GUI/releases/download/2026.03.09-2312/PortMaster.zip"
+  local pm_url="https://github.com/PortsMaster/PortMaster-GUI/releases/download/2026.04.01-1426/PortMaster.zip"
 
   if [[ -d "$pm_dir" && -f "$pm_dir/PortMaster.sh" ]]; then
     log_ok "PortMaster 目录已存在"

@@ -131,6 +131,8 @@ cp -f ./mod_so/64/* "$PAYLOAD_ROOT/home/ark/.config/retroarch/cores/" 2>/dev/nul
 cp -f ./mod_so/32/* "$PAYLOAD_ROOT/home/ark/.config/retroarch32/cores/" 2>/dev/null || true
 cp -f ./replace_file/es_systems.cfg "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
 cp -f ./replace_file/es_systems.cfg.dual "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
+cp -f ./replace_file/darkos4es_systems.cfg "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
+cp -f ./replace_file/darkos4es_systems.cfg.dual "$PAYLOAD_ROOT/etc/emulationstation/" 2>/dev/null || true
 cp -rf ./replace_file/resources/* \
       "$PAYLOAD_ROOT/usr/bin/emulationstation/resources/" 2>/dev/null || true
 
@@ -246,6 +248,11 @@ meta_add "0777" "1002:1002" "/opt/351Files/*"
 
 # replace_file/*.sh 中那 10 个：1002:1002 + 777
 for f in atomiswave.sh dreamcast.sh naomi.sh saturn.sh n64.sh pico8.sh drastic.sh drastic_kk.sh choose_drastic_ver.sh mediaplayer.sh get_last_played.sh; do
+  meta_add "0777" "1002:1002" "/usr/local/bin/$f"
+done
+
+# replace_file/*.sh 中那 10 个：1002:1002 + 777
+for f in darkos4atomiswave.sh darkos4dreamcast.sh darkos4naomi.sh darkos4saturn.sh darkos4n64.sh darkos4pico8.sh darkos4get_last_played.sh; do
   meta_add "0777" "1002:1002" "/usr/local/bin/$f"
 done
 
@@ -552,7 +559,6 @@ fi
 
 log "=== Step 6: Update plymouth theme ==="
 PLYMOUTH_THEME="/usr/share/plymouth/themes/text.plymouth"
-
 # 检测当前系统是否为 dArkOS
 IS_DARKOS="false"
 if [[ -f "$PLYMOUTH_THEME" ]]; then
@@ -565,7 +571,7 @@ if [[ -f "$PLYMOUTH_THEME" ]]; then
   fi
 fi
 
-# 根据检测结果设置标题
+# 根据检测结果设置标题和调整脚本
 if [[ -f "$BASE/VERSION" && -f "$PLYMOUTH_THEME" ]]; then
   VER_RAW="$(cat "$BASE/VERSION" 2>/dev/null || true)"
   UPDATE_DATE="$(echo "$VER_RAW" | cut -d- -f2)"
@@ -573,9 +579,27 @@ if [[ -f "$BASE/VERSION" && -f "$PLYMOUTH_THEME" ]]; then
   if [[ "$IS_DARKOS" == "true" ]]; then
     sed -i "/^title=/c\title=dArkOS4Clone (${UPDATE_DATE})(${MODDER})" "$PLYMOUTH_THEME" 2>/dev/null || true
     log "Plymouth updated: dArkOS4Clone (${UPDATE_DATE})(${MODDER})"
+    mv "/usr/local/bin/darkos4atomiswave.sh" "/usr/local/bin/atomiswave.sh"
+    mv "/usr/local/bin/darkos4dreamcast.sh" "/usr/local/bin/dreamcast.sh"
+    mv "/usr/local/bin/darkos4naomi.sh" "/usr/local/bin/naomi.sh"
+    mv "/usr/local/bin/darkos4saturn.sh" "/usr/local/bin/saturn.sh"
+    mv "/usr/local/bin/darkos4n64.sh" "/usr/local/bin/n64.sh"
+    mv "/usr/local/bin/darkos4pico8.sh" "/usr/local/bin/pico8.sh"
+    mv "/usr/local/bin/darkos4get_last_played.sh" "/usr/local/bin/get_last_played.sh"
+    mv "/etc/emulationstation/darkos4es_systems.cfg" "/etc/emulationstation/es_systems.cfg"
+    mv "/etc/emulationstation/darkos4es_systems.cfg.dual" "/etc/emulationstation/es_systems.cfg.dual"
   else
     sed -i "/^title=/c\title=ArkOS4Clone (${UPDATE_DATE})(${MODDER})" "$PLYMOUTH_THEME" 2>/dev/null || true
     log "Plymouth updated: ArkOS4Clone (${UPDATE_DATE})(${MODDER})"
+    rm "/usr/local/bin/darkos4atomiswave.sh"
+    rm "/usr/local/bin/darkos4dreamcast.sh"
+    rm "/usr/local/bin/darkos4naomi.sh"
+    rm "/usr/local/bin/darkos4saturn.sh"
+    rm "/usr/local/bin/darkos4n64.sh"
+    rm "/usr/local/bin/darkos4pico8.sh"
+    rm "/usr/local/bin/darkos4get_last_played.sh"
+    rm "/etc/emulationstation/darkos4es_systems.cfg.dual"
+    rm "/etc/emulationstation/darkos4es_systems.cfg"
   fi
 fi
 

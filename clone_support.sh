@@ -96,29 +96,74 @@ sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/351Files/" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/opt/351Files/" 2>/dev/null || true
 
 echo "== 注入启动脚本 =="
-sudo cp -f ./replace_file/*.sh "$MOUNT_DIR/root/usr/local/bin/"
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/saturn.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
-sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/saturn.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
-sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh" 2>/dev/null || true
+if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
+  echo "检测到 dArkOS 镜像，使用 dArkos Script"
+  sudo cp -f ./replace_file/darkos4atomiswave.sh "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh"
+  sudo cp -f ./replace_file/darkos4dreamcast.sh "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh"
+  sudo cp -f ./replace_file/darkos4naomi.sh "$MOUNT_DIR/root/usr/local/bin/naomi.sh"
+  sudo cp -f ./replace_file/darkos4n64.sh "$MOUNT_DIR/root/usr/local/bin/n64.sh"
+  sudo cp -f ./replace_file/darkos4pico8.sh "$MOUNT_DIR/root/usr/local/bin/pico8.sh"
+  sudo cp -f ./replace_file/drastic.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/drastic_kk.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/choose_drastic_ver.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/mediaplayer.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/darkos4get_last_played.sh "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh"
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh" 2>/dev/null || true
+else
+  echo "检测到 ArkOS 镜像，使用 dArkos Script"
+  sudo cp -f ./replace_file/atomiswave.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/dreamcast.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/naomi.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/saturn.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/n64.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/pico8.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/drastic.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/drastic_kk.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/choose_drastic_ver.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/mediaplayer.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo cp -f ./replace_file/get_last_played.sh "$MOUNT_DIR/root/usr/local/bin/"
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/saturn.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
+  sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/atomiswave.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/dreamcast.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/naomi.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/saturn.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/n64.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/pico8.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/drastic_kk.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/choose_drastic_ver.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/mediaplayer.sh" 2>/dev/null || true
+  sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/get_last_played.sh" 2>/dev/null || true
+fi
 
 echo "== 注入 adc-key 服务脚本 =="
 sudo cp -f ./bin/adc-key/adckeys.py "$MOUNT_DIR/root/usr/local/bin/"
@@ -139,8 +184,16 @@ sudo chown -R 1002:1002 $MOUNT_DIR/root/home/ark/.config/retroarch/cores/*
 sudo chown -R 1002:1002 $MOUNT_DIR/root/home/ark/.config/retroarch32/cores/*
 sudo chmod -R 777 $MOUNT_DIR/root/home/ark/.config/retroarch/cores/*
 sudo chmod -R 777 $MOUNT_DIR/root/home/ark/.config/retroarch32/cores/*
-sudo cp -f ./replace_file/es_systems.cfg "$MOUNT_DIR/root/etc/emulationstation/"
-sudo cp -f ./replace_file/es_systems.cfg.dual "$MOUNT_DIR/root/etc/emulationstation/"
+if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
+  echo "== 注入 dArkOS 主题 =="
+  sudo cp -f ./replace_file/darkos4es_systems.cfg "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg"
+  sudo cp -f ./replace_file/darkos4es_systems.cfg.dual "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg.dual"
+else
+  echo "== 注入 ArkOS 主题 =="
+  sudo cp -f ./replace_file/es_systems.cfg "$MOUNT_DIR/root/etc/emulationstation/"
+  sudo cp -f ./replace_file/es_systems.cfg.dual "$MOUNT_DIR/root/etc/emulationstation/"
+fi
+
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg.dual" 2>/dev/null || true
 sudo chmod 777 "$MOUNT_DIR/root/etc/emulationstation/es_systems.cfg" 2>/dev/null || true
@@ -203,8 +256,12 @@ if [ "$(stat -c%s $MOUNT_DIR/root/roms.tar 2>/dev/null || echo 0)" -le $((100*10
   if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
     echo "== 注入 dArkOS 主题 =="
     sudo cp -r ./replace_file/pymo/pymo "$WORK_DIR/mnt/roms/themes/es-theme-nes-box/"
+    sudo chown -R root:root "$WORK_DIR/mnt/roms/themes/es-theme-nes-box/pymo"
+    sudo chmod -R 777 "$WORK_DIR/mnt/roms/themes/es-theme-nes-box/pymo"
+    sudo cp -r ./replace_file/pymo/pymo "$WORK_DIR/tmproms/roms/themes/es-theme-nes-box"
     sudo chown -R root:root "$WORK_DIR/tmproms/roms/themes/es-theme-nes-box/pymo"
     sudo chmod -R 777 "$WORK_DIR/tmproms/roms/themes/es-theme-nes-box/pymo"
+    sudo rm "$WORK_DIR/tmproms/roms/tools/Install.PortMaster.sh"
   else
     echo "== 注入 ArkOS 主题 =="
     sudo cp -r ./replace_file/pymo/pymo "$MOUNT_DIR/root/tempthemes/es-theme-nes-box/"
@@ -310,6 +367,7 @@ if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   sudo mkdir "$MOUNT_DIR/root/opt/system/Tools/" || true
   sudo rm -rf "$MOUNT_DIR/root/opt/system/Advanced/Backup dArkOS Settings" 2>/dev/null || true
   sudo rm -rf "$MOUNT_DIR/root/opt/system/Tools/Install.PortMaster.sh" 2>/dev/null || true
+  sudo cp -r "./replace_file/tools/Ports Fix.sh" "$MOUNT_DIR/root/opt/system/Tools/" 2>/dev/null || true
 fi
 sudo cp -r "./Jason3_Scripte/wifi-toggle/Wifi-toggle.sh" "$MOUNT_DIR/root/opt/system/Wifi-Toggle.sh" || true
 sudo cp -r "./Jason3_Scripte/InfoSystem/InfoSystem.sh" "$MOUNT_DIR/root/opt/system/Tools/System Info.sh" || true
