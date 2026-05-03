@@ -188,6 +188,7 @@ Non-Windows users, see [Manual Configuration](#manual-configuration).
 | U8 | `480P5-3` | `common` | `consoles/u8/` | Thanks to Mr.Yin |
 | U8 V2 | `480P5-3` | `common` | `consoles/u8-v2/` | |
 | RG36 | `480P` | `common` | `consoles/rg36/` | |
+| R40S | `854x480P` | `common` | `consoles/r40s/`     | Thanks to Miss.Ding |
 
 > **Logo Path:** `consoles/logo/<Logo>/logo.bmp`  
 > **Kernel Path:** `consoles/kernel/<Kernel>/Image`
