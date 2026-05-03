@@ -399,6 +399,13 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/480P/", "kernel/common/"},
 	},
 	{
+		RealName: "r40s",
+		BrandEntries: []BrandEntry{
+			{Brand: "Other", DisplayName: "GameConsole R40S (RK3326 Without L2/R2)"},
+		},
+		ExtraSources: []string{"logo/854x480P/", "kernel/common/"},
+	},
+	{
 		RealName: "rgb20s",
 		BrandEntries: []BrandEntry{
 			{Brand: "Powkiddy", DisplayName: "Powkiddy RGB20S"},
