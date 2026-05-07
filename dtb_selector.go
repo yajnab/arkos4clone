@@ -402,8 +402,9 @@ var Consoles = []ConsoleConfig{
 		RealName: "r40s",
 		BrandEntries: []BrandEntry{
 			{Brand: "Other", DisplayName: "GameConsole R40S (RK3326 Without L2/R2)"},
+			{Brand: "Other", DisplayName: "GameConsole R39S"},
 		},
-		ExtraSources: []string{"logo/854x480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P5-3/", "kernel/common/"},
 	},
 	{
 		RealName: "rgb20s",
