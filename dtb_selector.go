@@ -33,28 +33,28 @@ var Consoles = []ConsoleConfig{
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan Mymini"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "mini40",
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan Mini40"},
 		},
-		ExtraSources: []string{"logo/720P/", "kernel/common/"},
+		ExtraSources: []string{"logo/720P/"},
 	},
 	{
 		RealName: "r36max",
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan R36Max"},
 		},
-		ExtraSources: []string{"logo/720P/", "kernel/common/"},
+		ExtraSources: []string{"logo/720P/"},
 	},
 	{
 		RealName: "r36max noamp",
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan R36Max Without Amplifier"},
 		},
-		ExtraSources: []string{"logo/720P/", "kernel/common/"},
+		ExtraSources: []string{"logo/720P/"},
 	},
 	{
 		RealName: "r36pro",
@@ -62,7 +62,7 @@ var Consoles = []ConsoleConfig{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan R36Pro"},
 			{Brand: "Clone R36s", DisplayName: "Clone Type 1 With Amplifier"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "xf35h",
@@ -70,7 +70,7 @@ var Consoles = []ConsoleConfig{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan XF35H"},
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan RF35H"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "xf40h",
@@ -78,7 +78,7 @@ var Consoles = []ConsoleConfig{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan XF40H"},
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan RF40H"},
 		},
-		ExtraSources: []string{"logo/720P/", "kernel/common/"},
+		ExtraSources: []string{"logo/720P/"},
 	},
 	{
 		RealName: "dc40v",
@@ -86,21 +86,21 @@ var Consoles = []ConsoleConfig{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan XF40V"},
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan DC40V"},
 		},
-		ExtraSources: []string{"logo/720P/", "kernel/common/"},
+		ExtraSources: []string{"logo/720P/"},
 	},
 	{
 		RealName: "dc35v",
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan DC35V"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "xf28",
 		BrandEntries: []BrandEntry{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan XF28"},
 		},
-		ExtraSources: []string{"logo/480P-1/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P-1/"},
 	},
 	{
 		RealName: "r36max2",
@@ -110,7 +110,7 @@ var Consoles = []ConsoleConfig{
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan DC45V"},
 			{Brand: "XiFan HandHelds", DisplayName: "XiFan RF45V"},
 		},
-		ExtraSources: []string{"logo/768P/", "kernel/common/"},
+		ExtraSources: []string{"logo/768P/"},
 	},
 	{
 		RealName: "k36s",
@@ -118,21 +118,21 @@ var Consoles = []ConsoleConfig{
 			{Brand: "AISLPC", DisplayName: "GameConsole K36S"},
 			{Brand: "AISLPC", DisplayName: "GameConsole R36T"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "r36tmax",
 		BrandEntries: []BrandEntry{
 			{Brand: "AISLPC", DisplayName: "GameConsole R36T MAX"},
 		},
-		ExtraSources: []string{"logo/720P/", "kernel/common/"},
+		ExtraSources: []string{"logo/720P/"},
 	},
 	{
 		RealName: "xu10",
 		BrandEntries: []BrandEntry{
 			{Brand: "MagicX", DisplayName: "MagicX XU10"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "hg36",
@@ -140,21 +140,21 @@ var Consoles = []ConsoleConfig{
 			{Brand: "Other", DisplayName: "GameConsole HG36 (HG3506)"},
 			{Brand: "Clone R36s", DisplayName: "Clone Type 1 Without Amplifier"},
 		},
-		ExtraSources: []string{"logo/480p/", "kernel/common/"},
+		ExtraSources: []string{"logo/480p/"},
 	},
 	{
 		RealName: "r36ultra",
 		BrandEntries: []BrandEntry{
 			{Brand: "Other", DisplayName: "GameConsole R36Ultra"},
 		},
-		ExtraSources: []string{"logo/720P/", "kernel/common/"},
+		ExtraSources: []string{"logo/720P/"},
 	},
 	{
 		RealName: "rx6h",
 		BrandEntries: []BrandEntry{
 			{Brand: "Other", DisplayName: "GameConsole RX6H"},
 		},
-		ExtraSources: []string{"logo/480p/", "kernel/common/"},
+		ExtraSources: []string{"logo/480p/"},
 	},
 	{
 		RealName: "r46h",
@@ -162,14 +162,14 @@ var Consoles = []ConsoleConfig{
 			{Brand: "GameConsole", DisplayName: "GameConsole R46H"},
 			{Brand: "GameConsole", DisplayName: "GameConsole R40XX ProMax"},
 		},
-		ExtraSources: []string{"logo/768p/", "kernel/common/"},
+		ExtraSources: []string{"logo/768p/"},
 	},
 	{
 		RealName: "r40xx",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R40XX"},
 		},
-		ExtraSources: []string{"logo/768p/", "kernel/common/"},
+		ExtraSources: []string{"logo/768p/"},
 	},
 	{
 		RealName: "r45h",
@@ -177,63 +177,63 @@ var Consoles = []ConsoleConfig{
 			{Brand: "GameConsole", DisplayName: "GameConsole R45H"},
 			{Brand: "GameConsole", DisplayName: "GameConsole R36H ProMax"},
 		},
-		ExtraSources: []string{"logo/768p/", "kernel/common/"},
+		ExtraSources: []string{"logo/768p/"},
 	},
 	{
 		RealName: "r36splus",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36sPlus"},
 		},
-		ExtraSources: []string{"logo/720p/", "kernel/common/"},
+		ExtraSources: []string{"logo/720p/"},
 	},
 	{
 		RealName: "r33s",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R33s"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "origin panel1",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36s Panel 1"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "origin panel2",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36s Panel 2"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "origin panel3",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36s Panel 3"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "origin panel4",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36s Panel 4"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "v22 panel4",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36s Panel 4 V22"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "origin panel4",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36XX"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "r36h",
@@ -241,56 +241,56 @@ var Consoles = []ConsoleConfig{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36H"},
 			{Brand: "GameConsole", DisplayName: "GameConsole O30S"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "r50s",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R50S"},
 		},
-		ExtraSources: []string{"logo/854x480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/854x480P/"},
 	},
 	{
 		RealName: "sauce panel1",
 		BrandEntries: []BrandEntry{
 			{Brand: "SoySauce R36s", DisplayName: "Soy Sauce Panel 1"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "sauce panel2",
 		BrandEntries: []BrandEntry{
 			{Brand: "SoySauce R36s", DisplayName: "Soy Sauce Panel 2"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "sauce panel3",
 		BrandEntries: []BrandEntry{
 			{Brand: "SoySauce R36s", DisplayName: "Soy Sauce Panel 3"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "sauce panel4",
 		BrandEntries: []BrandEntry{
 			{Brand: "SoySauce R36s", DisplayName: "Soy Sauce Panel 4"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "a10mini",
 		BrandEntries: []BrandEntry{
 			{Brand: "YMC", DisplayName: "YMC A10MINI"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "a10miniv4",
 		BrandEntries: []BrandEntry{
 			{Brand: "YMC", DisplayName: "YMC A10MINI V4"},
 		},
-		ExtraSources: []string{"logo/540P/", "kernel/common/"},
+		ExtraSources: []string{"logo/540P/"},
 	},
 	{
 		RealName: "k36",
@@ -298,105 +298,105 @@ var Consoles = []ConsoleConfig{
 			{Brand: "Kinhank", DisplayName: "K36 Origin Panel"},
 			{Brand: "Clone R36s", DisplayName: "Clone Type 1 Without Amplifier And Invert Right Joystick"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "clone type2",
 		BrandEntries: []BrandEntry{
 			{Brand: "Clone R36s", DisplayName: "Clone Type 2 Without Amplifier"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "clone type2 amp",
 		BrandEntries: []BrandEntry{
 			{Brand: "Clone R36s", DisplayName: "Clone Type 2 With Amplifier"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "clone type3 panel1",
 		BrandEntries: []BrandEntry{
 			{Brand: "Clone R36s", DisplayName: "Clone Type 3 Panel 1"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "clone type3 panel2",
 		BrandEntries: []BrandEntry{
 			{Brand: "Clone R36s", DisplayName: "Clone Type 3 Panel 2[thanks Flecha]"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "clone type4",
 		BrandEntries: []BrandEntry{
 			{Brand: "Clone R36s", DisplayName: "Clone Type 4"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "clone type5",
 		BrandEntries: []BrandEntry{
 			{Brand: "Clone R36s", DisplayName: "Clone Type 5"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "xgb36",
 		BrandEntries: []BrandEntry{
 			{Brand: "Other", DisplayName: "GameConsole XGB36 (G26)"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "t16max",
 		BrandEntries: []BrandEntry{
 			{Brand: "Other", DisplayName: "GameConsole T16MAX"},
 		},
-		ExtraSources: []string{"logo/720P/", "kernel/common/"},
+		ExtraSources: []string{"logo/720P/"},
 	},
 	{
 		RealName: "u8",
 		BrandEntries: []BrandEntry{
 			{Brand: "Other", DisplayName: "GameConsole U8"},
 		},
-		ExtraSources: []string{"logo/480P5-3/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P5-3/"},
 	},
 	{
 		RealName: "u8-v2",
 		BrandEntries: []BrandEntry{
 			{Brand: "Other", DisplayName: "GameConsole U8 V2"},
 		},
-		ExtraSources: []string{"logo/480P5-3/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P5-3/"},
 	},
 	{
 		RealName: "g350",
 		BrandEntries: []BrandEntry{
 			{Brand: "Batlexp", DisplayName: "Batlexp G350"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "dr28s",
 		BrandEntries: []BrandEntry{
 			{Brand: "Diium(SZDiiER)", DisplayName: "Diium Dr28s"},
 		},
-		ExtraSources: []string{"logo/480P-270/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P-270/"},
 	},
 	{
 		RealName: "d007",
 		BrandEntries: []BrandEntry{
 			{Brand: "Diium(SZDiiER)", DisplayName: "SZDiiER D007(Plus)"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "rg36",
 		BrandEntries: []BrandEntry{
 			{Brand: "Other", DisplayName: "GameConsole RG36"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "r40s",
@@ -404,21 +404,21 @@ var Consoles = []ConsoleConfig{
 			{Brand: "Other", DisplayName: "GameConsole R40S (RK3326 Without L2/R2)"},
 			{Brand: "Other", DisplayName: "GameConsole R39S"},
 		},
-		ExtraSources: []string{"logo/480P5-3/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P5-3/"},
 	},
 	{
 		RealName: "rgb20s",
 		BrandEntries: []BrandEntry{
 			{Brand: "Powkiddy", DisplayName: "Powkiddy RGB20S"},
 		},
-		ExtraSources: []string{"logo/480P/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P/"},
 	},
 	{
 		RealName: "rp1",
 		BrandEntries: []BrandEntry{
 			{Brand: "RetroBox", DisplayName: "RetroBox P1"},
 		},
-		ExtraSources: []string{"logo/480P-270/", "kernel/common/"},
+		ExtraSources: []string{"logo/480P-270/"},
 	},
 }
 
@@ -486,6 +486,9 @@ type LanguageMenu3 struct {
 	Copying              string
 	CopyingExtra         string
 	CopyingFmt           string
+	SelectBatteryVersion string
+	BatteryVersion44     string
+	BatteryVersion66     string
 }
 
 type LanguageCleanup struct {
@@ -549,6 +552,9 @@ var english = Language{
 		Copying:              "Copying: ",
 		CopyingExtra:         "Copying extra resources...",
 		CopyingFmt:           "  Copying: %s\n",
+		SelectBatteryVersion: "Select battery driver version:",
+		BatteryVersion44:     "1. Kernel 4.4",
+		BatteryVersion66:     "2. Kernel 6.6",
 	},
 	Cleanup: LanguageCleanup{
 		OperationCompleted:   "  ✅  Operation completed!",
@@ -603,6 +609,9 @@ var chinese = Language{
 		Copying:              "开始复制: ",
 		CopyingExtra:         "正在复制额外资源...",
 		CopyingFmt:           "  开始复制: %s\n",
+		SelectBatteryVersion: "请选择电池驱动版本:",
+		BatteryVersion44:     "1. 内核 4.4",
+		BatteryVersion66:     "2. 内核 6.6",
 	},
 	Cleanup: LanguageCleanup{
 		OperationCompleted:   "  ✅  操作完成！",
@@ -657,6 +666,9 @@ var korean = Language{
 		Copying:              "복사중",
 		CopyingExtra:         "기타 리소스 복사중...",
 		CopyingFmt:           "  복사중: %s\n",
+		SelectBatteryVersion: "배터리 드라이버 버전을 선택하세요:",
+		BatteryVersion44:     "1. 커널 4.4",
+		BatteryVersion66:     "2. 커널 6.6",
 	},
 	Cleanup: LanguageCleanup{
 		OperationCompleted:   "  ✅  성공!",
@@ -1027,6 +1039,32 @@ func showMenu(lang *Language) (*SelectedConsole, error) {
 	}
 }
 
+// ===================== 电池版本选择 =====================
+func selectBatteryVersion(lang *Language) (string, error) {
+	clearScreen()
+	fmt.Println()
+	fmt.Println(colorWrap("┌────────────────────────────────────────┐", ansiCyan))
+	fmt.Println(colorWrap(lang.Menu3.SelectBatteryVersion, ansiBold+ansiGreen))
+	fmt.Println(colorWrap("└────────────────────────────────────────┘", ansiCyan))
+	fmt.Println(lang.Menu3.BatteryVersion44)
+	fmt.Println(lang.Menu3.BatteryVersion66)
+
+	for {
+		choice, err := readIntChoice(lang, lang.Common.SelectNumber)
+		if err != nil {
+			return "", err
+		}
+		switch choice {
+		case 1:
+			return "4.4", nil
+		case 2:
+			return "6.6", nil
+		default:
+			fmt.Println(colorWrap(lang.Common.InvalidSelection, ansiRed))
+		}
+	}
+}
+
 // ===================== 复制逻辑 =====================
 func copySelectedConsole(lang *Language, selected *SelectedConsole, baseDir string) error {
 	if selected == nil || selected.Config == nil {
@@ -1056,6 +1094,24 @@ func copySelectedConsole(lang *Language, selected *SelectedConsole, baseDir stri
 			fmt.Printf("  Warning: Extra source not found: %s\n", extra)
 		}
 	}
+
+	// 让用户选择电池驱动版本并复制 Image
+	batteryVersion, err := selectBatteryVersion(lang)
+	if err != nil {
+		return fmt.Errorf("failed to select battery version: %v", err)
+	}
+	if batteryVersion != "" {
+		kernelSrc := filepath.Join(baseDir, "consoles", "kernel", batteryVersion+"-battery", "Image")
+		if _, err := os.Stat(kernelSrc); err == nil {
+			fmt.Printf(lang.Menu3.CopyingFmt, "kernel/"+batteryVersion+"-battery/Image")
+			if err := copyFile(kernelSrc, filepath.Join(baseDir, "Image")); err != nil {
+				return fmt.Errorf("failed to copy kernel Image: %v", err)
+			}
+		} else {
+			fmt.Printf("  Warning: Kernel Image not found: %s\n", kernelSrc)
+		}
+	}
+
 	return nil
 }
 

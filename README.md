@@ -52,7 +52,8 @@ After the script finishes, `(d)ArkOS4Clone.img.xz` will be generated in the root
 1. Download the **ArkOS** release image
 2. Flash to SD card
 3. Run `dtb_selector.exe` (Windows) to select your device
-4. Reboot the device
+4. Select battery driver version (4.4 or 6.6) when prompted
+5. Reboot the device
 
 Non-Windows users, see [Manual Configuration](#manual-configuration).
 
@@ -64,135 +65,135 @@ Non-Windows users, see [Manual Configuration](#manual-configuration).
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| A10MINI | `480P` | `common` | `consoles/a10mini/` | Thanks to Mr.Wu |
-| A10MINI V4 | `540P` | `common` | `consoles/a10miniv4/` | Thanks to Mr.Wu |
+| A10MINI | `480P` | User Select | `consoles/a10mini/` | Thanks to Mr.Wu |
+| A10MINI V4 | `540P` | User Select | `consoles/a10miniv4/` | Thanks to Mr.Wu |
 
 ### AISLPC
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| K36S | `480P` | `common` | `consoles/k36s/` | Thanks to Mr.Yin |
-| R36T | `480P` | `common` | `consoles/k36s/` | Thanks to Mr.Yin |
-| R36T MAX | `720P` | `common` | `consoles/r36tmax/` | Thanks to Mr.Yin |
+| K36S | `480P` | User Select | `consoles/k36s/` | Thanks to Mr.Yin |
+| R36T | `480P` | User Select | `consoles/k36s/` | Thanks to Mr.Yin |
+| R36T MAX | `720P` | User Select | `consoles/r36tmax/` | Thanks to Mr.Yin |
 
 ### MagicX
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| xu10 | `480P` | `common` | `consoles/xu10/` | |
+| xu10 | `480P` | User Select | `consoles/xu10/` | |
 
 ### Batlexp
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| G350 | `480P` | `common` | `consoles/g350/` | |
+| G350 | `480P` | User Select | `consoles/g350/` | |
 
 ### Kinhank
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| K36 (Origin Panel) | `480P` | `common` | `consoles/k36/` | |
+| K36 (Origin Panel) | `480P` | User Select | `consoles/k36/` | |
 
 ### Powkiddy
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| RGB20S | `480P` | `common` | `consoles/rgb20s/` | |
+| RGB20S | `480P` | User Select | `consoles/rgb20s/` | |
 
 ### RetroBox
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| P1 | `480P-270` | `common` | `consoles/rp1/` | |
+| P1 | `480P-270` | User Select | `consoles/rp1/` | |
 
 ### Clone R36s Series
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| Type 1 (With Amplifier) | `480P` | `common` | `consoles/r36pro/` | Thanks to XiFan |
-| Type 1 (Without Amplifier) | `480P` | `common` | `consoles/hg36/` | |
-| Type 1 (No Amp + Inverted Right Joystick) | `480P` | `common` | `consoles/k36/` | |
-| Type 2 (With Amplifier) | `480P` | `common` | `consoles/clone type2 amp/` | Thanks to XiFan |
-| Type 2 (Without Amplifier) | `480P` | `common` | `consoles/clone type2/` | Thanks to Mr.Li |
-| Type 3 (Panel 1) | `480P` | `common` | `consoles/clone type3 panel1/` | Thanks to LangZi |
-| Type 3 (Panel 2) | `480P` | `common` | `consoles/clone type3 panel2/` | |
-| Type 4 | `480P` | `common` | `consoles/clone type4/` | |
-| Type 5 | `480P` | `common` | `consoles/clone type5/` | |
+| Type 1 (With Amplifier) | `480P` | User Select | `consoles/r36pro/` | Thanks to XiFan |
+| Type 1 (Without Amplifier) | `480P` | User Select | `consoles/hg36/` | |
+| Type 1 (No Amp + Inverted Right Joystick) | `480P` | User Select | `consoles/k36/` | |
+| Type 2 (With Amplifier) | `480P` | User Select | `consoles/clone type2 amp/` | Thanks to XiFan |
+| Type 2 (Without Amplifier) | `480P` | User Select | `consoles/clone type2/` | Thanks to Mr.Li |
+| Type 3 (Panel 1) | `480P` | User Select | `consoles/clone type3 panel1/` | Thanks to LangZi |
+| Type 3 (Panel 2) | `480P` | User Select | `consoles/clone type3 panel2/` | |
+| Type 4 | `480P` | User Select | `consoles/clone type4/` | |
+| Type 5 | `480P` | User Select | `consoles/clone type5/` | |
 
 ### GameConsole
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| R33s | `480P` | `common` | `consoles/r33s/` | |
-| R36H | `480P` | `common` | `consoles/r36h/` | Thanks to Mr.Lang |
-| R36s Panel 1 | `480P` | `common` | `consoles/origin panel1/` | |
-| R36s Panel 2 | `480P` | `common` | `consoles/origin panel2/` | |
-| R36s Panel 3 | `480P` | `common` | `consoles/origin panel3/` | |
-| R36s Panel 4 | `480P` | `common` | `consoles/origin panel4/` | Thanks to 海拉姆电玩 |
-| R36s Panel 4 V22 | `480P` | `common` | `consoles/v22 panel4/` | |
-| R36XX | `480P` | `common` | `consoles/origin panel4/` | Thanks to Mr.Lang |
-| O30S | `480P` | `common` | `consoles/r36h/` | |
-| R36sPlus | `720P` | `common` | `consoles/r36splus/` | Thanks to Mr.Lang |
-| R36H ProMax | `768P` | `common` | `consoles/r45h/` | Thanks to Mr.Lang |
-| R40XX | `768P` | `common` | `consoles/r40xx/` | Thanks to Mr.Lang |
-| R40XX ProMax | `768P` | `common` | `consoles/r46h/` | Thanks to Mr.Lang |
-| R45H | `768P` | `common` | `consoles/r45h/` | Thanks to Mr.Lang |
-| R46H | `768P` | `common` | `consoles/r46h/` | Thanks to Mr.Lang |
-| R50S | `854x480P` | `common` | `consoles/r50s/` | Thanks to Mr.Lang |
+| R33s | `480P` | User Select | `consoles/r33s/` | |
+| R36H | `480P` | User Select | `consoles/r36h/` | Thanks to Mr.Lang |
+| R36s Panel 1 | `480P` | User Select | `consoles/origin panel1/` | |
+| R36s Panel 2 | `480P` | User Select | `consoles/origin panel2/` | |
+| R36s Panel 3 | `480P` | User Select | `consoles/origin panel3/` | |
+| R36s Panel 4 | `480P` | User Select | `consoles/origin panel4/` | Thanks to 海拉姆电玩 |
+| R36s Panel 4 V22 | `480P` | User Select | `consoles/v22 panel4/` | |
+| R36XX | `480P` | User Select | `consoles/origin panel4/` | Thanks to Mr.Lang |
+| O30S | `480P` | User Select | `consoles/r36h/` | |
+| R36sPlus | `720P` | User Select | `consoles/r36splus/` | Thanks to Mr.Lang |
+| R36H ProMax | `768P` | User Select | `consoles/r45h/` | Thanks to Mr.Lang |
+| R40XX | `768P` | User Select | `consoles/r40xx/` | Thanks to Mr.Lang |
+| R40XX ProMax | `768P` | User Select | `consoles/r46h/` | Thanks to Mr.Lang |
+| R45H | `768P` | User Select | `consoles/r45h/` | Thanks to Mr.Lang |
+| R46H | `768P` | User Select | `consoles/r46h/` | Thanks to Mr.Lang |
+| R50S | `854x480P` | User Select | `consoles/r50s/` | Thanks to Mr.Lang |
 
 ### SoySauce R36s
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| Panel 1 | `480P` | `common` | `consoles/sauce panel1/` | |
-| Panel 2 | `480P` | `common` | `consoles/sauce panel2/` | Thanks to QQ:2824907016 |
-| Panel 3 | `480P` | `common` | `consoles/sauce panel3/` | |
-| Panel 4 | `480P` | `common` | `consoles/sauce panel4/` | |
+| Panel 1 | `480P` | User Select | `consoles/sauce panel1/` | |
+| Panel 2 | `480P` | User Select | `consoles/sauce panel2/` | Thanks to QQ:2824907016 |
+| Panel 3 | `480P` | User Select | `consoles/sauce panel3/` | |
+| Panel 4 | `480P` | User Select | `consoles/sauce panel4/` | |
 
 ### Diium / SZDiiER
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| ~~Dr28s~~ | ~~`480P-270`~~ | ~~`common`~~ | ~~`consoles/dr28s/`~~ | ~~Maintenance suspended due to device damage~~ |
-| D007 / D007 Plus | `480P` | `common` | `consoles/d007/` | |
+| ~~Dr28s~~ | ~~`480P-270`~~ | ~~`User Select`~~ | ~~`consoles/dr28s/`~~ | ~~Maintenance suspended due to device damage~~ |
+| D007 / D007 Plus | `480P` | User Select | `consoles/d007/` | |
 
 ### XiFan
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| Mymini | `480P` | `common` | `consoles/mymini/` | Thanks to XiFan |
-| Mini40 | `720P` | `common` | `consoles/mini40/` | Thanks to XiFan |
-| R36Max | `720P` | `common` | `consoles/r36max/` | Thanks to XiFan |
-| R36Max2 | `768P` | `common` | `consoles/r36max2/` | Thanks to XiFan |
-| XF45V | `768P` | `common` | `consoles/r36max2/` | Thanks to XiFan |
-| DC45V | `768P` | `common` | `consoles/r36max2/` | Thanks to XiFan |
-| RF45V | `768P` | `common` | `consoles/r36max2/` | Thanks to XiFan |
-| R36Pro | `480P` | `common` | `consoles/r36pro/` | Thanks to XiFan |
-| XF28 | `480P-1` | `common` | `consoles/xf28/` | Thanks to XiFan |
-| XF35H | `480P` | `common` | `consoles/xf35h/` | Thanks to XiFan |
-| RF35H | `480P` | `common` | `consoles/xf35h/` | Thanks to XiFan |
-| XF40H | `720P` | `common` | `consoles/xf40h/` | Thanks to XiFan |
-| RF40H | `720P` | `common` | `consoles/xf40h/` | Thanks to XiFan |
-| DC35V | `480P` | `common` | `consoles/dc35v/` | Thanks to XiFan |
-| DC40V | `720P` | `common` | `consoles/dc40v/` | Thanks to XiFan |
+| Mymini | `480P` | User Select | `consoles/mymini/` | Thanks to XiFan |
+| Mini40 | `720P` | User Select | `consoles/mini40/` | Thanks to XiFan |
+| R36Max | `720P` | User Select | `consoles/r36max/` | Thanks to XiFan |
+| R36Max2 | `768P` | User Select | `consoles/r36max2/` | Thanks to XiFan |
+| XF45V | `768P` | User Select | `consoles/r36max2/` | Thanks to XiFan |
+| DC45V | `768P` | User Select | `consoles/r36max2/` | Thanks to XiFan |
+| RF45V | `768P` | User Select | `consoles/r36max2/` | Thanks to XiFan |
+| R36Pro | `480P` | User Select | `consoles/r36pro/` | Thanks to XiFan |
+| XF28 | `480P-1` | User Select | `consoles/xf28/` | Thanks to XiFan |
+| XF35H | `480P` | User Select | `consoles/xf35h/` | Thanks to XiFan |
+| RF35H | `480P` | User Select | `consoles/xf35h/` | Thanks to XiFan |
+| XF40H | `720P` | User Select | `consoles/xf40h/` | Thanks to XiFan |
+| RF40H | `720P` | User Select | `consoles/xf40h/` | Thanks to XiFan |
+| DC35V | `480P` | User Select | `consoles/dc35v/` | Thanks to XiFan |
+| DC40V | `720P` | User Select | `consoles/dc40v/` | Thanks to XiFan |
 
 ### Other Devices
 
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
-| HG36 (HG3506) | `480P` | `common` | `consoles/hg36/` | |
-| R36Ultra | `720P` | `common` | `consoles/r36ultra/` | Thanks to Mr.Li |
-| RX6H | `480P` | `common` | `consoles/rx6h/` | Thanks to Mr.Yin |
-| XGB36 (G26) | `480P` | `common` | `consoles/xgb36/` | |
-| T16MAX | `720P` | `common` | `consoles/t16max/` | |
-| U8 | `480P5-3` | `common` | `consoles/u8/` | Thanks to Mr.Yin |
-| U8 V2 | `480P5-3` | `common` | `consoles/u8-v2/` | |
-| RG36 | `480P` | `common` | `consoles/rg36/` | |
-| R40S | `480P5-3` | `common` | `consoles/r40s/`     | Thanks to Miss.Ding |
-| R39S | `480P5-3` | `common` | `consoles/r40s/`     |  |
+| HG36 (HG3506) | `480P` | User Select | `consoles/hg36/` | |
+| R36Ultra | `720P` | User Select | `consoles/r36ultra/` | Thanks to Mr.Li |
+| RX6H | `480P` | User Select | `consoles/rx6h/` | Thanks to Mr.Yin |
+| XGB36 (G26) | `480P` | User Select | `consoles/xgb36/` | |
+| T16MAX | `720P` | User Select | `consoles/t16max/` | |
+| U8 | `480P5-3` | User Select | `consoles/u8/` | Thanks to Mr.Yin |
+| U8 V2 | `480P5-3` | User Select | `consoles/u8-v2/` | |
+| RG36 | `480P` | User Select | `consoles/rg36/` | |
+| R40S | `480P5-3` | User Select | `consoles/r40s/`     | Thanks to Miss.Ding |
+| R39S | `480P5-3` | User Select | `consoles/r40s/`     |  |
 
 > **Logo Path:** `consoles/logo/<Logo>/logo.bmp`  
-> **Kernel Path:** `consoles/kernel/<Kernel>/Image`
+> **Kernel Path:** `consoles/kernel/4.4-battery/Image` or `consoles/kernel/6.6-battery/Image` (user selects during setup)
 
 ---
 
@@ -202,7 +203,9 @@ For non-Windows users:
 
 1. Mount the `BOOT` partition of the SD card
 2. Copy `boot.ini` and the two `.dtb` files from `consoles/<device>/` to the root directory
-3. Copy `consoles/kernel/common/Image` to the root directory
+3. Copy the appropriate kernel Image:
+   - For 4.4 battery driver: `consoles/kernel/4.4-battery/Image`
+   - For 6.6 battery driver: `consoles/kernel/6.6-battery/Image`
 4. Copy `consoles/logo/<resolution>/logo.bmp` to the root directory
 5. Unmount the SD card, insert into device, and reboot
 
@@ -226,6 +229,17 @@ Adjust joystick axis mappings (Joymux / amux), battery parameters, and generate 
 - **File Manager** — [lcdyk0517/351Files](https://github.com/lcdyk0517/351Files)
 - **Ogage Tool** — [lcdyk0517/ogage](https://github.com/lcdyk0517/ogage)
 - **Drastic-KK Patch** — [drastic-kk/patch](https://github.com/lcdyk0517/arkos4clone/tree/main/replace_file/drastic-kk/patch)
+
+---
+
+## Battery Driver Selection
+
+When using the `dtb_selector` tool, you will be prompted to select a battery driver version:
+
+- **4.4** — For devices using the older 4.4 kernel battery driver
+- **6.6** — For devices using the newer 6.6 kernel battery driver
+
+The selected version's `Image` file will be copied to the root directory of your SD card.
 
 ---
 
