@@ -98,7 +98,7 @@ check_jdk_file() {
 
 check_pm_libs() {
   local pm_libs_dir="$SCRIPT_DIR/bin/pm_libs"
-  local runtimes_url="https://github.com/PortsMaster/PortMaster-New/releases/download/2025-11-18_1011/runtimes.all.aarch64.zip"
+  local runtimes_url="https://github.com/PortsMaster/PortMaster-New/releases/download/2026-05-24_0536/runtimes.all.aarch64.zip"
 
   # 需要的文件列表
   local required_files=(
@@ -126,6 +126,8 @@ check_pm_libs() {
     "godot_4.4.squashfs"
     "godot_4.5.mono.squashfs"
     "godot_4.5.squashfs"
+    "godot_4.6.3.mono.squashfs"
+    "godot_4.6.3.squashfs"
     "mesa_pkg_0.1.squashfs"
     "mono-6.12.0.122-aarch64.squashfs"
     "python_3.11.squashfs"
@@ -212,7 +214,7 @@ check_work_dir() {
 
 check_portmaster() {
   local pm_dir="$SCRIPT_DIR/PortMaster"
-  local pm_url="https://github.com/PortsMaster/PortMaster-GUI/releases/download/2026.04.01-1426/PortMaster.zip"
+  local pm_url="https://github.com/PortsMaster/PortMaster-New/releases/download/2026-06-09_2128/PortMaster.zip"
 
   if [[ -d "$pm_dir" && -f "$pm_dir/PortMaster.sh" ]]; then
     log_ok "PortMaster 目录已存在"
