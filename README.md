@@ -25,6 +25,10 @@ Bringing **(d)ArkOS 4.4 kernel** support to unsupported devices. Contributions v
 
 **For ArkOS4Clone:**
 
+Option 1: Fork the repository, go to **Actions** tab, run the build workflow, then download the image from your fork's **Releases** page.
+
+Option 2: Build manually:
+
 ```bash
 git clone git@github.com:lcdyk0517/arkos4clone.git
 cd arkos4clone
@@ -32,6 +36,8 @@ sudo ./build_image.sh ArkOS-R3XS.img .
 ```
 
 **For dArkOS4Clone:**
+
+> ⚠️ **Note:** dArkOS4Clone build process still requires more testing to fix bugs.
 
 1. Download G350/RG351MP image from [christianhaitian/dArkOS](https://github.com/christianhaitian/dArkOS)
 2. Extract to get `dArkOS-xxx.img`

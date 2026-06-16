@@ -454,7 +454,7 @@ move_to_script_dir() {
   local xz_file="$1"
   local dest="$SCRIPT_DIR/$(basename "$xz_file")"
   log_info "移动输出文件到脚本目录..."
-  mv "$xz_file" "$dest"
+  mv "$xz_file" "$dest" || true
   log_ok "输出文件: $dest"
 }
 
