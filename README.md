@@ -103,6 +103,8 @@ Non-Windows users, see [Manual Configuration](#manual-configuration).
 | Device | Logo | Kernel | Config Files | Notes |
 |--------|------|--------|--------------|-------|
 | RGB20S | `480P` | User Select | `consoles/rgb20s/` | |
+| RGB10MAX1 | `854x480P` | User Select | `consoles/rgb10max1/` | |
+| RGB10 | `320P` | User Select | `consoles/rgb10/` | |
 
 ### RetroBox
 

@@ -407,6 +407,20 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/480P5-3/"},
 	},
 	{
+		RealName: "rgb10",
+		BrandEntries: []BrandEntry{
+			{Brand: "Powkiddy", DisplayName: "Powkiddy RGB10"},
+		},
+		ExtraSources: []string{"logo/320P/"},
+	},
+	{
+		RealName: "rgb10max1",
+		BrandEntries: []BrandEntry{
+			{Brand: "Powkiddy", DisplayName: "Powkiddy RGB10Max1"},
+		},
+		ExtraSources: []string{"logo/854x480P/"},
+	},
+	{
 		RealName: "rgb20s",
 		BrandEntries: []BrandEntry{
 			{Brand: "Powkiddy", DisplayName: "Powkiddy RGB20S"},
@@ -481,14 +495,14 @@ type LanguageMenu2 struct {
 }
 
 type LanguageMenu3 struct {
-	AvailableConsolesFor string
-	NoConsolesFound      string
-	Copying              string
-	CopyingExtra         string
-	CopyingFmt           string
-	SelectBatteryVersion  string
+	AvailableConsolesFor   string
+	NoConsolesFound        string
+	Copying                string
+	CopyingExtra           string
+	CopyingFmt             string
+	SelectBatteryVersion   string
 	BatteryVersionOriginal string
-	BatteryVersionFix     string
+	BatteryVersionFix      string
 }
 
 type LanguageCleanup struct {
@@ -547,14 +561,14 @@ var english = Language{
 		PleaseSelectBrand: "│ Please select a brand",
 	},
 	Menu3: LanguageMenu3{
-		AvailableConsolesFor: "Available consoles for: ",
-		NoConsolesFound:      "No consoles found.",
-		Copying:              "Copying: ",
-		CopyingExtra:         "Copying extra resources...",
-		CopyingFmt:           "  Copying: %s\n",
-		SelectBatteryVersion:  "Select battery driver version:",
+		AvailableConsolesFor:   "Available consoles for: ",
+		NoConsolesFound:        "No consoles found.",
+		Copying:                "Copying: ",
+		CopyingExtra:           "Copying extra resources...",
+		CopyingFmt:             "  Copying: %s\n",
+		SelectBatteryVersion:   "Select battery driver version:",
 		BatteryVersionOriginal: "1. Original battery driver",
-		BatteryVersionFix:     "2. arkos4clone_fix battery driver",
+		BatteryVersionFix:      "2. arkos4clone_fix battery driver",
 	},
 	Cleanup: LanguageCleanup{
 		OperationCompleted:   "  ✅  Operation completed!",
@@ -604,14 +618,14 @@ var chinese = Language{
 		PleaseSelectBrand: "│ 请选择品牌",
 	},
 	Menu3: LanguageMenu3{
-		AvailableConsolesFor: "该品牌可用机型: ",
-		NoConsolesFound:      "该品牌下没有机型.",
-		Copying:              "开始复制: ",
-		CopyingExtra:         "正在复制额外资源...",
-		CopyingFmt:           "  开始复制: %s\n",
-		SelectBatteryVersion:  "请选择电池驱动版本:",
+		AvailableConsolesFor:   "该品牌可用机型: ",
+		NoConsolesFound:        "该品牌下没有机型.",
+		Copying:                "开始复制: ",
+		CopyingExtra:           "正在复制额外资源...",
+		CopyingFmt:             "  开始复制: %s\n",
+		SelectBatteryVersion:   "请选择电池驱动版本:",
 		BatteryVersionOriginal: "1. 原版电池驱动",
-		BatteryVersionFix:     "2. arkos4clone_fix 电池驱动",
+		BatteryVersionFix:      "2. arkos4clone_fix 电池驱动",
 	},
 	Cleanup: LanguageCleanup{
 		OperationCompleted:   "  ✅  操作完成！",
@@ -661,14 +675,14 @@ var korean = Language{
 		PleaseSelectBrand: "│ 브랜드를 선택하세요",
 	},
 	Menu3: LanguageMenu3{
-		AvailableConsolesFor: "선택 가능한 기기: ",
-		NoConsolesFound:      "기기를 찾을 수 없어요.",
-		Copying:              "복사중",
-		CopyingExtra:         "기타 리소스 복사중...",
-		CopyingFmt:           "  복사중: %s\n",
-		SelectBatteryVersion:  "배터리 드라이버 버전을 선택하세요:",
+		AvailableConsolesFor:   "선택 가능한 기기: ",
+		NoConsolesFound:        "기기를 찾을 수 없어요.",
+		Copying:                "복사중",
+		CopyingExtra:           "기타 리소스 복사중...",
+		CopyingFmt:             "  복사중: %s\n",
+		SelectBatteryVersion:   "배터리 드라이버 버전을 선택하세요:",
 		BatteryVersionOriginal: "1. 원본 배터리 드라이버",
-		BatteryVersionFix:     "2. arkos4clone_fix 배터리 드라이버",
+		BatteryVersionFix:      "2. arkos4clone_fix 배터리 드라이버",
 	},
 	Cleanup: LanguageCleanup{
 		OperationCompleted:   "  ✅  성공!",
