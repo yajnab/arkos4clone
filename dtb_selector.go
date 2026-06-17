@@ -224,7 +224,14 @@ var Consoles = []ConsoleConfig{
 	{
 		RealName: "v22 panel4",
 		BrandEntries: []BrandEntry{
-			{Brand: "GameConsole", DisplayName: "GameConsole R36s Panel 4 V22"},
+			{Brand: "GameConsole", DisplayName: "GameConsole R36s V22"},
+		},
+		ExtraSources: []string{"logo/480P/"},
+	},
+	{
+		RealName: "v30 panel4",
+		BrandEntries: []BrandEntry{
+			{Brand: "GameConsole", DisplayName: "GameConsole R36s V30"},
 		},
 		ExtraSources: []string{"logo/480P/"},
 	},

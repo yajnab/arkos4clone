@@ -136,7 +136,8 @@ Non-Windows users, see [Manual Configuration](#manual-configuration).
 | R36s Panel 2 | `480P` | User Select | `consoles/origin panel2/` | |
 | R36s Panel 3 | `480P` | User Select | `consoles/origin panel3/` | |
 | R36s Panel 4 | `480P` | User Select | `consoles/origin panel4/` | Thanks to 海拉姆电玩 |
-| R36s Panel 4 V22 | `480P` | User Select | `consoles/v22 panel4/` | |
+| R36s V22 | `480P` | User Select | `consoles/v22 panel4/` | |
+| R36s V30 | `480P` | User Select | `consoles/v30 panel4/` | Thanks to 海拉姆电玩 |
 | R36XX | `480P` | User Select | `consoles/origin panel4/` | Thanks to Mr.Lang |
 | O30S | `480P` | User Select | `consoles/r36h/` | |
 | R36sPlus | `720P` | User Select | `consoles/r36splus/` | Thanks to Mr.Lang |
