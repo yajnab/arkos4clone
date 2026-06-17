@@ -70,6 +70,15 @@ jobs:
           mkdir -p bin/pm_libs mnt
           sudo ./build_image.sh $(ls *.img) .
 
+      - name: Build update.tar
+        run: |
+          chmod +x build_update_tar.sh
+          sudo ./build_update_tar.sh
+
+      - name: Prepare firstboot.sh
+        run: |
+          cp sh/clone.sh firstboot.sh
+
       - name: Create Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -91,9 +100,11 @@ jobs:
             FILES="$XZ_FILE"
           fi
 
-          echo "上传文件: $FILES"
+          echo "上传文件: $FILES update.tar firstboot.sh"
           gh release create "$BUILD_DATE" \
             $FILES \
+            update.tar \
+            firstboot.sh \
             --title "ArkOS4Clone-$BUILD_DATE" \
             --notes "ArkOS4Clone 构建版本 - $BUILD_DATE" \
             --draft=true
