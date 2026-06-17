@@ -2146,7 +2146,6 @@
 		<emulators>
 			<emulator name="retroarch">
 				<cores>
-					<core>dosbox_svn</core>
 					<core>dosbox_pure</core>
 					<core>dosbox</core>
 				</cores>
@@ -4741,7 +4740,6 @@
 		<emulators>
 			<emulator name="retroarch">
 				<cores>
-					<core>dosbox_svn</core>
 					<core>dosbox_pure</core>
 					<core>dosbox</core>
 				</cores>
