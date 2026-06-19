@@ -82,6 +82,7 @@ cp -f ./sh/clone.sh "$PAYLOAD_BOOT/firstboot.sh"
 # 其他 boot 工具保持原文件名
 cp -f ./dtb_selector_macos \
       ./dtb_selector_win32.exe \
+      ./dtb_selector_linux32 \
       "$PAYLOAD_BOOT/" 2>/dev/null || true
 
 # DTB 选择器提示标记文件
