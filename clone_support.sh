@@ -223,12 +223,17 @@ sudo cp -f ./bin/json-c3/* "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/" || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so*" 2>/dev/null || true
 
-echo "== 更新 PPSSPP 1.20.2 =="
+echo "== 更新 PPSSPP 1.20.4 =="
 sudo cp -a ./replace_file/ppsspp/* "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null || true
 
-echo "== 更新 ScummVM v2026.1.0 =="
+echo "== 更新 flycastsa v2.6 =="
+sudo cp -a ./replace_file/flycastsa/flycast "$MOUNT_DIR/root/opt/flycastsa/" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/flycastsa/" 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/opt/flycastsa/" 2>/dev/null || true
+
+echo "== 更新 ScummVM v2026.2.0 =="
 sudo cp -a ./replace_file/scummvm/* "$MOUNT_DIR/root/opt/scummvm/" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/scummvm/" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/opt/scummvm/" 2>/dev/null || true
