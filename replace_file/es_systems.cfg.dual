@@ -464,6 +464,8 @@
 			</emulator>
 			<emulator name="standalone">
 			  </emulator>
+			<emulator name="standalone-2022">
+			  </emulator>
 		</emulators>
 		<platform>atomiswave</platform>
 		<theme>atomiswave</theme>
@@ -503,6 +505,8 @@
 				</cores>
 			</emulator>
 			<emulator name="standalone">
+			  </emulator>
+			<emulator name="standalone-2022">
 			  </emulator>
 		</emulators>
 		<platform>naomi</platform>
@@ -1633,7 +1637,9 @@
 				</cores>
 			</emulator>
 			<emulator name="standalone">
-		    </emulator>
+			  </emulator>
+			<emulator name="standalone-2022">
+			  </emulator>
 		</emulators>
 		<platform>dreamcast</platform>
 		<theme>dreamcast</theme>
@@ -3058,6 +3064,8 @@
 			</emulator>
 			<emulator name="standalone">
 			  </emulator>
+			<emulator name="standalone-2022">
+			  </emulator>
 		</emulators>
 		<platform>atomiswave</platform>
 		<theme>atomiswave</theme>
@@ -3097,6 +3105,8 @@
 				</cores>
 			</emulator>
 			<emulator name="standalone">
+			  </emulator>
+			<emulator name="standalone-2022">
 			  </emulator>
 		</emulators>
 		<platform>naomi</platform>
@@ -4227,7 +4237,9 @@
 				</cores>
 			</emulator>
 			<emulator name="standalone">
-		    </emulator>
+			  </emulator>
+			<emulator name="standalone-2022">
+			  </emulator>
 		</emulators>
 		<platform>dreamcast</platform>
 		<theme>dreamcast</theme>

@@ -164,6 +164,11 @@ echo "== 更新 flycastsa v2.6 =="
 mkdir -p "$PAYLOAD_ROOT/opt/flycastsa"
 cp -a ./replace_file/flycastsa/flycast "$PAYLOAD_ROOT/opt/flycastsa/" 2>/dev/null || true
 
+echo "== 添加 flycastsa-2022 =="
+mkdir -p "$PAYLOAD_ROOT/opt/flycastsa-2022"
+cp -a ./replace_file/flycastsa-2022/. "$PAYLOAD_ROOT/opt/flycastsa-2022/" 2>/dev/null || true
+rm -rf "$PAYLOAD_ROOT/opt/flycastsa-2022/patch" 2>/dev/null || true
+
 echo "== 更新 ScummVM v2026.1.0 =="
 mkdir -p "$PAYLOAD_ROOT/opt/scummvm"
 cp -a ./replace_file/scummvm/. "$PAYLOAD_ROOT/opt/scummvm/" 2>/dev/null || true
@@ -289,6 +294,10 @@ meta_add "0777" "1002:1002" "/opt/ppsspp/*"
 # flycastsa v2.6：1002:1002 + 777
 meta_add "0777" "1002:1002" "/opt/flycastsa"
 meta_add "0777" "1002:1002" "/opt/flycastsa/*"
+
+# flycastsa-2022：1002:1002 + 777
+meta_add "0777" "1002:1002" "/opt/flycastsa-2022"
+meta_add "0777" "1002:1002" "/opt/flycastsa-2022/*"
 
 # ScummVM v2026.2.0：1002:1002 + 777
 meta_add "0777" "1002:1002" "/opt/scummvm"

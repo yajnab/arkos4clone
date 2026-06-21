@@ -233,6 +233,13 @@ sudo cp -a ./replace_file/flycastsa/flycast "$MOUNT_DIR/root/opt/flycastsa/" 2>/
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/flycastsa/" 2>/dev/null || true
 sudo chmod -R 777 "$MOUNT_DIR/root/opt/flycastsa/" 2>/dev/null || true
 
+echo "== 添加flycastsa-2022  =="
+sudo mkdir -p "$MOUNT_DIR/root/opt/flycastsa-2022" 2>/dev/null || true
+sudo cp -a ./replace_file/flycastsa-2022/. "$MOUNT_DIR/root/opt/flycastsa-2022/" 2>/dev/null || true
+sudo rm -rf "$MOUNT_DIR/root/opt/flycastsa-2022/patch" 2>/dev/null || true
+sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/flycastsa-2022" 2>/dev/null || true
+sudo chmod -R 777 "$MOUNT_DIR/root/opt/flycastsa-2022" 2>/dev/null || true
+
 echo "== 更新 ScummVM v2026.2.0 =="
 sudo cp -a ./replace_file/scummvm/* "$MOUNT_DIR/root/opt/scummvm/" 2>/dev/null || true
 sudo chown -R 1002:1002 "$MOUNT_DIR/root/opt/scummvm/" 2>/dev/null || true
