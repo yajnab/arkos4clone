@@ -85,18 +85,37 @@ get_profile_name() {
 # ==================== OTA 更新 ====================
 maybe_apply_ota_update() {
   local tar_path=""
-  [[ -f "/roms/update.tar" ]] && tar_path="/roms/update.tar"
-  [[ -f "/roms2/update.tar" ]] && tar_path="/roms2/update.tar"
+  # 检查 update-arkos.tar 或 update-darkos.tar
+  for name in update-arkos.tar update-darkos.tar; do
+    [[ -f "/roms/$name" ]] && tar_path="/roms/$name" && break
+    [[ -f "/roms2/$name" ]] && tar_path="/roms2/$name" && break
+  done
   [[ -z "$tar_path" ]] && return 0
 
+  # 检查升级包是否与当前系统匹配
+  local is_darkos=false
+  grep -q "dArkOS" /usr/share/plymouth/themes/text.plymouth 2>/dev/null && is_darkos=true
+  
+  if [[ "$is_darkos" == "true" && "$tar_path" != *darkos* ]]; then
+    err "Mismatch: current=dArkOS, package=ArkOS. Use update-darkos.tar"
+    return 0
+  fi
+  if [[ "$is_darkos" == "false" && "$tar_path" == *darkos* ]]; then
+    err "Mismatch: current=ArkOS, package=dArkOS. Use update-arkos.tar"
+    return 0
+  fi
+
   local tmpdir="/home/ark/.ota_update" TTY="/dev/tty1"
+  local ota_title="ArkOS4Clone OTA"
+  [[ "$is_darkos" == "true" ]] && ota_title="dArkOS4Clone OTA"
+  
   msg "OTA package found: $tar_path"
   sudo rm -rf "$tmpdir" 2>/dev/null || true
   sudo mkdir -p "$tmpdir" || { err "Failed to create OTA dir"; return 0; }
 
   {
     printf '\033c'
-    echo "==============================="; echo "        ArkOS4Clone OTA        "; echo "==============================="
+    echo "==============================="; echo "        $ota_title        "; echo "==============================="
     echo; echo "[OTA] Package: $tar_path"; echo "[OTA] Step 1/2: Extracting... (Do NOT power off)"
   } > "$TTY"
 

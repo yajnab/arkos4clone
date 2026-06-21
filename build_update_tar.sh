@@ -4,21 +4,34 @@ set -euo pipefail
 # ============================================
 # ArkOS4Clone OTA 升级包制作脚本
 #
+# 用法：
+#   sudo ./build_update_tar.sh           # 构建 ArkOS 版本
+#   sudo ./build_update_tar.sh -d        # 构建 dArkOS 版本
+#   sudo ./build_update_tar.sh darkos    # 构建 dArkOS 版本
+#
 # 输出文件：
 #   ./update.tar   （放到设备 /roms/update.tar）
 # ============================================
 
+# 解析命令行参数
+ARKOS_IMAGE_NAME=""
+for arg in "$@"; do
+  case "${arg,,}" in  # 转小写比较
+    -d|darkos|darkos4clone|darkos4clone)
+      ARKOS_IMAGE_NAME="dArkOS"
+      ;;
+  esac
+done
+
 # 生成版本信息
 UPDATE_DATE="$(TZ=Asia/Shanghai date +%m%d%Y)"
 MODDER="kk&lcdyk"
-ARKOS_IMAGE_NAME="${ARKOS_IMAGE_NAME:-}"
 
 # 工作目录与临时构建目录
 WORKDIR="$(pwd)"
 STAGE="/tmp/_ota_stage"
 PAYLOAD_BOOT="${STAGE}/payload/boot"
 PAYLOAD_ROOT="${STAGE}/payload/root"
-OUT_TAR="${WORKDIR}/update.tar"
 
 # boot 分区（FAT32）专用 rsync 参数
 RSYNC_BOOT_OPTS="-rltD --no-owner --no-group --no-perms --omit-dir-times"
@@ -55,6 +68,7 @@ if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   echo "=== 检测到 dArkOS 镜像，构建 dArkOS OTA 包 ==="
   VERSION="dArkOS4Clone-${UPDATE_DATE}-${MODDER}"
   CHOWN_USER="1000:1000"
+  OUT_TAR="${WORKDIR}/update-darkos.tar"
 
   echo "== 构建 payload/boot =="
   mkdir -p "$PAYLOAD_BOOT/consoles"
@@ -280,6 +294,7 @@ else
   echo "=== 检测到 ArkOS 镜像，构建 ArkOS OTA 包 ==="
   VERSION="ArkOS4Clone-${UPDATE_DATE}-${MODDER}"
   CHOWN_USER="1002:1002"
+  OUT_TAR="${WORKDIR}/update-arkos.tar"
 
   echo "== 构建 payload/boot =="
   mkdir -p "$PAYLOAD_BOOT/consoles"
