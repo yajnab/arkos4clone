@@ -123,6 +123,12 @@ if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   cp -f ./bin/es-service/es-status-daemon.sh "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
   cp -f ./bin/es-service/es-status-daemon.service "$PAYLOAD_ROOT/etc/systemd/system/" 2>/dev/null || true
 
+  echo "== 注入 zram 服务 =="
+  mkdir -p "$PAYLOAD_ROOT/etc/systemd/system"
+  cp -f ./bin/zram-service/zram-setup.sh "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
+  cp -f ./bin/zram-service/zram.conf "$PAYLOAD_ROOT/etc/" 2>/dev/null || true
+  cp -f ./bin/zram-service/zram-swap.service "$PAYLOAD_ROOT/etc/systemd/system/" 2>/dev/null || true
+
   echo "== 注入核心与 EmulationStation 文件 =="
   mkdir -p "$PAYLOAD_ROOT/home/ark/.config/retroarch/cores" \
            "$PAYLOAD_ROOT/home/ark/.config/retroarch32/cores" \
@@ -228,6 +234,9 @@ EOF
   meta_add "0777" "1000:1000" "/etc/systemd/system/adckeys.service"
   meta_add "0777" "1000:1000" "/usr/local/bin/es-status-daemon.sh"
   meta_add "0777" "1000:1000" "/etc/systemd/system/es-status-daemon.service"
+  meta_add "0777" "1000:1000" "/etc/zram.conf"
+  meta_add "0777" "1000:1000" "/usr/local/bin/zram-setup.sh"
+  meta_add "0777" "1000:1000" "/etc/systemd/system/zram-swap.service"
   meta_add "0777" "1000:1000" "/home/ark/.config/retroarch/cores/*"
   meta_add "0777" "1000:1000" "/home/ark/.config/retroarch32/cores/*"
   meta_add "0777" "1000:1000" "/etc/emulationstation/darkos4es_systems.cfg"
@@ -329,6 +338,12 @@ else
   mkdir -p "$PAYLOAD_ROOT/etc/systemd/system"
   cp -f ./bin/es-service/es-status-daemon.sh "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
   cp -f ./bin/es-service/es-status-daemon.service "$PAYLOAD_ROOT/etc/systemd/system/" 2>/dev/null || true
+
+  echo "== 注入 zram 服务 =="
+  mkdir -p "$PAYLOAD_ROOT/etc/systemd/system"
+  cp -f ./bin/zram-service/zram-setup.sh "$PAYLOAD_ROOT/usr/local/bin/" 2>/dev/null || true
+  cp -f ./bin/zram-service/zram.conf "$PAYLOAD_ROOT/etc/" 2>/dev/null || true
+  cp -f ./bin/zram-service/zram-swap.service "$PAYLOAD_ROOT/etc/systemd/system/" 2>/dev/null || true
 
   echo "== 注入核心与 EmulationStation 文件 =="
   mkdir -p "$PAYLOAD_ROOT/home/ark/.config/retroarch/cores" \
@@ -442,6 +457,9 @@ EOF
   meta_add "0777" "1002:1002" "/etc/systemd/system/adckeys.service"
   meta_add "0777" "1002:1002" "/usr/local/bin/es-status-daemon.sh"
   meta_add "0777" "1002:1002" "/etc/systemd/system/es-status-daemon.service"
+  meta_add "0777" "1002:1002" "/etc/zram.conf"
+  meta_add "0777" "1002:1002" "/usr/local/bin/zram-setup.sh"
+  meta_add "0777" "1002:1002" "/etc/systemd/system/zram-swap.service"
   meta_add "0777" "1002:1002" "/home/ark/.config/retroarch/cores/*"
   meta_add "0777" "1002:1002" "/home/ark/.config/retroarch32/cores/*"
   meta_add "0777" "1002:1002" "/etc/emulationstation/es_systems.cfg"
@@ -577,7 +595,7 @@ else
 fi
 
 log "=== Step 1: Stop conflicting services ==="
-for s in adckeys.service es-status-daemon.service batt_led.service ddtbcheck.service 351mp.service mpv.service oga_events; do
+for s in adckeys.service zram-swap.service es-status-daemon.service batt_led.service ddtbcheck.service 351mp.service mpv.service oga_events; do
   if [[ -e "/etc/systemd/system/$s" || -e "/lib/systemd/system/$s" ]]; then
     svc_stop_disable "$s"
   fi
