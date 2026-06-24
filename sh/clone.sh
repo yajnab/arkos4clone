@@ -278,6 +278,13 @@ handle_d007_service() {
   fi
 }
 
+# ==================== Es 守服务 ====================
+handle_es_service() {
+  msg "enabling es-status-daemon.service"
+  sudo systemctl daemon-reload 2>/dev/null || true
+  sudo systemctl enable --now es-status-daemon.service 2>/dev/null || warn "es-status-daemon.service failed"
+}
+
 # ==================== 国际化配置 ====================
 apply_localization() {
   local lang="$1" es_lang ra_lang ppsspp_lang timezone
@@ -412,6 +419,9 @@ main() {
 
   # D007 服务
   handle_d007_service
+
+  # es-status-daemon.service 服务
+  handle_es_service
 
   # 国际化
   [[ -f "/boot/.cn" ]] && { apply_localization "cn"; sudo rm -f /boot/.cn; }

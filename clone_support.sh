@@ -134,6 +134,14 @@ if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   safe sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/adckeys.sh" 2>/dev/null
   safe sudo chmod 777 "$MOUNT_DIR/root/etc/systemd/system/adckeys.service" 2>/dev/null
 
+  echo "== 注入 es-service 服务脚本 =="
+  safe sudo cp -f ./bin/es-service/es-status-daemon.sh "$MOUNT_DIR/root/usr/local/bin/"
+  safe sudo cp -f ./bin/es-service/es-status-daemon.service "$MOUNT_DIR/root/etc/systemd/system/"
+  safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/usr/local/bin/es-status-daemon.sh" 2>/dev/null
+  safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/etc/systemd/system/es-status-daemon.service" 2>/dev/null
+  safe sudo chmod 777 "$MOUNT_DIR/root/usr/local/bin/es-status-daemon.sh" 2>/dev/null
+  safe sudo chmod 777 "$MOUNT_DIR/root/etc/systemd/system/es-status-daemon.service" 2>/dev/null
+
   echo "== 注入核心 =="
   safe sudo cp -f ./mod_so/64/* "$MOUNT_DIR/root/home/ark/.config/retroarch/cores/"
   safe sudo cp -f ./mod_so/32/* "$MOUNT_DIR/root/home/ark/.config/retroarch32/cores/"
