@@ -102,7 +102,11 @@ if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
 
   echo "== 注入 rk915 固件 =="
   mkdir -p "$PAYLOAD_ROOT/usr/lib/firmware/"
-  cp -f ./bin/rk915_*.bin "$PAYLOAD_ROOT/usr/lib/firmware/" 2>/dev/null || true
+  cp -f ./bin/rk915/* "$PAYLOAD_ROOT/usr/lib/firmware/" 2>/dev/null || true
+
+  echo "== 注入 swt6621s 固件 =="
+  mkdir -p "$PAYLOAD_ROOT/usr/lib/firmware/"
+  cp -f ./bin/swt6621s/* "$PAYLOAD_ROOT/usr/lib/firmware/" 2>/dev/null || true
 
   echo "== 注入 aic8800DC 固件 =="
   mkdir -p "$PAYLOAD_ROOT/usr/lib/firmware/aic8800DC"
@@ -236,6 +240,7 @@ EOF
   meta_add "0777" "1000:1000" "/usr/local/bin/sdljoymap"
   meta_add "0777" "1000:1000" "/usr/local/bin/console_detect"
   meta_add "0777" "1000:1000" "/usr/lib/firmware/rk915_*.bin"
+  meta_add "0777" "1000:1000" "/usr/lib/firmware/SWT6621S_*.bin"
   meta_add "0777" "1000:1000" "/usr/lib/firmware/aic8800DC"
   meta_add "0777" "1000:1000" "/usr/lib/firmware/aic8800DC/*"
   meta_add "0777" "1000:1000" "/opt/351Files"
@@ -319,7 +324,11 @@ else
 
   echo "== 注入 rk915 固件 =="
   mkdir -p "$PAYLOAD_ROOT/usr/lib/firmware/"
-  cp -f ./bin/rk915_*.bin "$PAYLOAD_ROOT/usr/lib/firmware/" 2>/dev/null || true
+  cp -f ./bin/rk915/* "$PAYLOAD_ROOT/usr/lib/firmware/" 2>/dev/null || true
+
+  echo "== 注入 swt6621s 固件 =="
+  mkdir -p "$PAYLOAD_ROOT/usr/lib/firmware/"
+  cp -f ./bin/swt6621s/* "$PAYLOAD_ROOT/usr/lib/firmware/" 2>/dev/null || true
 
   echo "== 注入 aic8800DC 固件 =="
   mkdir -p "$PAYLOAD_ROOT/usr/lib/firmware/aic8800DC"
@@ -460,6 +469,7 @@ EOF
   meta_add "0777" "1002:1002" "/usr/local/bin/sdljoymap"
   meta_add "0777" "1002:1002" "/usr/local/bin/console_detect"
   meta_add "0777" "1002:1002" "/usr/lib/firmware/rk915_*.bin"
+  meta_add "0777" "1002:1002" "/usr/lib/firmware/SWT6621S_*.bin"
   meta_add "0777" "1002:1002" "/usr/lib/firmware/aic8800DC"
   meta_add "0777" "1002:1002" "/usr/lib/firmware/aic8800DC/*"
   meta_add "0777" "1002:1002" "/opt/351Files"

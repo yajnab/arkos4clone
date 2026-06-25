@@ -73,9 +73,14 @@ if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   fi
 
   echo "== 注入 915 固件 =="
-  safe sudo cp -f ./bin/rk915_*.bin "$MOUNT_DIR/root/usr/lib/firmware/" 2>/dev/null
+  safe sudo cp -f ./bin/rk915/* "$MOUNT_DIR/root/usr/lib/firmware/" 2>/dev/null
   safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/usr/lib/firmware/"rk915_*.bin 2>/dev/null
   safe sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/firmware/"rk915_*.bin 2>/dev/null
+
+  echo "== 注入 swt6621s 固件 =="
+  safe sudo cp -f ./bin/swt6621s/* "$MOUNT_DIR/root/usr/lib/firmware/" 2>/dev/null
+  safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/usr/lib/firmware/"SWT6621S_*.bin 2>/dev/null
+  safe sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/firmware/"SWT6621S_*.bin 2>/dev/null
 
   echo "== 注入 aic8800DC 固件 =="
   safe sudo mkdir -p "$MOUNT_DIR/root/usr/lib/firmware/aic8800DC"
@@ -372,9 +377,14 @@ else
   safe sudo depmod -a -b "$MOUNT_DIR/root" 4.4.189 2>/dev/null
 
   echo "== 注入 915 固件 =="
-  safe sudo cp -f ./bin/rk915_*.bin "$MOUNT_DIR/root/usr/lib/firmware/" 2>/dev/null
+  safe sudo cp -f ./bin/rk915/rk915_*.bin "$MOUNT_DIR/root/usr/lib/firmware/" 2>/dev/null
   safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/usr/lib/firmware/"rk915_*.bin 2>/dev/null
   safe sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/firmware/"rk915_*.bin 2>/dev/null
+
+  echo "== 注入 swt6621s 固件 =="
+  safe sudo cp -f ./bin/swt6621s/* "$MOUNT_DIR/root/usr/lib/firmware/" 2>/dev/null
+  safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/usr/lib/firmware/"SWT6621S_*.bin 2>/dev/null
+  safe sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/firmware/"SWT6621S_*.bin 2>/dev/null
 
   echo "== 注入 aic8800DC 固件 =="
   safe sudo mkdir -p "$MOUNT_DIR/root/usr/lib/firmware/aic8800DC"
