@@ -115,6 +115,7 @@ if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   echo "== 注入 351Files 资源 =="
   mkdir -p "$PAYLOAD_ROOT/opt/351Files/res"
   cp -r ./res/* "$PAYLOAD_ROOT/opt/351Files/res/" 2>/dev/null || true
+  cp -r ./replace_file/351Files "$PAYLOAD_ROOT/opt/351Files/" 2>/dev/null || true
 
   echo "== 注入 dArkOS 启动脚本 =="
   mkdir -p "$PAYLOAD_ROOT/usr/local/bin"
@@ -337,6 +338,7 @@ else
   echo "== 注入 351Files 资源 =="
   mkdir -p "$PAYLOAD_ROOT/opt/351Files/res"
   cp -r ./res/* "$PAYLOAD_ROOT/opt/351Files/res/" 2>/dev/null || true
+  cp -r ./replace_file/351Files "$PAYLOAD_ROOT/opt/351Files/" 2>/dev/null || true
 
   echo "== 注入 ArkOS 启动脚本 =="
   mkdir -p "$PAYLOAD_ROOT/usr/local/bin"
@@ -797,10 +799,6 @@ find /opt/system/Advanced -name 'Restore*.sh' ! -name 'Restore ArkOS Settings.sh
 rm -rf "/opt/system/Advanced/Screen - Switch to Original Screen Timings.sh" 2>/dev/null || true
 rm -rf "/opt/system/Advanced/Reset EmulationStation Controls.sh" 2>/dev/null || true
 rm -rf "/opt/system/Advanced/Fix Global Hotkeys.sh" 2>/dev/null || true
-
-if [[ -e "/opt/351Files/351Files" ]]; then
-  mv "/opt/351Files/351Files" "/opt/351Files/351Files.old" 2>/dev/null && log "Renamed: 351Files -> 351Files.old" || true
-fi
 
 log "=== Step 8: Apply permissions (META) ==="
 apply_meta

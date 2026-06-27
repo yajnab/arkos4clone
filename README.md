@@ -132,6 +132,7 @@ Non-Windows users, see [Manual Configuration](#manual-configuration).
 |--------|------|--------|--------------|-------|
 | R33s | `480P` | User Select | `consoles/r33s/` | |
 | R36H | `480P` | User Select | `consoles/r36h/` | Thanks to Mr.Lang |
+| R36s Panel 0 | `480P` | User Select | `consoles/origin panel0/` |  |
 | R36s Panel 1 | `480P` | User Select | `consoles/origin panel1/` | |
 | R36s Panel 2 | `480P` | User Select | `consoles/origin panel2/` | |
 | R36s Panel 3 | `480P` | User Select | `consoles/origin panel3/` | |
@@ -147,6 +148,7 @@ Non-Windows users, see [Manual Configuration](#manual-configuration).
 | R45H | `768P` | User Select | `consoles/r45h/` | Thanks to Mr.Lang |
 | R46H | `768P` | User Select | `consoles/r46h/` | Thanks to Mr.Lang |
 | R50S | `854x480P` | User Select | `consoles/r50s/` | Thanks to Mr.Lang |
+| R50S | `720x1280P` | User Select | `consoles/r50h/` | Thanks to Mr.Lang |
 
 ### SoySauce R36s
 

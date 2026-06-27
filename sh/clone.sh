@@ -183,12 +183,6 @@ apply_joy_conf() {
   esac
 }
 
-apply_profile_assets() {
-  local prof; prof="$(get_profile_name)"
-  msg "Applying 351Files profile: $prof"
-  cp_if_exists "$QUIRKS_DIR/$prof/351Files" "/opt/351Files" "no" || true
-}
-
 apply_es_input() {
   msg "apply_es_input: CONSOLE_FILE=$CONSOLE_FILE"
   [[ ! -f "$CONSOLE_FILE" ]] && { warn "CONSOLE_FILE not found, skip es_input"; return 0; }
@@ -270,7 +264,6 @@ apply_all_quirks() {
   fi
   apply_joy_conf
   apply_hotkey_conf
-  apply_profile_assets
   apply_es_input
   apply_rotate_file
 }

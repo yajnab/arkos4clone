@@ -233,6 +233,13 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/480P/"},
 	},
 	{
+		RealName: "origin panel0",
+		BrandEntries: []BrandEntry{
+			{Brand: "GameConsole", DisplayName: "GameConsole R36s Panel 0"},
+		},
+		ExtraSources: []string{"logo/480P/"},
+	},
+	{
 		RealName: "origin panel1",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36s Panel 1"},
@@ -293,6 +300,13 @@ var Consoles = []ConsoleConfig{
 		RealName: "r50s",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R50S"},
+		},
+		ExtraSources: []string{"logo/854x480P/"},
+	},
+	{
+		RealName: "r50h",
+		BrandEntries: []BrandEntry{
+			{Brand: "GameConsole", DisplayName: "GameConsole R50H"},
 		},
 		ExtraSources: []string{"logo/854x480P/"},
 	},
