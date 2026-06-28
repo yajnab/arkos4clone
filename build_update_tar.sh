@@ -171,6 +171,11 @@ if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   cp -a ./replace_file/drastic-kk/. "$PAYLOAD_ROOT/opt/drastic-kk/" 2>/dev/null || true
   rm -rf "$PAYLOAD_ROOT/opt/drastic-kk/patch" 2>/dev/null || true
 
+  echo "== 改用自适应分辨率 Retroarch 1.22.2 =="
+  mkdir -p "$PAYLOAD_ROOT/opt/retroarch/bin/"
+  cp -a ./replace_file/retroarch/retroarch "$PAYLOAD_ROOT/opt/retroarch/bin/" 2>/dev/null || true
+  cp -a ./replace_file/retroarch/retroarch32 "$PAYLOAD_ROOT/opt/retroarch/bin/" 2>/dev/null || true
+
   echo "== 注入 json-c3 库 =="
   mkdir -p "$PAYLOAD_ROOT/usr/lib/aarch64-linux-gnu/"
   cp -f ./bin/json-c3/* "$PAYLOAD_ROOT/usr/lib/aarch64-linux-gnu/" 2>/dev/null || true
@@ -265,6 +270,8 @@ EOF
   meta_add "0777" "1000:1000" "/opt/drastic/*"
   meta_add "0777" "1000:1000" "/opt/drastic-kk"
   meta_add "0777" "1000:1000" "/opt/drastic-kk/*"
+  meta_add "0777" "1000:1000" "/opt/retroarch/bin/"
+  meta_add "0777" "1000:1000" "/opt/retroarch/bin/*"
   meta_add "0777" "1000:1000" "/opt/flycastsa"
   meta_add "0777" "1000:1000" "/opt/flycastsa/*"
   meta_add "0777" "1000:1000" "/opt/flycastsa-2022"
@@ -394,6 +401,11 @@ else
   cp -a ./replace_file/drastic-kk/. "$PAYLOAD_ROOT/opt/drastic-kk/" 2>/dev/null || true
   rm -rf "$PAYLOAD_ROOT/opt/drastic-kk/patch" 2>/dev/null || true
 
+  echo "== 改用自适应分辨率 Retroarch 1.22.2 =="
+  mkdir -p "$PAYLOAD_ROOT/opt/retroarch/bin/"
+  cp -a ./replace_file/retroarch/retroarch "$PAYLOAD_ROOT/opt/retroarch/bin/" 2>/dev/null || true
+  cp -a ./replace_file/retroarch/retroarch32 "$PAYLOAD_ROOT/opt/retroarch/bin/" 2>/dev/null || true
+
   echo "== 注入 json-c3 库 =="
   mkdir -p "$PAYLOAD_ROOT/usr/lib/aarch64-linux-gnu/"
   cp -f ./bin/json-c3/* "$PAYLOAD_ROOT/usr/lib/aarch64-linux-gnu/" 2>/dev/null || true
@@ -495,6 +507,8 @@ EOF
   meta_add "0777" "1002:1002" "/opt/drastic/*"
   meta_add "0777" "1002:1002" "/opt/drastic-kk"
   meta_add "0777" "1002:1002" "/opt/drastic-kk/*"
+  meta_add "0777" "1002:1002" "/opt/retroarch/bin/"
+  meta_add "0777" "1002:1002" "/opt/retroarch/bin/*"
   meta_add "0777" "1002:1002" "/opt/ppsspp"
   meta_add "0777" "1002:1002" "/opt/ppsspp/*"
   meta_add "0777" "1002:1002" "/opt/scummvm"

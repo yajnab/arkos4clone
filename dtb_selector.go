@@ -308,7 +308,7 @@ var Consoles = []ConsoleConfig{
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R50H"},
 		},
-		ExtraSources: []string{"logo/854x480P/"},
+		ExtraSources: []string{"logo/720x1280P/"},
 	},
 	{
 		RealName: "sauce panel1",

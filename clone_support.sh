@@ -194,6 +194,12 @@ if [[ "$ARKOS_IMAGE_NAME" == *dArkOS* ]]; then
   safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so"* 2>/dev/null
   safe sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so"* 2>/dev/null
 
+  echo "== 改用自适应分辨率 Retroarch 1.22.2 =="
+  safe sudo cp -a ./replace_file/retroarch/retroarch "$MOUNT_DIR/root/opt/retroarch/bin/" 2>/dev/null
+  safe sudo cp -a ./replace_file/retroarch/retroarch32 "$MOUNT_DIR/root/opt/retroarch/bin/" 2>/dev/null
+  safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/opt/retroarch/bin/" 2>/dev/null
+  safe sudo chmod -R 777 "$MOUNT_DIR/root/opt/retroarch/bin/" 2>/dev/null
+
   echo "== 更新 flycastsa v2.6 =="
   safe sudo cp -a ./replace_file/flycastsa/flycast "$MOUNT_DIR/root/opt/flycastsa/" 2>/dev/null
   safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/opt/flycastsa/" 2>/dev/null
@@ -499,6 +505,12 @@ else
   safe sudo cp -f ./bin/json-c3/* "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/"
   safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so"* 2>/dev/null
   safe sudo chmod -R 777 "$MOUNT_DIR/root/usr/lib/aarch64-linux-gnu/libjson-c.so"* 2>/dev/null
+
+  echo "== 改用自适应分辨率 Retroarch 1.22.2 =="
+  safe sudo cp -a ./replace_file/retroarch/retroarch "$MOUNT_DIR/root/opt/retroarch/bin/" 2>/dev/null
+  safe sudo cp -a ./replace_file/retroarch/retroarch32 "$MOUNT_DIR/root/opt/retroarch/bin/" 2>/dev/null
+  safe sudo chown -R $CHOWN_USER "$MOUNT_DIR/root/opt/retroarch/bin/" 2>/dev/null
+  safe sudo chmod -R 777 "$MOUNT_DIR/root/opt/retroarch/bin/" 2>/dev/null
 
   echo "== 更新 PPSSPP 1.20.4 =="
   safe sudo cp -a ./replace_file/ppsspp/* "$MOUNT_DIR/root/opt/ppsspp/" 2>/dev/null

@@ -241,11 +241,11 @@ apply_sdl_rotation() {
   ln -sf "libSDL2-2.0.so.0" "$sdl32_dir/libSDL2-2.0.so" && msg "  Created: libSDL2-2.0.so -> libSDL2-2.0.so.0 (32)" || warn "  Failed: libSDL2-2.0.so (32)"
   ln -sf "libSDL2-2.0.so" "$sdl32_dir/libSDL2.so" && msg "  Created: libSDL2.so -> libSDL2-2.0.so (32)" || warn "  Failed: libSDL2.so (32)"
   
-  # RetroArch rotation
-  cp_if_exists "$QUIRKS_DIR/rotate/retroarch/retroarch32.$ra_suffix" "/opt/retroarch/bin/retroarch32" "yes" || true
-  cp_if_exists "$QUIRKS_DIR/rotate/retroarch/retroarch.$ra_suffix" "/opt/retroarch/bin/retroarch" "yes" || true
+  # # RetroArch rotation
+  # cp_if_exists "$QUIRKS_DIR/rotate/retroarch/retroarch32.$ra_suffix" "/opt/retroarch/bin/retroarch32" "yes" || true
+  # cp_if_exists "$QUIRKS_DIR/rotate/retroarch/retroarch.$ra_suffix" "/opt/retroarch/bin/retroarch" "yes" || true
   
-  sudo chmod 777 /opt/retroarch/bin/* 2>/dev/null || true
+  # sudo chmod 777 /opt/retroarch/bin/* 2>/dev/null || true
 }
 
 apply_rotate_file() {
