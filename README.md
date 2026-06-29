@@ -148,7 +148,7 @@ Non-Windows users, see [Manual Configuration](#manual-configuration).
 | R45H | `768P` | User Select | `consoles/r45h/` | Thanks to Mr.Lang |
 | R46H | `768P` | User Select | `consoles/r46h/` | Thanks to Mr.Lang |
 | R50S | `854x480P` | User Select | `consoles/r50s/` | Thanks to Mr.Lang |
-| R50S | `720x1280P` | User Select | `consoles/r50h/` | Thanks to Mr.Lang |
+| R50H | `720x1280P` | User Select | `consoles/r50h/` | Thanks to Mr.Lang |
 
 ### SoySauce R36s
 
