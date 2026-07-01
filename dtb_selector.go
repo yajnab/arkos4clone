@@ -247,6 +247,13 @@ var Consoles = []ConsoleConfig{
 		ExtraSources: []string{"logo/480P/"},
 	},
 	{
+		RealName: "v21 panel4 rumble test",
+		BrandEntries: []BrandEntry{
+			{Brand: "GameConsole", DisplayName: "GameConsole R36s v21 Rumble Fix (Risk unknown. For testing purposes only.)"},
+		},
+		ExtraSources: []string{"logo/480P/"},
+	},
+	{
 		RealName: "v22 panel4",
 		BrandEntries: []BrandEntry{
 			{Brand: "GameConsole", DisplayName: "GameConsole R36s V22"},
